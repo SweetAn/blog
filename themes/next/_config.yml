@@ -1,7 +1,7 @@
 # ===============================================================
 # ========================= ATTENTION! ==========================
 # ===============================================================
-# NexT repository is moving here: https://github.com/theme-next
+# NexT reository is moving here: https://github.com/theme-next
 # ===============================================================
 # It's rebase to v6.0.0 and future maintenance will resume there
 # ===============================================================
@@ -26,6 +26,7 @@ override: false
 
 # For example, you put your favicons into `hexo-site/source/images` directory.
 # Then need to rename & redefine they on any other names, otherwise icons from Next will rewrite your custom icons in Hexo.
+#配置网站图标的
 favicon:
   small: /images/favicon-16x16-next.png
   medium: /images/favicon-32x32-next.png
@@ -45,7 +46,7 @@ rss:
 footer:
   # Specify the date when the site was setup.
   # If not defined, current year will be used.
-  since: 2018、
+  since: 2018
 
   # Icon between year and copyright info.
   icon: user
@@ -54,13 +55,13 @@ footer:
   copyright:
   # -------------------------------------------------------------
   # Hexo link (Powered by Hexo).
-  powered: true
+  powered: false
 
   theme:
     # Theme & scheme info link (Theme - NexT.scheme).
-    enable: true
+    enable: false
     # Version info of NexT after scheme info (vX.X.X).
-    version: true
+    version: false
   # -------------------------------------------------------------
   # Any custom text can be defined here.
   #custom_text: Hosted by <a target="_blank" href="https://pages.github.com">GitHub Pages</a>
@@ -99,7 +100,7 @@ menu:
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
-  about: /about/ || user
+  #about: /about/ || user
 # Enable/Disable menu icons.
 menu_icons:
   enable: true
@@ -156,7 +157,7 @@ links_layout: block
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
-#avatar: /images/avatar.gif
+avatar: /uploads/avatar.jpeg
 
 # Table Of Contents in the Sidebar
 toc:
@@ -225,16 +226,16 @@ auto_excerpt:
 post_meta:
   item_text: true
   created_at: true
-  updated_at: false
+  updated_at: true
   categories: true
 
 # Post wordcount display settings
 # Dependencies: https://github.com/willin/hexo-wordcount
 post_wordcount:
   item_text: true
-  wordcount: false
-  min2read: false
-  totalcount: false
+  wordcount: true
+  min2read: ture
+  totalcount: total
   separated_meta: true
 
 # Wechat Subscriber
@@ -344,7 +345,7 @@ font:
 
 # MathJax Support
 mathjax:
-  enable: false
+  enable: ture
   per_page: false
   cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML
 
@@ -429,7 +430,7 @@ baidushare: true
 # Warning: JiaThis does not support https.
 #jiathis:
   ##uid: Get this uid from http://www.jiathis.com/
-#add_this_id:
+ #add_this_id:2156726
 
 # Share
 # duoshuo_share: true
@@ -805,6 +806,13 @@ vendors:
   # https://github.com/revir/need-more-share2
   needMoreShare2:
 
+# Online contact 在线聊天 
+daovoice: true
+daovoice_app_id: 93957bb1
+
+# 文章末尾添加“本文结束”标记
+passage_end_tag:
+  enabled: true
 
 # Assets
 css: css
