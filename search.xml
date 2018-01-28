@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[测试]]></title>
-    <url>%2Fblog%2F2018%2F01%2F11%2F%E6%B5%8B%E8%AF%95%2F</url>
-    <content type="text"></content>
-  </entry>
-  <entry>
-    <title><![CDATA[你好]]></title>
-    <url>%2Fblog%2F2018%2F01%2F11%2F%E4%BD%A0%E5%A5%BD%2F</url>
-    <content type="text"></content>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello]]></title>
-    <url>%2Fblog%2F2018%2F01%2F10%2FHello%2F</url>
-    <content type="text"></content>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2Fblog%2F2018%2F01%2F10%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+    <title><![CDATA[初相遇]]></title>
+    <url>%2Fblog%2F2018%2F01%2F28%2F%E5%B8%AD%E6%85%95%E8%93%89-%E5%88%9D%E7%9B%B8%E9%81%87%2F</url>
+    <content type="text"><![CDATA[初相遇 美丽的梦和美丽的诗一样都是可遇而不可求的常常在最没能料到的时刻里出现 我喜欢那样的梦在梦里 一切都可以重新开始一切都可以慢慢解释心里甚至还能感觉到所有被浪费的时光竟然都能重回时的狂喜和感激 胸怀中满溢著幸福只因为你就在我眼前对我微笑 一如当年我真喜欢那样的梦 明明知道你已为我跋涉千里却又觉得芳草鲜美 落英缤纷好像你我才初初相遇]]></content>
+      <categories>
+        <category>书</category>
+        <category>诗集</category>
+      </categories>
+      <tags>
+        <tag>席慕蓉</tag>
+      </tags>
   </entry>
 </search>
