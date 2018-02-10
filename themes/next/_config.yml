@@ -157,7 +157,7 @@ links_layout: block
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
-avatar: /uploads/avatar.jpeg
+avatar: https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F/avatar.jpeg
 
 # Table Of Contents in the Sidebar
 toc:
@@ -219,7 +219,7 @@ excerpt_description: true
 # Automatically Excerpt. Not recommend.
 # Please use <!-- more --> in the post to control excerpt accurately.
 auto_excerpt:
-  enable: false
+  enable: true
   length: 150
 
 # Post meta display settings
