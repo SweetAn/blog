@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "93957bb1"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="GIS,地图," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="面对地图坐标之间的关系，一脸懵 ，收集整合资料 ##基本概念地理坐标系：为球面坐标。 参考平面地是椭球面，坐标单位：经纬度；投影坐标系：为平面坐标。参考平面地是水平面，坐标单位：米、千米等；地理坐标转换到投影坐标的过程可理解为投影。（投影：将不规则的地球曲面转换为平面） 1、投影坐标系地图投影的种类很多，一般按照两种标准进行分类：一是按投影的变形性质分类，二是按照投影的构成方式分类。 1.1 按投">
+<meta name="keywords" content="GIS,地图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="地图投影和坐标系概念">
+<meta property="og:url" content="https://sweetan.github.io/blog/2018/02/10/地图投影和坐标系概念/index.html">
+<meta property="og:site_name" content="Sweet">
+<meta property="og:description" content="面对地图坐标之间的关系，一脸懵 ，收集整合资料 ##基本概念地理坐标系：为球面坐标。 参考平面地是椭球面，坐标单位：经纬度；投影坐标系：为平面坐标。参考平面地是水平面，坐标单位：米、千米等；地理坐标转换到投影坐标的过程可理解为投影。（投影：将不规则的地球曲面转换为平面） 1、投影坐标系地图投影的种类很多，一般按照两种标准进行分类：一是按投影的变形性质分类，二是按照投影的构成方式分类。 1.1 按投">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%87%A0%E4%BD%95%E6%8A%95%E5%BD%B1.png">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E4%BC%AA%E6%96%B9%E4%BD%8D%E6%8A%95%E5%BD%B1%E7%9A%84%E7%BB%8F%E7%BA%AC%E7%BA%BF%E5%BD%A2%E7%8A%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E4%BC%AA%E5%9C%86%E6%9F%B1%E6%8A%95%E5%BD%B1%E7%9A%84%E7%BB%8F%E7%BA%AC%E7%BA%BF%E5%BD%A2%E7%8A%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E4%BC%AA%E5%9C%86%E9%94%A5%E6%8A%95%E5%BD%B1%E7%9A%84%E7%BB%8F%E7%BA%AC%E7%BA%BF%E5%BD%A2%E7%8A%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%A4%9A%E5%9C%86%E9%94%A5%E6%8A%95%E5%BD%B1%E7%9A%84%E7%BB%8F%E7%BA%AC%E7%BA%BF%E5%BD%A2%E7%8A%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%A2%A8%E5%8D%A1%E6%89%98(Mercator">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E9%AB%98%E6%96%AF%E6%8A%95%E5%BD%B1.jpg">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E9%AB%98%E6%96%AF-%E5%85%8B%E5%90%95%E6%A0%BC%E6%8A%95%E5%BD%B1%E5%88%86%E5%B8%A6%20%20.jpg">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%A4%A7%E5%9C%B0%E6%B0%B4%E5%87%86%E9%9D%A2.png">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%9C%B0%E7%90%83%E6%A4%AD%E5%9C%86%E7%90%83%E4%BD%931.png">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%9C%B0%E7%90%83%E6%A4%AD%E5%9C%86%E7%90%83%E4%BD%932.png">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%9C%B0%E7%90%83%E6%A4%AD%E5%9C%86%E7%90%83%E4%BD%933.png">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%A4%A7%E5%9C%B0%E7%BB%8F%E7%BA%AC%E5%BA%A6.png">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/arcgis_s.png">
+<meta property="og:updated_time" content="2018-02-10T10:34:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="地图投影和坐标系概念">
+<meta name="twitter:description" content="面对地图坐标之间的关系，一脸懵 ，收集整合资料 ##基本概念地理坐标系：为球面坐标。 参考平面地是椭球面，坐标单位：经纬度；投影坐标系：为平面坐标。参考平面地是水平面，坐标单位：米、千米等；地理坐标转换到投影坐标的过程可理解为投影。（投影：将不规则的地球曲面转换为平面） 1、投影坐标系地图投影的种类很多，一般按照两种标准进行分类：一是按投影的变形性质分类，二是按照投影的构成方式分类。 1.1 按投">
+<meta name="twitter:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%87%A0%E4%BD%95%E6%8A%95%E5%BD%B1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sweetan.github.io/blog/2018/02/10/地图投影和坐标系概念/"/>
+
+
+
+
+
+  <title>地图投影和坐标系概念 | Sweet</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sweet</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sweetan.github.io/blog/blog/2018/02/10/地图投影和坐标系概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MA KAI">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sweet">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">地图投影和坐标系概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-10T11:15:19+08:00">
+                2018-02-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-02-10T18:34:39+08:00">
+                2018-02-10
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/无人机/" itemprop="url" rel="index">
+                    <span itemprop="name">无人机</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/无人机/地图/" itemprop="url" rel="index">
+                    <span itemprop="name">地图</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">阅读
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计"> 
+                  5,506 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  19 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="面对地图坐标之间的关系，一脸懵-，收集整合资料"><a href="#面对地图坐标之间的关系，一脸懵-，收集整合资料" class="headerlink" title="面对地图坐标之间的关系，一脸懵 ，收集整合资料"></a>面对地图坐标之间的关系，一脸懵 ，收集整合资料</h5><hr>
+<p>##基本概念<br>地理坐标系：为球面坐标。 参考平面地是椭球面，坐标单位：经纬度；<br>投影坐标系：为平面坐标。参考平面地是水平面，坐标单位：米、千米等；<br>地理坐标转换到投影坐标的过程可理解为投影。（投影：将不规则的地球曲面转换为平面）</p>
+<h3 id="1、投影坐标系"><a href="#1、投影坐标系" class="headerlink" title="1、投影坐标系"></a>1、投影坐标系</h3><p>地图投影的种类很多，一般按照两种标准进行分类：一是按投影的变形性质分类，二是按照投影的构成方式分类。</p>
+<h4 id="1-1-按投影变形性质分类"><a href="#1-1-按投影变形性质分类" class="headerlink" title="1.1 按投影变形性质分类"></a>1.1 按投影变形性质分类</h4><p>按照投影的变形性质可以分为以下几类：等角投影、等积投影、任意投影。</p>
+<h5 id="1-1-1-等角投影"><a href="#1-1-1-等角投影" class="headerlink" title="1.1.1 等角投影"></a>1.1.1 等角投影</h5><p>能保持无限小图形的相似。同一点上长度比处处相同-变形圆，不同点变形圆的半径不同，大范围看，投影图形与地面实际形状并不完全相似。由于这种投影无角度变形，便于图上量测方向/角度，所以常用于对真实角度和方向要求高的地图，比如航海、洋流和风向图等。由于此类投影面积变形很大，故不能量算面积。</p>
+<h5 id="1-1-2-等面积投影"><a href="#1-1-2-等面积投影" class="headerlink" title="1.1.2 等面积投影"></a>1.1.2 等面积投影</h5><p>等积投影是等面积投影，便于面积的比较和量算。常用于对面积精度要求较高的自然和经济地图，如地质、土壤、土地利用、行政区划等地图。</p>
+<h5 id="1-1-3-任意投影"><a href="#1-1-3-任意投影" class="headerlink" title="1.1.3 任意投影"></a>1.1.3 任意投影</h5><p>任意投影既不等角又不等积，各方面变形都存在，但都适中。在任意投影中，有一类比较特殊的投影叫做等距投影，满足正轴投影中经线长度比为1，在斜轴或横轴投影中垂直圈长度比为1。任意投影常用于教学地图、科学参考地图和通用世界地图等。</p>
+<h4 id="1-2-按投影构成方式分类"><a href="#1-2-按投影构成方式分类" class="headerlink" title="1.2 按投影构成方式分类"></a>1.2 按投影构成方式分类</h4><p>根据投影构成方式可以分为两类：几何投影和解析投影。</p>
+<h5 id="1-2-1几何投影"><a href="#1-2-1几何投影" class="headerlink" title="1.2.1几何投影"></a>1.2.1几何投影</h5><p>几何投影是把椭球体面上的经纬网直接或附加某种条件投影到几何承影面上，然后将几何面展开为平面而得到的一类投影，包括方位投影、圆锥投影和圆柱投影。根据投影面与球面的位置关系的不同又可将其划分为：正轴投影、横轴投影、斜轴投影。如下图所示：<br>    <img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%87%A0%E4%BD%95%E6%8A%95%E5%BD%B1.png" alt="几何投影"><br>a 方位投影：以平面作为几何承影面，使平面与椭球体面相切或相割，将球面经纬网投影到平面上而成的投影。在切点或割线上无任何变形，离切点或割线越远，变形越大。</p>
+<p>b 圆锥投影：以圆锥作为几何承影面，使圆锥与椭球体面相切或相割，将球面经纬网投影到圆锥面上而成的投影。该投影适用于中纬度地带沿纬线方向伸展地区的地图，我国的地图多用此投影。</p>
+<p>c 圆柱投影：以圆柱作为几何承影面，使圆柱与椭球体面相切或相割，将球面经纬网投影到圆柱面上而成的投影。该投影方式一般适用于编制赤道附近地区的地图和世界地图。</p>
+<h6 id="1-2-2-解析投影"><a href="#1-2-2-解析投影" class="headerlink" title="1.2.2 解析投影"></a>1.2.2 解析投影</h6><p>解析投影是不借助于辅助几何面，直接用解析法得到经纬网的一种投影。主要包括：伪方位投影，伪圆锥投影，伪圆柱投影，多圆锥投影。此处不再赘述。</p>
+<p>a 伪方位投影：据方位投影修改而来。在正轴情况下，纬线仍为同心圆，除中央经线为直线外，其余经线均改为中央经线的曲线，且相交于纬线的圆心。<br>    <img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E4%BC%AA%E6%96%B9%E4%BD%8D%E6%8A%95%E5%BD%B1%E7%9A%84%E7%BB%8F%E7%BA%AC%E7%BA%BF%E5%BD%A2%E7%8A%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="伪方位投影"><br>b 伪圆柱投影：据圆柱投影修改而来。在正轴圆柱投影的基础上，要求纬线仍为平行直线，除中央经线为直线外，其余的经线均改为对称于中央经线的曲线。<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E4%BC%AA%E5%9C%86%E6%9F%B1%E6%8A%95%E5%BD%B1%E7%9A%84%E7%BB%8F%E7%BA%AC%E7%BA%BF%E5%BD%A2%E7%8A%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="伪圆柱投影"><br>c 伪圆锥投影：据圆锥投影修改而来。在正轴圆锥投影的基础上，要求经线仍为同心圆弧，除中央经线为直线外，其余的经线均改为对称于中央经线的曲线。<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E4%BC%AA%E5%9C%86%E9%94%A5%E6%8A%95%E5%BD%B1%E7%9A%84%E7%BB%8F%E7%BA%AC%E7%BA%BF%E5%BD%A2%E7%8A%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="伪圆锥投影"><br>d 多圆锥投影：这是一种假想借助多个圆锥表面与球体相切而设计成的投影。纬线为同轴圆弧，其圆心均位于中央经线上，中央经线为直线，其余的经线均为对称于中央经线的曲线。<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%A4%9A%E5%9C%86%E9%94%A5%E6%8A%95%E5%BD%B1%E7%9A%84%E7%BB%8F%E7%BA%AC%E7%BA%BF%E5%BD%A2%E7%8A%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="多圆锥投影"></p>
+<p>####1.3常见的投影</p>
+<p>#####1． 墨卡托(Mercator)投影<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%A2%A8%E5%8D%A1%E6%89%98(Mercator" alt="">%E6%8A%95%E5%BD%B1%20.jpg)<br>墨卡托(Mercator)投影，是一种”等角正切圆柱投影”，荷兰地图学家墨卡托（Gerhardus Mercator 1512－1594）在1569年拟定，假设地球被围在一中空的圆柱里，其标准纬线与圆柱相切接触，然后再假想地球中心有一盏灯，把球面上的图形投影到圆柱体上，再把圆柱体展开，这就是一幅选定标准纬线上的“墨卡托投影”绘制出的地图。墨卡托投影没有角度变形，由每一点向各方向的长度比相等，它的经纬线都是平行直线，且相交成直角，经线间隔相等，纬线间隔从标准纬线向两极逐渐增大。墨卡托投影的地图上长度和面积变形明显，但标准纬线无变形，从标准纬线向两极变形逐渐增大，但因为它具有各个方向均等扩大的特性，保持了方向和相互位置关系的正确。在地图上保持方向和角度的正确是墨卡托投影的优点，墨卡托投影地图常用作航海图和航空图，如果循着墨卡托投影图上两点间的直线航行，方向不变可以一直到达目的地，因此它对船舰在航行中定位、确定航向都具有有利条件，给航海者带来很大方便。“海底地形图编绘规范”（GB/T 17834-1999，海军航保部起草）中规定1：25万及更小比例尺的海图采用墨卡托投影，其中基本比例尺海底地形图（1：5万，1：25万，1：100万）采用统一基准纬线30°，非基本比例尺图以制图区域中纬为基准纬线。基准纬线取至整度或整分。</p>
+<p>墨卡托投影坐标系取零子午线或自定义原点经线(L0)与赤道交点的投影为原点，零子午线或自定义原点经线的投影为纵坐标X轴，赤道的投影为横坐标Y轴，构成墨卡托平面直角坐标系。</p>
+<p>#####2． 高斯-克吕格(Gauss-Kruger)投影和UTM（Universal Transverse Mercator）投影</p>
+<p>######（1）高斯-克吕格投影性质<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E9%AB%98%E6%96%AF%E6%8A%95%E5%BD%B1.jpg" alt=""></p>
+<p>高斯-克吕格(Gauss-Kruger)投影简称“高斯投影”，又名”等角横切椭圆柱投影”，地球椭球面和平面间正形投影的一种。德国数学家、物理学家、天文学家高斯（Carl FriedrichＧauss，1777一 1855）于十九世纪二十年代拟定，后经德国大地测量学家克吕格（Johannes Kruger，1857～1928）于 1912年对投影公式加以补充，故名。<br>该投影按照投影带中央子午线投影为直线且长度不变和赤道投影为直线的条件，确定函数的形式，从而得到高斯一克吕格投影公式。投影后，除中央子午线和赤道为直线外， 其他子午线均为对称于中央子午线的曲线。设想用一个椭圆柱横切于椭球面上投影带的中央子午线，按上述投影条件，将中央子午线两侧一定经差范围内的椭球面正形投影于椭圆柱面。将椭圆柱面沿过南北极的母线剪开展平，即为高斯投影平面。取中央子午线与赤道交点的投影为原点，中央子午线的投影为纵坐标x轴，赤道的投影为横坐标y轴，构成高斯克吕格平面直角坐标系。<br>高斯-克吕格投影在长度和面积上变形很小，中央经线无变形，自中央经线向投影带边缘，变形逐渐增加，变形最大之处在投影带内赤道的两端。由于其投影精度高，变形小，而且计算简便（各投影带坐标一致，只要算出一个带的数据，其他各带都能应用），因此在大比例尺地形图中应用，可以满足军事上各种需要，能在图上进行精确的量测计算。</p>
+<p>######（2）高斯-克吕格投影分带<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E9%AB%98%E6%96%AF-%E5%85%8B%E5%90%95%E6%A0%BC%E6%8A%95%E5%BD%B1%E5%88%86%E5%B8%A6%20%20.jpg" alt=""></p>
+<p>按一定经差将地球椭球面划分成若干投影带,这是高斯投影中限制长度变形的最有效方法。分带时既要控制长度变形使其不大于测图误差，又要使带数不致过多以减少换带计算工作，据此原则将地球椭球面沿子午线划分成经差相等的瓜瓣形地带,以便分带投影。通常按经差6度或3度分为六度带或三度带。六度带自0度子午线起每隔经差6度自西向东分带，带号依次编为第 1、2…60带。三度带是在六度带的基础上分成的，它的中央子午线与六度带的中央子午线和分带子午线重合，即自 1.5度子午线起每隔经差3度自西向东分带，带号依次编为三度带第 1、2…120带。我国的经度范围西起 73°东至135°，可分成六度带十一个，各带中央经线依次为75°、81°、87°、……、117°、123°、129°、135°，或三度带二十二个。六度带可用于中小比例尺（如 1：250000）测图，三度带可用于大比例尺（如 1：10000）测图，城建坐标多采用三度带的高斯投影。</p>
+<h6 id="（3）高斯-克吕格投影坐标"><a href="#（3）高斯-克吕格投影坐标" class="headerlink" title="（3）高斯-克吕格投影坐标"></a>（3）高斯-克吕格投影坐标</h6><p>高斯- 克吕格投影是按分带方法各自进行投影，故各带坐标成独立系统。以中央经线投影为纵轴(x), 赤道投影为横轴(y),两轴交点即为各带的坐标原点。纵坐标以赤道为零起算，赤道以北为正，以南为负。我国位于北半球，纵坐标均为正值。横坐标如以中央经线为零起算，中央经线以东为正，以西为负，横坐标出现负值，使用不便，故规定将坐标纵轴西移500公里当作起始轴，凡是带内的横坐标值均加 500公里。由于高斯-克吕格投影每一个投影带的坐标都是对本带坐标原点的相对值，所以各带的坐标完全相同，为了区别某一坐标系统属于哪一带，在横轴坐标前加上带号，如(4231898m,21655933m)，其中21即为带号。   </p>
+<h6 id="（4）高斯-克吕格投影与UTM投影"><a href="#（4）高斯-克吕格投影与UTM投影" class="headerlink" title="（4）高斯-克吕格投影与UTM投影"></a>（4）高斯-克吕格投影与UTM投影</h6><p>某些国外的软件如ARC/INFO或国外仪器的配套软件如多波束的数据处理软件等，往往不支持高斯-克吕格投影，但支持UTM投影，因此常有把UTM投影坐标当作高斯-克吕格投影坐标提交的现象。</p>
+<p>UTM投影全称为“通用横轴墨卡托投影”，是等角横轴割圆柱投影（高斯-克吕格为等角横轴切圆柱投影），圆柱割地球于南纬80度、北纬84度两条等高圈，该投影将地球划分为60个投影带，每带经差为6度，已被许多国家作为地形图的数学基础。UTM投影与高斯投影的主要区别在南北格网线的比例系数上，高斯-克吕格投影的中央经线投影后保持长度不变，即比例系数为1，而UTM投影的比例系数为0.9996。UTM投影沿每一条南北格网线比例系数为常数，在东西方向则为变数，中心格网线的比例系数为0.9996，在南北纵行最宽部分的边缘上距离中心点大约 363公里，比例系数为 1.00158。</p>
+<p>高斯-克吕格投影与UTM投影可近似采用 Xutm=0.9996 <em> X高斯，Yutm=0.9996 </em> Y高斯进行坐标转换。以下举例说明(基准面为WGS84)：</p>
+<table>
+<thead>
+<tr>
+<th>输入坐标（度）</th>
+<th style="text-align:center">高斯投影（米）</th>
+<th style="text-align:center">UTM投影（米）</th>
+<th style="text-align:center">Xutm=0.9996 <strong> X高斯, Yutm=0.9996 </strong> Y高斯</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>纬度值（X）32</td>
+<td style="text-align:center">3543600.9</td>
+<td style="text-align:center">3542183.5</td>
+<td style="text-align:center">3543600.9*0.9996 ≈ 3542183.5</td>
+</tr>
+<tr>
+<td>经度值（Y）121</td>
+<td style="text-align:center">21310996.8</td>
+<td style="text-align:center">311072.4</td>
+<td style="text-align:center">(310996.8-500000)*0.9996+500000 ≈ 311072.4</td>
+</tr>
+</tbody>
+</table>
+<p>注：坐标点（32,121）位于高斯投影的21带，高斯投影Y值21310996.8中前两位“21”为带号；坐标点（32,121）位于UTM投影的51带，上表中UTM投影的Y值没加带号。因坐标纵轴西移了500000米，转换时必须将Y值减去500000乘上比例因子后再加500000。</p>
+<h3 id="2、地理坐标系"><a href="#2、地理坐标系" class="headerlink" title="2、地理坐标系"></a>2、地理坐标系</h3><h4 id="2-1-地球的三级逼近"><a href="#2-1-地球的三级逼近" class="headerlink" title="2.1 地球的三级逼近"></a>2.1 地球的三级逼近</h4><h5 id="2-1-1大地水准面"><a href="#2-1-1大地水准面" class="headerlink" title="2.1.1大地水准面"></a>2.1.1大地水准面</h5><p>地球的自然表面有高山也有洼地，是崎岖不平的，我们要使用数学法则来描述他，就必须找到一个相对规则的数学面。</p>
+<p>大地水准面是地球表面的第一级逼近。假设当海水处于完全静止的平衡状态时，从海平面延伸到所有大陆下部，而与地球重力方向处处正交的一个连续、闭合的曲面，这就是大地水准面。</p>
+<p><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%A4%A7%E5%9C%B0%E6%B0%B4%E5%87%86%E9%9D%A2.png" alt=""></p>
+<h5 id="2-1-2地球椭球体"><a href="#2-1-2地球椭球体" class="headerlink" title="2.1.2地球椭球体"></a>2.1.2地球椭球体</h5><p>大地水准面可以近似成一个规则成椭球体，但并不是完全规则，其形状接近一个扁率极小的椭圆绕短轴旋转所形成的规则椭球体，这个椭球体称为地球椭球体。它是地球的第二级逼近。<br>    <img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%9C%B0%E7%90%83%E6%A4%AD%E5%9C%86%E7%90%83%E4%BD%931.png" alt=""><br>    <img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%9C%B0%E7%90%83%E6%A4%AD%E5%9C%86%E7%90%83%E4%BD%932.png" alt=""><br>    下面列举了一些常见椭球体的参数。我国1952年以前采用海福特椭球体，从1953年起采用克拉索夫斯基椭球体。 1978年我国决定采用新椭球体GRS（1975），并以此建立了我国新的、独立的大地坐标系，对应ArcGIS里面的Xian_1980椭球体。从1980年开始采用新椭球体GRS（1980），这个椭球体参数与ArcGIS中的CGCS2000椭球体相同。<br>    <img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%9C%B0%E7%90%83%E6%A4%AD%E5%9C%86%E7%90%83%E4%BD%933.png" alt=""></p>
+<h5 id="2-1-3大地基准面"><a href="#2-1-3大地基准面" class="headerlink" title="2.1.3大地基准面"></a>2.1.3大地基准面</h5><p>确定了一个规则的椭球表面以后，我们会发现还有一个问题，参考椭球体是对地球的抽象，因此其并不能去地球表面完全重合，在设置参考椭球体的时候必然会出现有的地方贴近的好（参考椭球体与地球表面位置接近），有地地方贴近的不好的问题，因此这里还需要一个大地基准面来控制参考椭球和地球的相对位置。 这是地球表面的第三级逼近。有以下两类基准面：</p>
+<p>地心基准面：由卫星数据得到，使用地球的质心作为原点，使用最广泛的是 WGS 1984。</p>
+<p>区域基准面：特定区域内与地球表面吻合，大地原点是参考椭球与大地水准面相切的点，例如Beijing54、Xian80。我们通常称谓的Beijing54、Xian80坐标系实际上指的是我国的两个大地基准面。</p>
+<p>我们通常说的参心大地坐标系和地心大地坐标系的区别就在于此。<br>参心大地坐标系：指经过定位与定向后，地球椭球的中心不与地球质心重合而是接近地球质心。区域性大地坐标系。是我国基本测图和常规大地测量的基础。如Beijing54、Xian80。<br>地心大地坐标系：指经过定位与定向后，地球椭球的中心与地球质心重合。如CGCS2000、WGS84。</p>
+<h4 id="2-2-地理坐标"><a href="#2-2-地理坐标" class="headerlink" title="2.2 地理坐标"></a>2.2 地理坐标</h4><p>地理坐标，就是用经线（子午线）、纬线、经度、纬度表示地面点位的球面坐标。</p>
+<p>一般地理坐标可分为三种，天文经纬度，大地经纬度，地心经纬度。通常地图上使用的经纬度都为大地经纬度，所以这里我介绍一下大地经纬度，其他两种要想了解的话可以百度一下，其实区别不大。</p>
+<p>大地经纬度：<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%A4%A7%E5%9C%B0%E7%BB%8F%E7%BA%AC%E5%BA%A6.png" alt=""><br>大地经度：参考椭球面上某点的大地子午面与本初子午面间的两面角。东正西负。</p>
+<p>大地纬度 ：参考椭球面上某点的法线与赤道平面的夹角。北正南负。</p>
+<p>大地高： 指某点沿法线方向到参考椭球面的距离。</p>
+<p>看到这里，地理坐标系的思路基本明确的了吧！只需要参考椭球体参数以及大地基准面就可以确定地理坐标系。下面是Arcgis中对北京1954坐标系的说明。<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/arcgis_s.png" alt=""><br>主要就是以下几个参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Prime Meridian（起始经度）</span><br><span class="line">Datum（大地基准面）: D_Beijing_1954</span><br><span class="line">Spheroid（参考椭球体）: Krasovsky_1940 （克拉索夫斯基椭球体）</span><br></pre></td></tr></table></figure></p>
+<h3 id="常见的问题"><a href="#常见的问题" class="headerlink" title="常见的问题"></a>常见的问题</h3><p>1）说“经纬度投影”对吗？</p>
+<p>经纬度表示的是地理坐标系（单位是度），不是投影坐标系（单位是米），两者放一起明显不妥。</p>
+<p>2）大地坐标系与地理坐标系有何不同？</p>
+<p>大地坐标系和地理坐标系都是经纬度表示的坐标系，本身并不包含投影信息，很多时候，这两种说法都是相同的。</p>
+<p>3）为什么有地理坐标系和投影坐标系之分？</p>
+<p>由于经纬度的度数不对应某一标准长度，因此无法精确测量距离或面积，也难以在平面地图或计算机屏幕上显示数据。在使用许多（不是全部）GIS 分析和制图应用程序时，经常需要由投影坐标系提供的更稳定的平面坐标框架。与地理坐标系不同，在二维空间范围内，投影坐标系的长度、角度和面积恒定。投影坐标系始终基于地理坐标系，而后者则是基于球体或旋转椭球体的。在投影坐标系中，通过格网上的 x,y 坐标来标识位置，其原点位于格网中心。</p>
+<p>4）通常所说的西安80，北京54是指什么？</p>
+<p>GIS中的坐标系统定义由基准面和地图投影两组参数确定，基准面对应一个参考椭球体，我们常说的北京54、西安80、国家大地2000坐标系都是指其参考椭球体。基于这种椭球体，我们能定义出大地坐标系和投影坐标系。只说一个西安80是不能确定坐标系统的，因为没有说明有没有投影及投影信息。如果不指明投影方式，则认为西安80、北京54的表现形式为大地坐标，而不是投影平面直角坐标。</p>
+<p>5）什么都是高斯投影 ？</p>
+<p>高斯-克吕格投影属于横轴墨卡托投影，能小范围内保持形状不变，因此被国内普遍采用，但在表示小比例尺数据时，这种投影明显不合适。就中国来说，一般50万以上比例尺采用高斯投影，50万以下采用兰伯特投影。数据用途不同，具体的投影方式各有不同，有的是为了保持面积不变，有的是为了保持形状不变。另一种世界常用的投影是UTM（通用墨卡托投影），高斯-克吕格投影是“等角横切椭圆柱投影”，投影后中央经线保持长度不变，即比例系数为1；UTM投影是“等角横轴割圆柱投影”，圆柱割地球于南纬80度、北纬84度两条等高圈，投影后两条割线上没有变形，中央经线上长度比 0.9996。</p>
+<p>6）北京54，西安80，WGS84，国家2000 有何不同？</p>
+<p>54和80本质上是参心坐标系，大地原点分别在苏联和西安，原点是参考椭球的几何中心，这类坐标难以表达高度信息，精度信息等也不够，正被淘汰。。 84和2000本质上是地心坐标系，即以地球质量中心作为坐标系原点。 54的椭球体长半轴半径是6378245米，80为6378140米，84和2000坐标系一样，都是6378137米。国家最新的2000坐标系和WGS84据说在厘米级都是一样的，但和80坐标在高纬度地区误差达十几倍。</p>
+<p>7) Google、Microsoft、ArcGIS提供的地图服务分别采用了什么坐标系？</p>
+<p>现在都统一为了Web Mercator，即正轴墨卡托投影，和UTM（常规墨卡托）投影的主要区别是为了实现上的方便，把地球模拟为球体而非椭球体，精度理论上差别0.33%，比例尺大时基本可以忽略。同时纬度范围变成了(-85,85),南北极显示不了，但不影响正常使用，这样也减少了切图数量。</p>
+<p>8）ArcGIS的空间参考与坐标系统？</p>
+<p>ArcGIS的空间参考信息SpatialReference，不仅包含了坐标系统的定义，还包括容差Tolerance和分辨率Resolution等，通常由Prj文件表示。ArcGIS中的坐标系统分地理坐标系和投影坐标系，其中投影坐标系也一定包含一个地理坐标系，反之不然。</p>
+
+      
+    </div>
+    
+    
+    
+
+  <div>
+    
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束 感谢您的阅读-------------</div>
+    
+</div>
+
+    
+  </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/GIS/" rel="tag"><i class="fa fa-tag"></i> GIS</a>
+          
+            <a href="/blog/tags/地图/" rel="tag"><i class="fa fa-tag"></i> 地图</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2018/02/09/手机是如何实现自动对焦/" rel="next" title="手机是如何实现自动对焦">
+                <i class="fa fa-chevron-left"></i> 手机是如何实现自动对焦
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2018/02/10/收集计算机书籍/" rel="prev" title="收集计算机书籍">
+                收集计算机书籍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzIzMy85Nzkw"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F/avatar.jpeg"
+                alt="MA KAI" />
+            
+              <p class="site-author-name" itemprop="name">MA KAI</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/blog/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SweetAn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:mkyxlx@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#面对地图坐标之间的关系，一脸懵-，收集整合资料"><span class="nav-number">1.</span> <span class="nav-text">面对地图坐标之间的关系，一脸懵 ，收集整合资料</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、投影坐标系"><span class="nav-number"></span> <span class="nav-text">1、投影坐标系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-按投影变形性质分类"><span class="nav-number"></span> <span class="nav-text">1.1 按投影变形性质分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-1-等角投影"><span class="nav-number">1.</span> <span class="nav-text">1.1.1 等角投影</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-2-等面积投影"><span class="nav-number">2.</span> <span class="nav-text">1.1.2 等面积投影</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-3-任意投影"><span class="nav-number">3.</span> <span class="nav-text">1.1.3 任意投影</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-按投影构成方式分类"><span class="nav-number"></span> <span class="nav-text">1.2 按投影构成方式分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-1几何投影"><span class="nav-number">1.</span> <span class="nav-text">1.2.1几何投影</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-2-2-解析投影"><span class="nav-number">1.1.</span> <span class="nav-text">1.2.2 解析投影</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#（3）高斯-克吕格投影坐标"><span class="nav-number">1.2.</span> <span class="nav-text">（3）高斯-克吕格投影坐标</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#（4）高斯-克吕格投影与UTM投影"><span class="nav-number">1.3.</span> <span class="nav-text">（4）高斯-克吕格投影与UTM投影</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、地理坐标系"><span class="nav-number"></span> <span class="nav-text">2、地理坐标系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-地球的三级逼近"><span class="nav-number"></span> <span class="nav-text">2.1 地球的三级逼近</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1大地水准面"><span class="nav-number">1.</span> <span class="nav-text">2.1.1大地水准面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-2地球椭球体"><span class="nav-number">2.</span> <span class="nav-text">2.1.2地球椭球体</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-3大地基准面"><span class="nav-number">3.</span> <span class="nav-text">2.1.3大地基准面</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-地理坐标"><span class="nav-number"></span> <span class="nav-text">2.2 地理坐标</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的问题"><span class="nav-number"></span> <span class="nav-text">常见的问题</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MA KAI</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">7.7k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      你是第
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      访客
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1272831475&web_id=1272831475" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v="></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v="></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v="></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v="></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v="></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/blog/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
