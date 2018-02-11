@@ -80,7 +80,7 @@
 
 
 
-  <meta name="keywords" content="相机,飞控," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -91,28 +91,13 @@
 
 
 
-<meta name="description" content="先介绍几个概念：1、焦点(focus)与光轴平行的光线射入凸透镜时，理想的镜头应该是所有的光线聚集在一点后，再以锥状的扩散开来，这个聚集所有光线的一点，就叫做焦点。 2、弥散圆(circle of confusion)在焦点前后，光线开始聚集和扩散，点的影象变成模糊的，形成一个扩大的圆，这个圆就叫做弥散圆。 在现实当中，观赏拍摄的影象是以某种方式(比如投影、放大成照片等等)来观察的，人的肉眼所感受">
-<meta name="keywords" content="相机,飞控">
-<meta property="og:type" content="article">
-<meta property="og:title" content="景深概念及计算">
-<meta property="og:url" content="https://sweetan.github.io/blog/2018/02/04/精深概念及计算/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sweet">
+<meta property="og:url" content="https://sweetan.github.io/blog/tags/Maria-DB/index.html">
 <meta property="og:site_name" content="Sweet">
-<meta property="og:description" content="先介绍几个概念：1、焦点(focus)与光轴平行的光线射入凸透镜时，理想的镜头应该是所有的光线聚集在一点后，再以锥状的扩散开来，这个聚集所有光线的一点，就叫做焦点。 2、弥散圆(circle of confusion)在焦点前后，光线开始聚集和扩散，点的影象变成模糊的，形成一个扩大的圆，这个圆就叫做弥散圆。 在现实当中，观赏拍摄的影象是以某种方式(比如投影、放大成照片等等)来观察的，人的肉眼所感受">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/focuspoint.gif">
-<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/circle-cunf.gif">
-<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/depth1.gif">
-<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/depth2.gif">
-<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/depth-1.gif">
-<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/f28.jpg">
-<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/f56.jpg">
-<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/f11.jpg">
-<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/f22.jpg">
-<meta property="og:updated_time" content="2018-02-09T03:58:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="景深概念及计算">
-<meta name="twitter:description" content="先介绍几个概念：1、焦点(focus)与光轴平行的光线射入凸透镜时，理想的镜头应该是所有的光线聚集在一点后，再以锥状的扩散开来，这个聚集所有光线的一点，就叫做焦点。 2、弥散圆(circle of confusion)在焦点前后，光线开始聚集和扩散，点的影象变成模糊的，形成一个扩大的圆，这个圆就叫做弥散圆。 在现实当中，观赏拍摄的影象是以某种方式(比如投影、放大成照片等等)来观察的，人的肉眼所感受">
-<meta name="twitter:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/focuspoint.gif">
+<meta name="twitter:title" content="Sweet">
 
 
 
@@ -142,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://sweetan.github.io/blog/2018/02/04/精深概念及计算/"/>
+  <link rel="canonical" href="https://sweetan.github.io/blog/tags/Maria-DB/"/>
 
 
 
 
 
-  <title>景深概念及计算 | Sweet</title>
+  <title>标签: Maria DB | Sweet</title>
   
 
 
@@ -167,7 +152,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -295,297 +280,54 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block tag">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>Maria DB<small>标签</small>
+        </h1>
+      </div>
 
-  
-  
-  
+      
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sweetan.github.io/blog/blog/2018/02/04/精深概念及计算/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="KAI">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sweet">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/blog/2018/02/11/CentOs7安装MariaDB5-5/" itemprop="url">
+              
+                <span itemprop="name">CentOs7安装MariaDB5.5</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">景深概念及计算</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-04T00:14:28+08:00">
-                2018-02-04
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-02-11T09:43:17+08:00"
+              content="2018-02-11" >
+          02-11
+        </time>
+      </div>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-02-09T11:58:50+08:00">
-                2018-02-09
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/无人机/" itemprop="url" rel="index">
-                    <span itemprop="name">无人机</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/无人机/拍照/" itemprop="url" rel="index">
-                    <span itemprop="name">拍照</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv">阅读
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计"> 
-                  977 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h2 id="先介绍几个概念："><a href="#先介绍几个概念：" class="headerlink" title="先介绍几个概念："></a>先介绍几个概念：</h2><h3 id="1、焦点-focus"><a href="#1、焦点-focus" class="headerlink" title="1、焦点(focus)"></a>1、焦点(focus)</h3><p>与光轴平行的光线射入凸透镜时，理想的镜头应该是所有的光线聚集在一点后，再以锥状的扩散开来，这个聚集所有光线的一点，就叫做焦点。<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/focuspoint.gif" alt=""></p>
-<h3 id="2、弥散圆-circle-of-confusion"><a href="#2、弥散圆-circle-of-confusion" class="headerlink" title="2、弥散圆(circle of confusion)"></a>2、弥散圆(circle of confusion)</h3><p>在焦点前后，光线开始聚集和扩散，点的影象变成模糊的，形成一个扩大的圆，这个圆就叫做弥散圆。</p>
-<p>在现实当中，观赏拍摄的影象是以某种方式(比如投影、放大成照片等等)来观察的，人的肉眼所感受到的影象与放大倍率、投影距离及观看距离有很大的关系，如果弥散圆的直径小于人眼的鉴别能力，在一定范围内实际影象产生的模糊是不能辨认的。这个不能辨认的弥散圆就称为容许弥散圆(permissible circle of confusion)。<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/circle-cunf.gif" alt=""></p>
-<p>不同的厂家、不同的胶片面积都有不同的容许弥散圆直径的数值定义。一般常用的是：</p>
-<table>
-<thead>
-<tr>
-<th>画幅</th>
-<th style="text-align:center">24mm x 36mm</th>
-<th style="text-align:center">6cm x 9cm</th>
-<th style="text-align:center">4” x 5”</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>弥散圆直径</td>
-<td style="text-align:center">0.035mm</td>
-<td style="text-align:center">0.0817mm</td>
-<td style="text-align:center">0.146mm</td>
-</tr>
-</tbody>
-</table>
-<p>35mm照相镜头的容许弥散圆，大约是底片对角线长度的1/1000~1/1500左右。前提是画面放大为5x7英寸的照片，观察距离为25~30cm。</p>
-<h3 id="3、景深-depth-of-field"><a href="#3、景深-depth-of-field" class="headerlink" title="3、景深(depth of field)"></a>3、景深(depth of field)</h3><p>在焦点前后各有一个容许弥散圆，这两个弥散圆之间的距离就叫景深，即：在被摄主体(对焦点)前后，其影像仍然有一段清晰范围的，就是景深。换言之，被摄体的前后纵深，呈现在底片面的影象模糊度，都在容许弥散圆的限定范围内。</p>
-<p><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/depth1.gif" alt=""></p>
-<p>景深随镜头的焦距、光圈值、拍摄距离而变化。对于固定焦距和拍摄距离，使用光圈越小，景深越大。</p>
-<p><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/depth2.gif" alt=""><br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/depth-1.gif" alt=""></p>
-<p>以持照相机拍摄者为基准，从焦点到近处容许弥散圆的的距离叫前景深，从焦点到远方容许弥散圆的距离叫后景深。</p>
-<h3 id="4、景深的计算"><a href="#4、景深的计算" class="headerlink" title="4、景深的计算"></a>4、景深的计算</h3><p>下面是景深的计算公式。其中：</p>
-<hr>
-<p>δ — 容许弥散圆直径</p>
-<p>f — 镜头焦距</p>
-<p>F — 镜头的拍摄光圈值</p>
-<p>L — 对焦距离</p>
-<p>ΔL1 — 前景深</p>
-<p>ΔL2 — 后景深</p>
-<p>ΔL — 景深</p>
-<p>$$<br>前景深 ΔL1=\frac{FδL^2}{f^2 + FδL} 公式(1)<br>$$<br>$$<br>后景深 ΔL2=\frac{FδL^2}{f^2 - FδL} 公式(2)<br>$$<br>$$<br>景深 ΔL=ΔL1+ΔL2=\frac{2f^2FδL^2}{f^4 - F^2δ^2L^2}<br>$$</p>
-<hr>
-<p>从公式(1)和(2)可以看出，后景深 &gt; 前景深。</p>
-<p>由景深计算公式可以看出，景深与镜头使用光圈、镜头焦距、拍摄距离以及对像质的要求(表现为对容许弥散圆的大小)有关。这些主要因素对景深的影响如下(假定其他的条件都不改变)：<br>(1)、镜头光圈：<br>光圈越大，景深越小；光圈越小，景深越大；<br>(2)、镜头焦距<br>镜头焦距越长，景深越小；焦距越短，景深越大；<br>(3)、拍摄距离<br>距离越远，景深越大；距离越近，景深越小。</p>
-<h3 id="5、一些计算实例"><a href="#5、一些计算实例" class="headerlink" title="5、一些计算实例"></a>5、一些计算实例</h3><p>网上有些在线计算器，有兴趣的网友可以参考：<br>摄影光学计算器<br>Windows版本的可下载的计数器在<br>f/Calc<br>(1)、200/2.8对焦在5m时，f/2.8的景深：</p>
-<p>δ=0.035mm<br>f=200mm<br>F=2.8<br>L=5000mm<br>ΔL1=60mm<br>ΔL2=62mm<br>ΔL=122mm<br>结论：<br> 该镜头在用f/2.8拍摄时，清晰范围是从4.94m~5.062m，景深很浅。<br> (2)、200/2.8+2X=400/5.6对焦在5m时，f/5.6的景深：</p>
-<p>δ=0.035mm<br>f= 400mm<br>F= 5.6<br>L= 5000mm<br>ΔL1= 30mm<br>ΔL2= 31mm<br>ΔL= 61mm<br>结论：<br> 该镜头在配合2X增距镜后，主镜头用f/2.8拍摄时，景深是(1)的一半。<br> <next page=""></next></p>
-<p>景深的实际拍摄照片<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/f28.jpg" alt=""><br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/f56.jpg" alt=""><br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/f11.jpg" alt=""><br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E6%99%AF%E6%B7%B1%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AE%A1%E7%AE%97/f22.jpg" alt=""></p>
-<p>注：本内容是从其他博客得来，但是找不到原贴了</p>
-<p></p>
-
-      
-    </div>
-    
-    
-    
-
-  <div>
-    
-        <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束 感谢您的阅读-------------</div>
-    
-</div>
-
-    
-  </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/blog/tags/相机/" rel="tag"><i class="fa fa-tag"></i> 相机</a>
-          
-            <a href="/blog/tags/飞控/" rel="tag"><i class="fa fa-tag"></i> 飞控</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/blog/2018/01/28/席慕蓉-初相遇/" rel="next" title="初相遇">
-                <i class="fa fa-chevron-left"></i> 初相遇
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2018/02/09/手机是如何实现自动对焦/" rel="prev" title="手机是如何实现自动对焦">
-                手机是如何实现自动对焦 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
-      
-        
-<script>
-  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
-</script>
-
       
     </div>
+
   </div>
+  
+  
+  
+
+  
 
 
           </div>
@@ -593,15 +335,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzIzMy85Nzkw"></div>
-    </div>
-
-  
-
-
 
         </div>
         
@@ -622,17 +355,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -712,22 +436,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#先介绍几个概念："><span class="nav-number">1.</span> <span class="nav-text">先介绍几个概念：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、焦点-focus"><span class="nav-number">1.1.</span> <span class="nav-text">1、焦点(focus)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、弥散圆-circle-of-confusion"><span class="nav-number">1.2.</span> <span class="nav-text">2、弥散圆(circle of confusion)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、景深-depth-of-field"><span class="nav-number">1.3.</span> <span class="nav-text">3、景深(depth of field)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、景深的计算"><span class="nav-number">1.4.</span> <span class="nav-text">4、景深的计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、一些计算实例"><span class="nav-number">1.5.</span> <span class="nav-text">5、一些计算实例</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -897,10 +605,6 @@
   
 
   
-  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v="></script>
-<script type="text/javascript" src="/blog/js/src/post-details.js?v="></script>
-
-
 
   
 
@@ -929,17 +633,6 @@
 
 
 
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
   
 
 
