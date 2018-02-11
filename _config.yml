@@ -6,7 +6,7 @@
 title: Sweet
 subtitle:
 description:
-author: MA KAI
+author: KAI
 language: zh-Hans
 timezone:
 
@@ -86,3 +86,4 @@ search:
   field: post
   format: html
   limit: 10000
+
