@@ -4,8 +4,58 @@
 
     
   <url>
+    <loc>https://sweetan.github.io/blog/blog/2018/02/14/CentOS7.3%E5%8D%87%E7%BA%A7mariadb%E8%87%B310.2/</loc>
+    <lastmod>2018-02-17T15:41:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS7.3升级mariadb至10.2</title>
+        <pubTime>2018-02-14T06:34:21.000Z</pubTime>
+        
+        <tag>CentOS7</tag>
+         
+        <tag>Maria DB</tag>
+         
+         
+           
+             
+              <breadCrumb title="服务器" url="https://sweetan.github.io/blog/blog/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+             
+              <breadCrumb title="数据库" url="https://sweetan.github.io/blog/blog/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://sweetan.github.io/blog/blog/2018/02/12/git%E6%9C%8D%E5%8A%A1%E5%99%A8gogs%E5%AE%89%E8%A3%85/</loc>
+    <lastmod>2018-02-17T15:34:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS7 gogs安装及二级域名nginx代理</title>
+        <pubTime>2018-02-12T08:46:57.000Z</pubTime>
+        
+        <tag>CentOS7</tag>
+         
+        <tag>Gogs</tag>
+         
+         
+           
+             
+              <breadCrumb title="服务器" url="https://sweetan.github.io/blog/blog/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+             
+              <breadCrumb title="git" url="https://sweetan.github.io/blog/blog/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://sweetan.github.io/blog/blog/2018/02/11/CentOs7%E5%AE%89%E8%A3%85MariaDB5-5/</loc>
-    <lastmod>2018-02-11T02:02:20.000Z</lastmod>
+    <lastmod>2018-02-11T02:03:35.000Z</lastmod>
     <data>
         <display>
         <title>CentOs7安装MariaDB5.5</title>

@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sweetan.github.io/blog/2018/02/14/CentOS7.3%E5%8D%87%E7%BA%A7mariadb%E8%87%B310.2/</loc>
+    
+    <lastmod>2018-02-17T15:41:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sweetan.github.io/blog/2018/02/12/git%E6%9C%8D%E5%8A%A1%E5%99%A8gogs%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2018-02-17T15:34:48.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://sweetan.github.io/blog/2018/02/11/CentOs7%E5%AE%89%E8%A3%85MariaDB5-5/</loc>
     
-    <lastmod>2018-02-11T02:02:20.000Z</lastmod>
+    <lastmod>2018-02-11T02:03:35.000Z</lastmod>
     
   </url>
   
