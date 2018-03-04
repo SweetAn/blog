@@ -12,8 +12,8 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://sweetan.github.io/blog/
-root: /blog
+url: http://blog.sweetm.top
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -80,10 +80,20 @@ deploy:
   type: git
   repo: https://github.com/SweetAn/blog.git
   branch: master
-#站点内容搜索
+##站点内容搜索
 search:
   path: search.xml
   field: post
   format: html
   limit: 10000
 
+#hexo sitemap
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
+nofollow:
+    enable: true
+    exclude: # 排除的域名
+    - exclude1.com
+    - exclude2.com
