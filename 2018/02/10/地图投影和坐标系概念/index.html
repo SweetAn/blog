@@ -91,13 +91,13 @@
 
 
 
-<meta name="description" content="面对地图坐标之间的关系，一脸懵 ，收集整合资料 ##基本概念地理坐标系：为球面坐标。 参考平面地是椭球面，坐标单位：经纬度；投影坐标系：为平面坐标。参考平面地是水平面，坐标单位：米、千米等；地理坐标转换到投影坐标的过程可理解为投影。（投影：将不规则的地球曲面转换为平面） 1、投影坐标系地图投影的种类很多，一般按照两种标准进行分类：一是按投影的变形性质分类，二是按照投影的构成方式分类。 1.1 按投">
+<meta name="description" content="面对地图坐标之间的关系，一脸懵 ，收集整合资料 基本概念地理坐标系：为球面坐标。 参考平面地是椭球面，坐标单位：经纬度；投影坐标系：为平面坐标。参考平面地是水平面，坐标单位：米、千米等；地理坐标转换到投影坐标的过程可理解为投影。（投影：将不规则的地球曲面转换为平面） 1、投影坐标系地图投影的种类很多，一般按照两种标准进行分类：一是按投影的变形性质分类，二是按照投影的构成方式分类。 1.1 按投影变">
 <meta name="keywords" content="GIS,地图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="地图投影和坐标系概念">
 <meta property="og:url" content="http://blog.sweetm.top/2018/02/10/地图投影和坐标系概念/index.html">
 <meta property="og:site_name" content="Sweet">
-<meta property="og:description" content="面对地图坐标之间的关系，一脸懵 ，收集整合资料 ##基本概念地理坐标系：为球面坐标。 参考平面地是椭球面，坐标单位：经纬度；投影坐标系：为平面坐标。参考平面地是水平面，坐标单位：米、千米等；地理坐标转换到投影坐标的过程可理解为投影。（投影：将不规则的地球曲面转换为平面） 1、投影坐标系地图投影的种类很多，一般按照两种标准进行分类：一是按投影的变形性质分类，二是按照投影的构成方式分类。 1.1 按投">
+<meta property="og:description" content="面对地图坐标之间的关系，一脸懵 ，收集整合资料 基本概念地理坐标系：为球面坐标。 参考平面地是椭球面，坐标单位：经纬度；投影坐标系：为平面坐标。参考平面地是水平面，坐标单位：米、千米等；地理坐标转换到投影坐标的过程可理解为投影。（投影：将不规则的地球曲面转换为平面） 1、投影坐标系地图投影的种类很多，一般按照两种标准进行分类：一是按投影的变形性质分类，二是按照投影的构成方式分类。 1.1 按投影变">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%87%A0%E4%BD%95%E6%8A%95%E5%BD%B1.png">
 <meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E4%BC%AA%E6%96%B9%E4%BD%8D%E6%8A%95%E5%BD%B1%E7%9A%84%E7%BB%8F%E7%BA%AC%E7%BA%BF%E5%BD%A2%E7%8A%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
@@ -113,10 +113,10 @@
 <meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%9C%B0%E7%90%83%E6%A4%AD%E5%9C%86%E7%90%83%E4%BD%933.png">
 <meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%A4%A7%E5%9C%B0%E7%BB%8F%E7%BA%AC%E5%BA%A6.png">
 <meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/arcgis_s.png">
-<meta property="og:updated_time" content="2018-02-10T10:34:39.000Z">
+<meta property="og:updated_time" content="2018-02-26T14:02:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="地图投影和坐标系概念">
-<meta name="twitter:description" content="面对地图坐标之间的关系，一脸懵 ，收集整合资料 ##基本概念地理坐标系：为球面坐标。 参考平面地是椭球面，坐标单位：经纬度；投影坐标系：为平面坐标。参考平面地是水平面，坐标单位：米、千米等；地理坐标转换到投影坐标的过程可理解为投影。（投影：将不规则的地球曲面转换为平面） 1、投影坐标系地图投影的种类很多，一般按照两种标准进行分类：一是按投影的变形性质分类，二是按照投影的构成方式分类。 1.1 按投">
+<meta name="twitter:description" content="面对地图坐标之间的关系，一脸懵 ，收集整合资料 基本概念地理坐标系：为球面坐标。 参考平面地是椭球面，坐标单位：经纬度；投影坐标系：为平面坐标。参考平面地是水平面，坐标单位：米、千米等；地理坐标转换到投影坐标的过程可理解为投影。（投影：将不规则的地球曲面转换为平面） 1、投影坐标系地图投影的种类很多，一般按照两种标准进行分类：一是按投影的变形性质分类，二是按照投影的构成方式分类。 1.1 按投影变">
 <meta name="twitter:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%87%A0%E4%BD%95%E6%8A%95%E5%BD%B1.png">
 
 
@@ -356,8 +356,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-02-10T18:34:39+08:00">
-                2018-02-10
+              <time title="更新于" itemprop="dateModified" datetime="2018-02-26T22:02:00+08:00">
+                2018-02-26
               </time>
             
           </span>
@@ -460,7 +460,7 @@
 
       
         <h5 id="面对地图坐标之间的关系，一脸懵-，收集整合资料"><a href="#面对地图坐标之间的关系，一脸懵-，收集整合资料" class="headerlink" title="面对地图坐标之间的关系，一脸懵 ，收集整合资料"></a>面对地图坐标之间的关系，一脸懵 ，收集整合资料</h5><hr>
-<p>##基本概念<br>地理坐标系：为球面坐标。 参考平面地是椭球面，坐标单位：经纬度；<br>投影坐标系：为平面坐标。参考平面地是水平面，坐标单位：米、千米等；<br>地理坐标转换到投影坐标的过程可理解为投影。（投影：将不规则的地球曲面转换为平面）</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>地理坐标系：为球面坐标。 参考平面地是椭球面，坐标单位：经纬度；<br>投影坐标系：为平面坐标。参考平面地是水平面，坐标单位：米、千米等；<br>地理坐标转换到投影坐标的过程可理解为投影。（投影：将不规则的地球曲面转换为平面）</p>
 <h3 id="1、投影坐标系"><a href="#1、投影坐标系" class="headerlink" title="1、投影坐标系"></a>1、投影坐标系</h3><p>地图投影的种类很多，一般按照两种标准进行分类：一是按投影的变形性质分类，二是按照投影的构成方式分类。</p>
 <h4 id="1-1-按投影变形性质分类"><a href="#1-1-按投影变形性质分类" class="headerlink" title="1.1 按投影变形性质分类"></a>1.1 按投影变形性质分类</h4><p>按照投影的变形性质可以分为以下几类：等角投影、等积投影、任意投影。</p>
 <h5 id="1-1-1-等角投影"><a href="#1-1-1-等角投影" class="headerlink" title="1.1.1 等角投影"></a>1.1.1 等角投影</h5><p>能保持无限小图形的相似。同一点上长度比处处相同-变形圆，不同点变形圆的半径不同，大范围看，投影图形与地面实际形状并不完全相似。由于这种投影无角度变形，便于图上量测方向/角度，所以常用于对真实角度和方向要求高的地图，比如航海、洋流和风向图等。由于此类投影面积变形很大，故不能量算面积。</p>
@@ -472,13 +472,14 @@
 <p>c 圆柱投影：以圆柱作为几何承影面，使圆柱与椭球体面相切或相割，将球面经纬网投影到圆柱面上而成的投影。该投影方式一般适用于编制赤道附近地区的地图和世界地图。</p>
 <h6 id="1-2-2-解析投影"><a href="#1-2-2-解析投影" class="headerlink" title="1.2.2 解析投影"></a>1.2.2 解析投影</h6><p>解析投影是不借助于辅助几何面，直接用解析法得到经纬网的一种投影。主要包括：伪方位投影，伪圆锥投影，伪圆柱投影，多圆锥投影。此处不再赘述。</p>
 <p>a 伪方位投影：据方位投影修改而来。在正轴情况下，纬线仍为同心圆，除中央经线为直线外，其余经线均改为中央经线的曲线，且相交于纬线的圆心。<br>    <img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E4%BC%AA%E6%96%B9%E4%BD%8D%E6%8A%95%E5%BD%B1%E7%9A%84%E7%BB%8F%E7%BA%AC%E7%BA%BF%E5%BD%A2%E7%8A%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="伪方位投影"><br>b 伪圆柱投影：据圆柱投影修改而来。在正轴圆柱投影的基础上，要求纬线仍为平行直线，除中央经线为直线外，其余的经线均改为对称于中央经线的曲线。<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E4%BC%AA%E5%9C%86%E6%9F%B1%E6%8A%95%E5%BD%B1%E7%9A%84%E7%BB%8F%E7%BA%AC%E7%BA%BF%E5%BD%A2%E7%8A%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="伪圆柱投影"><br>c 伪圆锥投影：据圆锥投影修改而来。在正轴圆锥投影的基础上，要求经线仍为同心圆弧，除中央经线为直线外，其余的经线均改为对称于中央经线的曲线。<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E4%BC%AA%E5%9C%86%E9%94%A5%E6%8A%95%E5%BD%B1%E7%9A%84%E7%BB%8F%E7%BA%AC%E7%BA%BF%E5%BD%A2%E7%8A%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="伪圆锥投影"><br>d 多圆锥投影：这是一种假想借助多个圆锥表面与球体相切而设计成的投影。纬线为同轴圆弧，其圆心均位于中央经线上，中央经线为直线，其余的经线均为对称于中央经线的曲线。<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%A4%9A%E5%9C%86%E9%94%A5%E6%8A%95%E5%BD%B1%E7%9A%84%E7%BB%8F%E7%BA%AC%E7%BA%BF%E5%BD%A2%E7%8A%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="多圆锥投影"></p>
-<p>####1.3常见的投影</p>
-<p>#####1． 墨卡托(Mercator)投影<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%A2%A8%E5%8D%A1%E6%89%98(Mercator" alt="">%E6%8A%95%E5%BD%B1%20.jpg)<br>墨卡托(Mercator)投影，是一种”等角正切圆柱投影”，荷兰地图学家墨卡托（Gerhardus Mercator 1512－1594）在1569年拟定，假设地球被围在一中空的圆柱里，其标准纬线与圆柱相切接触，然后再假想地球中心有一盏灯，把球面上的图形投影到圆柱体上，再把圆柱体展开，这就是一幅选定标准纬线上的“墨卡托投影”绘制出的地图。墨卡托投影没有角度变形，由每一点向各方向的长度比相等，它的经纬线都是平行直线，且相交成直角，经线间隔相等，纬线间隔从标准纬线向两极逐渐增大。墨卡托投影的地图上长度和面积变形明显，但标准纬线无变形，从标准纬线向两极变形逐渐增大，但因为它具有各个方向均等扩大的特性，保持了方向和相互位置关系的正确。在地图上保持方向和角度的正确是墨卡托投影的优点，墨卡托投影地图常用作航海图和航空图，如果循着墨卡托投影图上两点间的直线航行，方向不变可以一直到达目的地，因此它对船舰在航行中定位、确定航向都具有有利条件，给航海者带来很大方便。“海底地形图编绘规范”（GB/T 17834-1999，海军航保部起草）中规定1：25万及更小比例尺的海图采用墨卡托投影，其中基本比例尺海底地形图（1：5万，1：25万，1：100万）采用统一基准纬线30°，非基本比例尺图以制图区域中纬为基准纬线。基准纬线取至整度或整分。</p>
+<h4 id="1-3常见的投影"><a href="#1-3常见的投影" class="headerlink" title="1.3常见的投影"></a>1.3常见的投影</h4><h5 id="1．-墨卡托-Mercator-投影"><a href="#1．-墨卡托-Mercator-投影" class="headerlink" title="1． 墨卡托(Mercator)投影"></a>1． 墨卡托(Mercator)投影</h5><p><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E5%A2%A8%E5%8D%A1%E6%89%98(Mercator" alt="">%E6%8A%95%E5%BD%B1%20.jpg)</p>
+<p>墨卡托(Mercator)投影，是一种”等角正切圆柱投影”，荷兰地图学家墨卡托（Gerhardus Mercator 1512－1594）在1569年拟定，假设地球被围在一中空的圆柱里，其标准纬线与圆柱相切接触，然后再假想地球中心有一盏灯，把球面上的图形投影到圆柱体上，再把圆柱体展开，这就是一幅选定标准纬线上的“墨卡托投影”绘制出的地图。墨卡托投影没有角度变形，由每一点向各方向的长度比相等，它的经纬线都是平行直线，且相交成直角，经线间隔相等，纬线间隔从标准纬线向两极逐渐增大。墨卡托投影的地图上长度和面积变形明显，但标准纬线无变形，从标准纬线向两极变形逐渐增大，但因为它具有各个方向均等扩大的特性，保持了方向和相互位置关系的正确。在地图上保持方向和角度的正确是墨卡托投影的优点，墨卡托投影地图常用作航海图和航空图，如果循着墨卡托投影图上两点间的直线航行，方向不变可以一直到达目的地，因此它对船舰在航行中定位、确定航向都具有有利条件，给航海者带来很大方便。“海底地形图编绘规范”（GB/T 17834-1999，海军航保部起草）中规定1：25万及更小比例尺的海图采用墨卡托投影，其中基本比例尺海底地形图（1：5万，1：25万，1：100万）采用统一基准纬线30°，非基本比例尺图以制图区域中纬为基准纬线。基准纬线取至整度或整分。</p>
 <p>墨卡托投影坐标系取零子午线或自定义原点经线(L0)与赤道交点的投影为原点，零子午线或自定义原点经线的投影为纵坐标X轴，赤道的投影为横坐标Y轴，构成墨卡托平面直角坐标系。</p>
-<p>#####2． 高斯-克吕格(Gauss-Kruger)投影和UTM（Universal Transverse Mercator）投影</p>
-<p>######（1）高斯-克吕格投影性质<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E9%AB%98%E6%96%AF%E6%8A%95%E5%BD%B1.jpg" alt=""></p>
+<h5 id="2．-高斯-克吕格-Gauss-Kruger-投影和UTM（Universal-Transverse-Mercator）投影"><a href="#2．-高斯-克吕格-Gauss-Kruger-投影和UTM（Universal-Transverse-Mercator）投影" class="headerlink" title="2． 高斯-克吕格(Gauss-Kruger)投影和UTM（Universal Transverse Mercator）投影"></a>2． 高斯-克吕格(Gauss-Kruger)投影和UTM（Universal Transverse Mercator）投影</h5><p>######（1）高斯-克吕格投影性质</p>
+<p><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E9%AB%98%E6%96%AF%E6%8A%95%E5%BD%B1.jpg" alt=""></p>
 <p>高斯-克吕格(Gauss-Kruger)投影简称“高斯投影”，又名”等角横切椭圆柱投影”，地球椭球面和平面间正形投影的一种。德国数学家、物理学家、天文学家高斯（Carl FriedrichＧauss，1777一 1855）于十九世纪二十年代拟定，后经德国大地测量学家克吕格（Johannes Kruger，1857～1928）于 1912年对投影公式加以补充，故名。<br>该投影按照投影带中央子午线投影为直线且长度不变和赤道投影为直线的条件，确定函数的形式，从而得到高斯一克吕格投影公式。投影后，除中央子午线和赤道为直线外， 其他子午线均为对称于中央子午线的曲线。设想用一个椭圆柱横切于椭球面上投影带的中央子午线，按上述投影条件，将中央子午线两侧一定经差范围内的椭球面正形投影于椭圆柱面。将椭圆柱面沿过南北极的母线剪开展平，即为高斯投影平面。取中央子午线与赤道交点的投影为原点，中央子午线的投影为纵坐标x轴，赤道的投影为横坐标y轴，构成高斯克吕格平面直角坐标系。<br>高斯-克吕格投影在长度和面积上变形很小，中央经线无变形，自中央经线向投影带边缘，变形逐渐增加，变形最大之处在投影带内赤道的两端。由于其投影精度高，变形小，而且计算简便（各投影带坐标一致，只要算出一个带的数据，其他各带都能应用），因此在大比例尺地形图中应用，可以满足军事上各种需要，能在图上进行精确的量测计算。</p>
-<p>######（2）高斯-克吕格投影分带<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E9%AB%98%E6%96%AF-%E5%85%8B%E5%90%95%E6%A0%BC%E6%8A%95%E5%BD%B1%E5%88%86%E5%B8%A6%20%20.jpg" alt=""></p>
+<p>######（2）高斯-克吕格投影分带</p>
+<p><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/2018-02-08%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1%E5%92%8C%E5%9D%90%E6%A0%87%E7%B3%BB%E6%A6%82%E5%BF%B5/%E9%AB%98%E6%96%AF-%E5%85%8B%E5%90%95%E6%A0%BC%E6%8A%95%E5%BD%B1%E5%88%86%E5%B8%A6%20%20.jpg" alt=""></p>
 <p>按一定经差将地球椭球面划分成若干投影带,这是高斯投影中限制长度变形的最有效方法。分带时既要控制长度变形使其不大于测图误差，又要使带数不致过多以减少换带计算工作，据此原则将地球椭球面沿子午线划分成经差相等的瓜瓣形地带,以便分带投影。通常按经差6度或3度分为六度带或三度带。六度带自0度子午线起每隔经差6度自西向东分带，带号依次编为第 1、2…60带。三度带是在六度带的基础上分成的，它的中央子午线与六度带的中央子午线和分带子午线重合，即自 1.5度子午线起每隔经差3度自西向东分带，带号依次编为三度带第 1、2…120带。我国的经度范围西起 73°东至135°，可分成六度带十一个，各带中央经线依次为75°、81°、87°、……、117°、123°、129°、135°，或三度带二十二个。六度带可用于中小比例尺（如 1：250000）测图，三度带可用于大比例尺（如 1：10000）测图，城建坐标多采用三度带的高斯投影。</p>
 <h6 id="（3）高斯-克吕格投影坐标"><a href="#（3）高斯-克吕格投影坐标" class="headerlink" title="（3）高斯-克吕格投影坐标"></a>（3）高斯-克吕格投影坐标</h6><p>高斯- 克吕格投影是按分带方法各自进行投影，故各带坐标成独立系统。以中央经线投影为纵轴(x), 赤道投影为横轴(y),两轴交点即为各带的坐标原点。纵坐标以赤道为零起算，赤道以北为正，以南为负。我国位于北半球，纵坐标均为正值。横坐标如以中央经线为零起算，中央经线以东为正，以西为负，横坐标出现负值，使用不便，故规定将坐标纵轴西移500公里当作起始轴，凡是带内的横坐标值均加 500公里。由于高斯-克吕格投影每一个投影带的坐标都是对本带坐标原点的相对值，所以各带的坐标完全相同，为了区别某一坐标系统属于哪一带，在横轴坐标前加上带号，如(4231898m,21655933m)，其中21即为带号。   </p>
 <h6 id="（4）高斯-克吕格投影与UTM投影"><a href="#（4）高斯-克吕格投影与UTM投影" class="headerlink" title="（4）高斯-克吕格投影与UTM投影"></a>（4）高斯-克吕格投影与UTM投影</h6><p>某些国外的软件如ARC/INFO或国外仪器的配套软件如多波束的数据处理软件等，往往不支持高斯-克吕格投影，但支持UTM投影，因此常有把UTM投影坐标当作高斯-克吕格投影坐标提交的现象。</p>
@@ -684,7 +685,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -695,7 +696,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -706,7 +707,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -755,7 +756,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#面对地图坐标之间的关系，一脸懵-，收集整合资料"><span class="nav-number">1.</span> <span class="nav-text">面对地图坐标之间的关系，一脸懵 ，收集整合资料</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#1、投影坐标系"><span class="nav-number"></span> <span class="nav-text">1、投影坐标系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-按投影变形性质分类"><span class="nav-number"></span> <span class="nav-text">1.1 按投影变形性质分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-1-等角投影"><span class="nav-number">1.</span> <span class="nav-text">1.1.1 等角投影</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-2-等面积投影"><span class="nav-number">2.</span> <span class="nav-text">1.1.2 等面积投影</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-3-任意投影"><span class="nav-number">3.</span> <span class="nav-text">1.1.3 任意投影</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-按投影构成方式分类"><span class="nav-number"></span> <span class="nav-text">1.2 按投影构成方式分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-1几何投影"><span class="nav-number">1.</span> <span class="nav-text">1.2.1几何投影</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-2-2-解析投影"><span class="nav-number">1.1.</span> <span class="nav-text">1.2.2 解析投影</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#（3）高斯-克吕格投影坐标"><span class="nav-number">1.2.</span> <span class="nav-text">（3）高斯-克吕格投影坐标</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#（4）高斯-克吕格投影与UTM投影"><span class="nav-number">1.3.</span> <span class="nav-text">（4）高斯-克吕格投影与UTM投影</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、地理坐标系"><span class="nav-number"></span> <span class="nav-text">2、地理坐标系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-地球的三级逼近"><span class="nav-number"></span> <span class="nav-text">2.1 地球的三级逼近</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1大地水准面"><span class="nav-number">1.</span> <span class="nav-text">2.1.1大地水准面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-2地球椭球体"><span class="nav-number">2.</span> <span class="nav-text">2.1.2地球椭球体</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-3大地基准面"><span class="nav-number">3.</span> <span class="nav-text">2.1.3大地基准面</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-地理坐标"><span class="nav-number"></span> <span class="nav-text">2.2 地理坐标</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的问题"><span class="nav-number"></span> <span class="nav-text">常见的问题</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#面对地图坐标之间的关系，一脸懵-，收集整合资料"><span class="nav-number">1.</span> <span class="nav-text">面对地图坐标之间的关系，一脸懵 ，收集整合资料</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number"></span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、投影坐标系"><span class="nav-number"></span> <span class="nav-text">1、投影坐标系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-按投影变形性质分类"><span class="nav-number"></span> <span class="nav-text">1.1 按投影变形性质分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-1-等角投影"><span class="nav-number">1.</span> <span class="nav-text">1.1.1 等角投影</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-2-等面积投影"><span class="nav-number">2.</span> <span class="nav-text">1.1.2 等面积投影</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-3-任意投影"><span class="nav-number">3.</span> <span class="nav-text">1.1.3 任意投影</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-按投影构成方式分类"><span class="nav-number"></span> <span class="nav-text">1.2 按投影构成方式分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-1几何投影"><span class="nav-number">1.</span> <span class="nav-text">1.2.1几何投影</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-2-2-解析投影"><span class="nav-number">1.1.</span> <span class="nav-text">1.2.2 解析投影</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3常见的投影"><span class="nav-number"></span> <span class="nav-text">1.3常见的投影</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1．-墨卡托-Mercator-投影"><span class="nav-number">1.</span> <span class="nav-text">1． 墨卡托(Mercator)投影</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2．-高斯-克吕格-Gauss-Kruger-投影和UTM（Universal-Transverse-Mercator）投影"><span class="nav-number">2.</span> <span class="nav-text">2． 高斯-克吕格(Gauss-Kruger)投影和UTM（Universal Transverse Mercator）投影</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#（3）高斯-克吕格投影坐标"><span class="nav-number">2.1.</span> <span class="nav-text">（3）高斯-克吕格投影坐标</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#（4）高斯-克吕格投影与UTM投影"><span class="nav-number">2.2.</span> <span class="nav-text">（4）高斯-克吕格投影与UTM投影</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、地理坐标系"><span class="nav-number"></span> <span class="nav-text">2、地理坐标系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-地球的三级逼近"><span class="nav-number"></span> <span class="nav-text">2.1 地球的三级逼近</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1大地水准面"><span class="nav-number">1.</span> <span class="nav-text">2.1.1大地水准面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-2地球椭球体"><span class="nav-number">2.</span> <span class="nav-text">2.1.2地球椭球体</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-3大地基准面"><span class="nav-number">3.</span> <span class="nav-text">2.1.3大地基准面</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-地理坐标"><span class="nav-number"></span> <span class="nav-text">2.2 地理坐标</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的问题"><span class="nav-number"></span> <span class="nav-text">常见的问题</span></a></li></ol></li></div>
             
 
           </div>
@@ -789,7 +790,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">10.6k</span>
+    <span title="Site words total count">12.0k</span>
   
 </div>
 
