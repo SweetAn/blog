@@ -5,29 +5,22 @@
     
   <url>
     <loc>http://blog.sweetm.top/2018/04/06/%E8%A7%A3%E5%8E%8B%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/</loc>
-    <lastmod>2018-04-06T15:36:53.000Z</lastmod>
+    <lastmod>2018-04-08T13:54:02.000Z</lastmod>
     <data>
         <display>
         <title>解压命令大全</title>
         <pubTime>2018-04-06T02:26:27.000Z</pubTime>
         
+        <tag>Linux</tag>
+         
          
            
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.sweetm.top/2018/04/06/%E6%A0%91%E8%8E%93%E6%B4%BEfrp%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</loc>
-    <lastmod>2018-04-06T15:34:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>树莓派frp搭建内网穿透</title>
-        <pubTime>2018-04-06T04:05:27.000Z</pubTime>
-        
-         
-           
+             
+              <breadCrumb title="服务器" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+             
+              <breadCrumb title="linux指令" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/linux%E6%8C%87%E4%BB%A4/"/>
+          
         </display>
     </data>
     </url>
@@ -35,14 +28,51 @@
     
   <url>
     <loc>http://blog.sweetm.top/2018/04/06/%E7%A7%81%E6%9C%89%E4%BA%91Owncloud%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2018-04-06T15:21:51.000Z</lastmod>
+    <lastmod>2018-04-08T13:44:23.000Z</lastmod>
     <data>
         <display>
         <title>私有云Owncloud搭建</title>
         <pubTime>2018-04-06T14:16:12.000Z</pubTime>
         
+        <tag>Linux</tag>
+         
+        <tag>私有云</tag>
+         
+        <tag>文件服务器</tag>
+         
          
            
+             
+              <breadCrumb title="服务器" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+             
+              <breadCrumb title="文件服务器" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.sweetm.top/2018/04/06/%E6%A0%91%E8%8E%93%E6%B4%BEfrp%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</loc>
+    <lastmod>2018-04-08T13:43:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>树莓派frp搭建内网穿透</title>
+        <pubTime>2018-04-06T04:05:27.000Z</pubTime>
+        
+        <tag>内网穿透</tag>
+         
+        <tag>linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="网络" url="http://blog.sweetm.top/categories/%E7%BD%91%E7%BB%9C/"/>
+          
+             
+              <breadCrumb title="内网穿透" url="http://blog.sweetm.top/categories/%E7%BD%91%E7%BB%9C/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+          
         </display>
     </data>
     </url>
@@ -50,7 +80,7 @@
     
   <url>
     <loc>http://blog.sweetm.top/2018/04/03/docker%E4%B8%8B%E5%AE%89%E8%A3%85mongoDB/</loc>
-    <lastmod>2018-04-06T02:26:37.000Z</lastmod>
+    <lastmod>2018-04-08T13:41:38.000Z</lastmod>
     <data>
         <display>
         <title>docker下安装mongoDB</title>
@@ -66,7 +96,7 @@
               <breadCrumb title="服务器" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
           
              
-              <breadCrumb title="docker~~~~" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/docker/"/>
+              <breadCrumb title="docker" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/docker/"/>
           
         </display>
     </data>
@@ -90,31 +120,6 @@
           
              
               <breadCrumb title="书籍" url="http://blog.sweetm.top/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E4%B9%A6%E7%B1%8D/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.sweetm.top/2018/03/22/python%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2018-03-22T14:53:41.000Z</lastmod>
-    <data>
-        <display>
-        <title>python学习</title>
-        <pubTime>2018-03-22T14:33:51.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>程序语言</tag>
-         
-         
-           
-             
-              <breadCrumb title="计算机语言" url="http://blog.sweetm.top/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80/"/>
-          
-             
-              <breadCrumb title="python" url="http://blog.sweetm.top/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80/python/"/>
           
         </display>
     </data>
