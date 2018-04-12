@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[gogs后台运行及重启]]></title>
+    <url>%2F2018%2F04%2F12%2Fgogs%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E5%8F%8A%E9%87%8D%E5%90%AF%2F</url>
+    <content type="text"><![CDATA[gogs 运行在后台后出现问题不会关😭 1$ nohup ./gogs web &amp; 后台运行后可以使用 123$ lsof -i:3000COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAMEgogs 17483 git 6u IPv6 338433 0t0 TCP *:3000 (LISTEN) 然后就可以使用杀掉进程了，最后就是你放心的启动gogs吧😁 1$ kill -9 17483]]></content>
+      <categories>
+        <category>服务器</category>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>Gogs</tag>
+        <tag>CentOS7</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[私有云Owncloud搭建]]></title>
     <url>%2F2018%2F04%2F06%2F%E7%A7%81%E6%9C%89%E4%BA%91Owncloud%E6%90%AD%E5%BB%BA%2F</url>
     <content type="text"><![CDATA[owncloudOwnCloud是一个基于Linux系统的开源云项目，允许用户建立自己的个人云服务器，目前功能包括文件分享、音乐存储、日历、联系人和书签共享等等。OwnCloud业务人员称，“相比Dropbox和box.net，我们提供的服务更实惠，更安全，更方便管理，灵活性更强，十分适合商业用途。OwnCloud用户还可在自己的硬件和存储设备上实现文件同步和共享服务。 Owncould下载网址 本次搭建采用了 nginx+owncloud+php5 一、根据上面的网址下载 ownCould 安装包解压开压缩包，并且将解压后的文件移动到对应的文件夹 想要存放 website的目录 /data/website/owncloud 12tar -jxvf owncloud-10.0.7.tar.bz2mv owncloud /data/website/owncloud 上面目录owncloud 需要配置权限 1drwxr-x--- 14 root www-data 4096 4月 6 21:45 owncloud 官方摘的权限配置 需要修改You can find your HTTP user in your HTTP server configuration files. Or you can use PHP Version and Information (Look for the User/Group line). 1234The HTTP user and group in Debian/Ubuntu is www-data.The HTTP user and group in Fedora/CentOS is apache.The HTTP user and group in Arch Linux is http.The HTTP user in openSUSE is wwwrun, and the HTTP group is www. 可以使用 下面的命令 检查 用户是否有访问，你设置磁盘路径的权限 1sudo -u www-data ls -la /media/pi/pi-data/owncloud 二、配置nginx 代理1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859upstream php-handler &#123; server 127.0.0.1:9000; #server unix:/var/run/php5-fpm.sock;&#125;server &#123; listen 81; server_name www.test.com; # Path to the root of your installation root /data/website/owncloud; index index.html index.htm index.php; # set max upload size client_max_body_size 10G; fastcgi_buffers 64 4K; # Disable gzip to avoid the removal of the ETag header gzip off; # Uncomment if your server is build with the ngx_pagespeed module # This module is currently not supported. #pagespeed off; rewrite ^/caldav(.*)$ /remote.php/caldav$1 redirect; rewrite ^/carddav(.*)$ /remote.php/carddav$1 redirect; rewrite ^/webdav(.*)$ /remote.php/webdav$1 redirect; index index.php; error_page 403 /core/templates/403.php; error_page 404 /core/templates/404.php; location = /robots.txt &#123; allow all; log_not_found off; access_log off; &#125; location ~ ^/(?:\.htaccess|data|config|db_structure\.xml|README)&#123; deny all; &#125; location / &#123; # The following 2 rules are only needed with webfinger rewrite ^/.well-known/host-meta /public.php?service=host-meta last; rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json last; rewrite ^/.well-known/carddav /remote.php/carddav/ redirect; rewrite ^/.well-known/caldav /remote.php/caldav/ redirect; rewrite ^(/core/doc/[^\/]+/)$ $1/index.html;&quot;owncould.conf&quot; 56L, 2123C 1,1 顶端 rewrite ^/.well-known/caldav /remote.php/caldav/ redirect; rewrite ^(/core/doc/[^\/]+/)$ $1/index.html; try_files $uri $uri/ /index.php; &#125; location ~ \.php(?:$|/) &#123; fastcgi_split_path_info ^(.+\.php)(/.+)$; include fastcgi_params; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; fastcgi_param PATH_INFO $fastcgi_path_info; fastcgi_pass php-handler; &#125; # Optional: set long EXPIRES header on static assets location ~* \.(?:jpg|jpeg|gif|bmp|ico|png|css|js|swf)$ &#123; expires 30d; # Optional: Don&apos;t log access to assets access_log off; &#125;&#125; 三、剩下的就是配置PHP 环境了Required PHP Version PHP &gt;= 5.6 (ideally 7.0 or above) 搭配需要的PHP环境 推荐 7.0 1234apt-get install -y libsmbclient-dev libssh2-1-dev openssl php5-imagick \ php5-common php5-curl php5-dev php5-gd \ php5-imap php5-intl php5-json php5-ldap \ php5-mcrypt php5-mysql php5-pgsql php5-sqlite 提示：如果获取不到php 环境变量修改目录 /etc/php5/fpm/pool.d/www.conf 12345678; Pass environment variables like LD_LIBRARY_PATH. All $VARIABLEs are taken from; the current environment.; Default Value: clean envenv[HOSTNAME] = $HOSTNAMEenv[PATH] = /usr/local/bin:/usr/bin:/binenv[TMP] = /tmpenv[TMPDIR] = /tmpenv[TEMP] = /tmp 放一张正常启动的图]]></content>
@@ -101,8 +114,8 @@
         <category>git</category>
       </categories>
       <tags>
-        <tag>CentOS7</tag>
         <tag>Gogs</tag>
+        <tag>CentOS7</tag>
       </tags>
   </entry>
   <entry>
@@ -114,8 +127,8 @@
         <category>数据库</category>
       </categories>
       <tags>
-        <tag>MySql</tag>
         <tag>CentOS7</tag>
+        <tag>MySql</tag>
         <tag>Maria DB</tag>
       </tags>
   </entry>
