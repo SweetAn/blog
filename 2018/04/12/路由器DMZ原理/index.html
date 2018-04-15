@@ -80,7 +80,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="网络,DMZ,">
 
 
 
@@ -91,13 +91,21 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Sweet">
-<meta property="og:url" content="http://blog.sweetm.top/archives/2018/page/2/index.html">
+<meta name="description" content="搞了一个树莓派，想直接外网可以访问所以就遇到这个东东 来个概念简介吧 维基百科 123DMZ，全写Demilitarized Zone，译名为“非军事区”[1]，又名Perimeter network，即“边界网络”、周边网络[2]或“对外网络”，为一种网络架构的布置方案，常用的架设方案是在不信任的外部网络和可信任的内部网络外，创建一个面向外部网络的物理或逻辑子网，该子网能设置用于对外部网络的服务">
+<meta name="keywords" content="网络,DMZ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="路由器DMZ原理">
+<meta property="og:url" content="http://blog.sweetm.top/2018/04/12/路由器DMZ原理/index.html">
 <meta property="og:site_name" content="Sweet">
+<meta property="og:description" content="搞了一个树莓派，想直接外网可以访问所以就遇到这个东东 来个概念简介吧 维基百科 123DMZ，全写Demilitarized Zone，译名为“非军事区”[1]，又名Perimeter network，即“边界网络”、周边网络[2]或“对外网络”，为一种网络架构的布置方案，常用的架设方案是在不信任的外部网络和可信任的内部网络外，创建一个面向外部网络的物理或逻辑子网，该子网能设置用于对外部网络的服务">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E8%B7%AF%E7%94%B1%E5%99%A8DMZ%E5%8E%9F%E7%90%86/7434747_201004061020141.jpg">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E8%B7%AF%E7%94%B1%E5%99%A8DMZ%E5%8E%9F%E7%90%86/7434747_201004061022481.jpg">
+<meta property="og:updated_time" content="2018-04-12T07:11:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sweet">
+<meta name="twitter:title" content="路由器DMZ原理">
+<meta name="twitter:description" content="搞了一个树莓派，想直接外网可以访问所以就遇到这个东东 来个概念简介吧 维基百科 123DMZ，全写Demilitarized Zone，译名为“非军事区”[1]，又名Perimeter network，即“边界网络”、周边网络[2]或“对外网络”，为一种网络架构的布置方案，常用的架设方案是在不信任的外部网络和可信任的内部网络外，创建一个面向外部网络的物理或逻辑子网，该子网能设置用于对外部网络的服务">
+<meta name="twitter:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E8%B7%AF%E7%94%B1%E5%99%A8DMZ%E5%8E%9F%E7%90%86/7434747_201004061020141.jpg">
 
 
 
@@ -127,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.sweetm.top/archives/2018/page/2/">
+  <link rel="canonical" href="http://blog.sweetm.top/2018/04/12/路由器DMZ原理/">
 
 
 
 
 
-  <title>归档 | Sweet</title>
+  <title>路由器DMZ原理 | Sweet</title>
   
 
 
@@ -152,7 +160,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -277,286 +285,264 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.sweetm.top/2018/04/12/路由器DMZ原理/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KAI">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sweet">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">路由器DMZ原理</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-12T14:25:25+08:00">
+                2018-04-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-04-12T15:11:19+08:00">
+                2018-04-12
+              </time>
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 17 篇日志。 继续努力。
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
 
-      
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/网络/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
 
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/12/git服务器gogs安装/" itemprop="url">
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">阅读
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">CentOS7 gogs安装及二级域名nginx代理</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计"> 
+                  1,381 字
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-02-12T16:46:57+08:00" content="2018-02-12">
-          02-12
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/11/CentOs7安装MariaDB5-5/" itemprop="url">
-              
-                <span itemprop="name">CentOs7安装MariaDB5.5</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-02-11T09:43:17+08:00" content="2018-02-11">
-          02-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/10/收集计算机书籍/" itemprop="url">
-              
-                <span itemprop="name">收集计算机书籍</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-02-10T18:42:09+08:00" content="2018-02-10">
-          02-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>搞了一个树莓派，想直接外网可以访问所以就遇到这个东东</p>
+<p>来个概念简介吧</p>
+<p><a href="https://zh.wikipedia.org/wiki/DMZ" rel="external nofollow noopener noreferrer" target="_blank">维基百科</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DMZ，全写Demilitarized Zone，译名为“非军事区”[1]，又名Perimeter network，即“边界网络”、周边网络[2]或“对外网络”，为一种网络架构的布置方案，常用的架设方案是在不信任的外部网络和可信任的内部网络外，创建一个面向外部网络的物理或逻辑子网，该子网能设置用于对外部网络的服务器主机。</span><br><span class="line"></span><br><span class="line">该方案可以使用在防火墙、路由器等区隔内外网的网络设备。在一般比较低级的网络设备，DMZ的功能只能以软件设置的接口去设置并实现，实体的网络层相接，会与一般的LAN PORT相接共同管理。不过在一般比较高阶的网络设备，如高阶的防火墙设备，DMZ的功能除了软件的接口的设置外，在实体的连接PORT除了一般的WAN PORT、LAN PORT外，还会有另外独立的DMZ PORT，这样可以方便网络管理人员在管理网段时，除了软件接口上去设置WAN、LAN、DMZ等网段外，在实体的缆线连接（通常采用的是RJ45）时，也可以直接区分网段，更方便管理。</span><br></pre></td></tr></table></figure>
+<p>一般网络分成内网和外网，也就是LAN和WAN,那么，当你有1台物理位置上的1台服务器，需要被外网访问，并且，也被内网访问的时候，那么，有2种方法，一种是放在LAN中，一种是放在DMZ。因为防火墙默认情况下，是为了保护内网的，所以，一般的策略是禁止外网访问内网，许可内网访问外网。但如果这个服务器能被外网所访问，那么，就意味着这个服务器已经处于不可信任的状态，那么，这个服务器就不能（主动）访问内网。所以，如果服务器放在内网（通过端口重定向让外网访问），一旦这个服务器被攻击，则内网将会处于非常不安全的状态。<br>但DMZ就是为了让外网能访问内部的资源，（内部资源在这里指的就是这个服务器），而内网呢，也能访问这个服务器，但这个服务器是不能主动访问内网的。DMZ就是这样的一个区域。为了让物理位置在内网的，并且，希望能被外网所访问的这样的一个区域。</p>
+<p>　<img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E8%B7%AF%E7%94%B1%E5%99%A8DMZ%E5%8E%9F%E7%90%86/7434747_201004061020141.jpg" alt=""></p>
+<p>　一个典型的DMZ区的应用图，用户将Web、Mail、FTP等需要为内部和外部网络提供服务的服务器放置到防火墙的DMZ区内。通过合理的策略规划，使DMZ中服务器既免受到来自外网络的入侵和破坏，也不会对内网中的机密信息造成影响。DMZ服务区好比一道屏障，在其中放置外网服务器，在为外网用户提供服务的同时也有效地保障了内部网络的安全。<br>　<br><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E8%B7%AF%E7%94%B1%E5%99%A8DMZ%E5%8E%9F%E7%90%86/7434747_201004061022481.jpg" alt=""></p>
+<h2 id="DMZ应用"><a href="#DMZ应用" class="headerlink" title="DMZ应用"></a>DMZ应用</h2><p>在一个用路由器连接的局域网中,我们可以将网络划分为三个区域：安全级别最高的LAN Area（内网）,安全级别中等的DMZ区域和安全级别最低的Internet区域（外网）。三个区域因担负不同的任务而拥有不同的访问策略。我们在配置一个拥有DMZ区的网络的时候通常定义以下的访问控制策略以实现DMZ区的屏障功能。<br>1、内网可以访问外网<br>内网的用户需要自由地访问外网。在这一策略中，防火墙需要执行NAT。</p>
+<p>2、内网可以访问DMZ<br>此策略使内网用户可以使用或者管理DMZ中的服务器。</p>
+<p>3、外网不能访问内网<br>这是防火墙的基本策略了，内网中存放的是公司内部数据，显然这些数据是不允许外网的用户进行访问的。如果要访问，就要通过VPN方式来进行。</p>
+<p>4、外网可以访问DMZ<br>DMZ中的服务器需要为外界提供服务，所以外网必须可以访问DMZ。同时，外网访问DMZ需要由防火墙完成对外地址到服务器实际地址的转换。</p>
+<p>5、DMZ不能访问内网<br>如不执行此策略，则当入侵者攻陷DMZ时，内部网络将不会受保护。　<br>6、DMZ不能访问外网<br>此条策略也有例外，比如我们的例子中，在DMZ中放置邮件服务器时，就需要访问外网，否则将不能正常工作。</p>
+<p>在没有DMZ的技术之前，需要使用外网服务器的用户必须在其防火墙上面开放端口（就是Port Forwarding技术）使互联网的用户访问其外网服务器，显然，这种做法会因为防火墙对互联网开放了一些必要的端口降低了需要受严密保护的内网区域的安全性，黑客们只需要攻陷外网服务器，那么整个内部网络就完全崩溃了。DMZ区的诞生恰恰为需用架设外网服务器的用户解决了内部网络的安全性问题。</p>
+<p> <a href="http://blog.sina.com.cn/s/blog_4a8d7b490100a18n.html" rel="external nofollow noopener noreferrer" target="_blank">原贴地址</a></p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/10/地图投影和坐标系概念/" itemprop="url">
-              
-                <span itemprop="name">地图投影和坐标系概念</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-02-10T11:15:19+08:00" content="2018-02-10">
-          02-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/09/手机是如何实现自动对焦/" itemprop="url">
-              
-                <span itemprop="name">手机是如何实现自动对焦</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-02-09T14:11:55+08:00" content="2018-02-09">
-          02-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/04/精深概念及计算/" itemprop="url">
-              
-                <span itemprop="name">景深概念及计算</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-02-04T00:14:28+08:00" content="2018-02-04">
-          02-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/28/席慕蓉-初相遇/" itemprop="url">
-              
-                <span itemprop="name">初相遇</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-01-28T19:45:04+08:00" content="2018-01-28">
-          01-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+  <div>
+    
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束 感谢您的阅读-------------</div>
+    
+</div>
+
+    
+  </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络/" rel="tag"><i class="fa fa-tag"></i> 网络</a>
+          
+            <a href="/tags/DMZ/" rel="tag"><i class="fa fa-tag"></i> DMZ</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/12/gogs后台运行及重启/" rel="next" title="gogs后台运行及重启">
+                <i class="fa fa-chevron-left"></i> gogs后台运行及重启
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/15/Ubuntu16-04下编译openJDK7/" rel="prev" title="Ubuntu16.04下编译openJDK7">
+                Ubuntu16.04下编译openJDK7 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2018/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2018/">1</a><span class="page-number current">2</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -564,6 +550,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzIzMy85Nzkw"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -584,8 +579,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -663,6 +667,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DMZ应用"><span class="nav-number">1.</span> <span class="nav-text">DMZ应用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -832,6 +852,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v="></script>
+<script type="text/javascript" src="/js/src/post-details.js?v="></script>
+
+
 
   
 
@@ -860,6 +884,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
