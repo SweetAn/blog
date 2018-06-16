@@ -4,6 +4,78 @@
 
     
   <url>
+    <loc>http://blog.sweetm.top/2018/06/16/%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE/</loc>
+    <lastmod>2018-06-16T11:02:03.000Z</lastmod>
+    <data>
+        <display>
+        <title>备份数据</title>
+        <pubTime>2018-06-16T10:58:47.000Z</pubTime>
+        
+        <tag>MongoDB</tag>
+         
+         
+           
+             
+              <breadCrumb title="服务器" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+             
+              <breadCrumb title="数据库" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+          
+             
+              <breadCrumb title="MongoDB" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.sweetm.top/2018/06/16/Linux%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%EF%BC%88crontab%EF%BC%89/</loc>
+    <lastmod>2018-06-16T10:57:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux定时任务（crontab）</title>
+        <pubTime>2018-06-16T10:55:53.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="服务器" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+             
+              <breadCrumb title="linux指令" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/linux%E6%8C%87%E4%BB%A4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.sweetm.top/2018/06/16/du%E5%91%BD%E4%BB%A4%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F/</loc>
+    <lastmod>2018-06-16T10:54:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>du命令查看磁盘文件夹大小</title>
+        <pubTime>2018-06-16T10:52:32.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="服务器" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+             
+              <breadCrumb title="linux指令" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/linux%E6%8C%87%E4%BB%A4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.sweetm.top/2018/04/15/frp%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/</loc>
     <lastmod>2018-04-15T08:45:39.000Z</lastmod>
     <data>
