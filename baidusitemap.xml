@@ -4,8 +4,31 @@
 
     
   <url>
+    <loc>http://blog.sweetm.top/2018/06/16/docker%E6%95%B0%E6%8D%AE%E5%8D%B7%E6%93%8D%E4%BD%9C/</loc>
+    <lastmod>2018-06-16T11:21:45.000Z</lastmod>
+    <data>
+        <display>
+        <title>docker数据卷操作</title>
+        <pubTime>2018-06-16T11:10:45.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+         
+           
+             
+              <breadCrumb title="服务器" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+             
+              <breadCrumb title="docker" url="http://blog.sweetm.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.sweetm.top/2018/06/16/%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE/</loc>
-    <lastmod>2018-06-16T11:05:27.000Z</lastmod>
+    <lastmod>2018-06-16T11:12:49.000Z</lastmod>
     <data>
         <display>
         <title>MongoDB备份数据</title>
@@ -160,9 +183,9 @@
         <title>gogs后台运行及重启</title>
         <pubTime>2018-04-12T02:45:58.000Z</pubTime>
         
-        <tag>Gogs</tag>
-         
         <tag>CentOS7</tag>
+         
+        <tag>Gogs</tag>
          
          
            
@@ -410,9 +433,9 @@
         <title>CentOS7 gogs安装及二级域名nginx代理</title>
         <pubTime>2018-02-12T08:46:57.000Z</pubTime>
         
-        <tag>Gogs</tag>
-         
         <tag>CentOS7</tag>
+         
+        <tag>Gogs</tag>
          
          
            
@@ -435,9 +458,9 @@
         <title>CentOs7安装MariaDB5.5</title>
         <pubTime>2018-02-11T01:43:17.000Z</pubTime>
         
-        <tag>CentOS7</tag>
-         
         <tag>MySql</tag>
+         
+        <tag>CentOS7</tag>
          
         <tag>Maria DB</tag>
          
