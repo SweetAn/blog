@@ -98,8 +98,8 @@
         <category>git</category>
       </categories>
       <tags>
-        <tag>CentOS7</tag>
         <tag>Gogs</tag>
+        <tag>CentOS7</tag>
       </tags>
   </entry>
   <entry>
@@ -203,8 +203,8 @@
         <category>git</category>
       </categories>
       <tags>
-        <tag>CentOS7</tag>
         <tag>Gogs</tag>
+        <tag>CentOS7</tag>
       </tags>
   </entry>
   <entry>
@@ -216,8 +216,8 @@
         <category>数据库</category>
       </categories>
       <tags>
-        <tag>MySql</tag>
         <tag>CentOS7</tag>
+        <tag>MySql</tag>
         <tag>Maria DB</tag>
       </tags>
   </entry>
