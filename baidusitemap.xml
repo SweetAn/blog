@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://blog.sweetm.top/2018/11/28/H-264%E7%BC%96%E7%A0%81%E7%AE%80%E4%BB%8B/</loc>
+    <lastmod>2018-11-28T14:23:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>H.264编码简介</title>
+        <pubTime>2018-11-28T14:21:21.000Z</pubTime>
+        
+        <tag>H264</tag>
+         
+        <tag>视频编码</tag>
+         
+         
+           
+             
+              <breadCrumb title="视频" url="http://blog.sweetm.top/categories/%E8%A7%86%E9%A2%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.sweetm.top/2018/11/28/Git%E4%BD%BF%E7%94%A8%E5%A4%A7%E5%85%A8/</loc>
     <lastmod>2018-11-28T14:10:19.000Z</lastmod>
     <data>
@@ -376,9 +398,9 @@
         <title>mac下常用软件、插件和驱动</title>
         <pubTime>2018-02-25T02:15:13.000Z</pubTime>
         
-        <tag>软件</tag>
-         
         <tag>mac</tag>
+         
+        <tag>软件</tag>
          
          
            
@@ -401,11 +423,11 @@
         <title>Mac下内网穿透工具</title>
         <pubTime>2018-02-24T14:33:33.000Z</pubTime>
         
-        <tag>mac</tag>
-         
         <tag>微信开发</tag>
          
         <tag>内网穿透</tag>
+         
+        <tag>mac</tag>
          
          
            

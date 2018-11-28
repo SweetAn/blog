@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[H.264编码简介]]></title>
+    <url>%2F2018%2F11%2F28%2FH-264%E7%BC%96%E7%A0%81%E7%AE%80%E4%BB%8B%2F</url>
+    <content type="text"><![CDATA[H.264 H.264编码简介 H.264原始码流（又称为“裸流”）是由一个一个的NALU组成的。他们的结构如下图所示。 视频编码层（VCL， Video Coding Layer） VCL输出的是原始数据比特流（SODB，String of data bits），表示H.264的语法元素编码完成后的实际的原始二进制码流。SODB通常不能保证字节对齐,故需要补齐为原始字节序列负荷（RBSP，Raw Byte Sequence Payload）。 网络提取层（NAL，Network Abstraction Layer） NAL层实际上就是最终输出的H.264码流，它是由一个个NALU组成的，每个NALU包括一组对应于视频编码数据的NAL头信息和一个原始字节序列负荷（RBSP，Raw Byte Sequence Payload）。 123RBSP = SODB + RBSP trailing bitsNALU = NAL header(1 byte) + RBSPH.264 = Start Code Prefix(3 bytes) + NALU + Start Code Prefix(3 bytes) + NALU +… H.264码流解构图如下： Start Code 每个NALU之间由起始码（Start Code Prefix）分隔，起始码分为两种：0x000001(3 bytes) or 0x00000001(4 bytes). 如果NALU 对应的Slice 为一帧的开始，则用4 字节表示，即0x00000001；否则用3 字节表示，0x000001.NALU针对起始码设计了防止冲突机制，如果出现连续的0x000000，0x000001,0x000002,0x000003时，会在两个0之间插入03，如下： 12340x00 00 00 -&gt; 0x00 00 03 000x00 00 01 -&gt; 0x00 00 03 010x00 00 02 -&gt; 0x00 00 03 020x00 00 03 -&gt; 0x00 00 03 03 NAL header 一个NALU就是编码后的一帧数据。NAL header是1byte NAL header头的格式 ： forbidden_bit(1bit) + nal_reference_bit(2bit) + nal_unit_type(5bit) forbidden_zero_bit(1 bit) 禁止位，如果有语法冲突，则为 1。当网络识别此单元存在比特错误时，可将其设为 1，以便接收方丢掉该单元。 nal_ref_idc(2 bit)指示当前NAL的优先级，取值范围为0~3，值越高，表示当前NAL越重要。H.264规定，如果当前NAL是序列参数集，或是图像参数等，该值必须大于0.比如nal_unit_type等于5时，nal_ref_idc大于0；nal_unit_type等于6,9,10,11或12时，nal_ref_idc等于0； nal_unit_type表示当前NALU的类型，表格如下： 表 nal_unit_type nal_unit_type NAL类型 C 0 未使用 1 未使用Data Partitioning、非IDR图像的Slice 2，3，4 2 使用Data Partitioning、且为Slice A 2 3 使用Data Partitioning、且为Slice B 3 4 使用Data Partitioning、且为Slice C 4 5 IDR图像中的Slice 2，3 6 补充增强信息单元（SEI） 5 7 序列参数集（Sequence Parameter Set,SPS） 0 8 图像参数集（Picture Parameter Set,PPS） 1 9 分界符 6 10 序列结束 7 11 码流结束 8 12 填充 9 13…23 保留 24…31 未使用 nal_unit_type=5时，表示当前NAL是IDR图像的一个片，此时，IDR图像中的每个片的nal_unit_type都应该等于5。 一般H.264原始码流是以SPS-&gt;PPS-&gt;SEI-&gt;IDR-&gt;SLICE-&gt;SLICE…开头的。 GOP即Group of picture(图像组)，指两个I帧之间的距离。即几秒有一个关键帧。一般在2、3秒之间。 图像示意图 H.264有两种封装模式： （1）annexb模式：传统模式，有start code， SPS和PPS是在ES中； （2）mp4模式：没有start code，SPS和PPS是封装在container中，每一个frame前面是这个frame的长度； SPS的头部是0x67，PPS的头部是0x68，要保持对数据的敏感性。 判断能否都丢帧的依据是，根据NALU包的优先级字节，如果优先级为0，则可以丢弃，如果是IDR、SPS、PPS时，优先级会大于0。 SPS:Sequence Parameter Set 序列参数集，H.264码流第一个 NALU PPS:Picture Parameter Set图像参数集，H.264码流第二个 NALU IDR帧:IDR帧属于I 帧。解码器收到IDR frame时，将所有的参考帧队列丢弃 ，这点是所有I帧共有的特性，但是收到IDR帧时，解码器另外需要做的工作就是：把所有的PPS和SPS参数进行更新。由此可见，在编码器端，每发一个 IDR，就相应地发一个 PPS&amp;SPS_nal_unit I帧:帧内编码帧是一种自带全部信息的独立帧，无需参考其它图像便可独立进行解码，视频序列中的第一个帧始终都是I帧。 P帧:前向预测编码帧 B帧：双向预测内插编码帧 µ]]></content>
+      <categories>
+        <category>视频</category>
+      </categories>
+      <tags>
+        <tag>H264</tag>
+        <tag>视频编码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Git使用大全]]></title>
     <url>%2F2018%2F11%2F28%2FGit%E4%BD%BF%E7%94%A8%E5%A4%A7%E5%85%A8%2F</url>
     <content type="text"><![CDATA[目录介绍 01.git上传代码步骤 1.1 最简单方法 1.2 常见的命令 02.初始化配置 03.克隆代码库 04.查看代码库信息 05.拉取，提交与推送操作 06.分支操作 07.工作区操作 08.远程同步 01.git简单上传代码步骤1.1 最简单方法 如下所示 1234567891011cd 名称 //进入提交文件目录git add .git commit -m &quot;command&quot; //command提交内容git push origin master提交失败场景：根据提示 “更新被拒绝，因为远程仓库包含您本地尚不存在的提交。由此可知github上面可能和本地的代码不同步，需要把远程服务器的代码更新到本地才行。【可能是网站上更改了某文件导致不同步】解决方法：输入命令git pull即可把github上的代码更新到本地。然后在重新提交如果还是无法提交，可以尝试强制更新git push -u origin +master 1.2 常见的命令02.初始化配置 Git 的设置文件为 .gitconfig，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。 显示当前的 Git 配置 $ git config –list 编辑 Git 配置文件 $ git config -e [–global] //–global 表示设置全局配置，不加该参数只对当前仓库生效 设置提交代码时的用户信息 $ git config [–global] user.name “[name]” $ git config [–global] user.email “[email address]” 创建 SSH key $ ssh-keygen -t rsa -C “email@example.com” 此时会生成 id_rsa 和 id_rsa.pub 两个文件，登录网站设置点击 Add SSH Key 在 key 文本里粘贴 id_rsa.pub 文件的内容 关联远程仓库 $ git remote add origin git@github.com:xxx/xxx.git 推送到远程 master 分支 $ git push -u origin master 03.克隆代码库 下载一个项目和它的整个代码历史 $ git clone [url] [url : git@github.com:xxx/xxx.git] 04.查看代码库信息 显示有变更的文件 $ git status 显示当前分支的版本历史 $ git log [–pretty=oneline] //–pretty=oneline 参数可以简化输出信息 显示当前分支的最近几次提交 $ git reflog 显示暂存区和工作区的差异 $ git diff 显示暂存区和上一个commit的差异 $ git diff –cached [file] 显示工作区与当前分支最新commit之间的差异 $ git diff HEAD 查看文件内容 $ cat [file] 查看分支合并情况 $ git log –graph –pretty=oneline –abbrev-commit 查看分支合并图 $ git log –graph 05.拉取，提交与推送操作 下载远程仓库的所有变动 $ git fetch [remote] 取回远程仓库的变化，并与本地分支合并 $ git pull [remote] [branch] 添加文件到暂存区 $ git add [file1] [file2] … //添加文件名 $ git add [dir] //添加目录 $ git add . //添加当前目录的所有文件(不包括删除文件) $ git add -A //(-A : –all的缩写)添加当前目录的所有文件 提交暂存区到仓库区 $ git commit -m [message] 推送到远程仓库 $ git push [remote] [branch] $ git push [remote] –all $ git push origin(远程仓库名称) master(分支名称) //将master分支上的内容推送到远程仓库，如果远程仓库没有master分支将创建 06.分支操作 查看远程仓库信息 $ git remote -v 列出所有本地分支和远程分支 $ git branch -a 新建一个分支，并切换到该分支 $ git checkout -b [branch]相当于$ git branch [branch-name] //新建一个分支，但依然停留在当前分支 $ git checkout [branch-name] //切换到指定分支，并更新工作区；如果是远程分支将自动与远程关联本地分支 123456789101. 找一个干净目录，假设是git_work2. cd git_work3. git clone http://myrepo.xxx.com/project/.git ,这样在git_work目录下得到一个project子目录4. cd project5. git branch -a，列出所有分支名称如下：remotes/origin/devremotes/origin/release6. git checkout -b dev origin/dev，作用是checkout远程的dev分支，在本地起名为dev分支，并切换到本地的dev分支7. git checkout -b release origin/release，作用参见上一步解释8. git checkout dev，切换回dev分支，并开始开发。 新建一个分支，指向指定 commit $ git branch [branch] [commit] 新建一个分支，与指定的远程分支建立追踪关系 $ git branch –track [branch] [remote-branch] 设置本地分支与远程origin分支链接 $ git branch –set-upstream [branch] origin/[branch] 合并指定分支到当前分支 $ git merge [branch] 查看分支合并情况 $ git log –graph –pretty=oneline –abbrev-commit 查看分支合并图 $ git log –graph 删除分支 $ git branch -d [branch-name] $ git branch -D [branch-name] //强行删除 删除远程分支 $ git push origin –delete [branch-name] $ git branch -dr [remote/branch] 07.工作区操作 查看工作区 $ git stash save [desc] 查看工作区列表 $ git stash list 取出工作区内容 $ git stash apply [stash-name] //取出不删除 $ git stash drop [stash-name] //删除 $ git stash pop [stash-name] //取出并删除 08.远程同步 默认 origin 代表远程仓库 下载远程仓库的所有变动 $ git fetch [remote] 显示所有远程仓库 $ git remote -v 显示某个远程仓库的信息 $ git remote show [remote] 增加一个新的远程仓库，并命名 $ git remote add [shortname] [url] 取回远程仓库的变化，并与本地分支合并 $ git pull [remote] [branch] 上传本地指定分支到远程仓库 $ git push [remote] [branch] 强行推送当前分支到远程仓库，即使有冲突 $ git push [remote] –force 推送所有分支到远程仓库 $ git push [remote] –all 09.增加/删除/撤销9.1 增加 添加指定文件到暂存区 $ git add [file1] [file2] … 添加指定目录到暂存区，包括子目录 $ git add [dir] 添加当前目录的所有文件(不包括删除文件)到暂存区 $ git add . 添加当前目录的所有文件到暂存区 $ git add -A(–all的缩写) 添加每个变化前，都会要求确认 对于同一个文件的多处变化，可以实现分次提交 $ git add -p 9.2 删除 删除工作区文件，并且将这次删除放入暂存区 $ git rm [file1] [file2] … 停止追踪指定文件，但该文件会保留在工作区 $ git rm –cached [file] 改名文件，并且将这个改名放入暂存区 $ git mv [file-original] [file-renamed] 9.1 撤销 恢复暂存区的指定文件到工作区 $ git checkout [file] 恢复某个 commit 的指定文件到暂存区和工作区 $ git checkout [commit] [file] 恢复暂存区的所有文件到工作区 $ git checkout . 重置暂存区的指定文件，与上一次 commit 保持一致，但工作区不变 $ git reset [file] 重置暂存区与工作区，与上一次 commit 保持一致 $ git reset –hard 重置当前分支的指针为指定 commit，同时重置暂存区，但工作区不变 $ git reset [commit] 重置当前分支的 HEAD 为指定 commit，同时重置暂存区和工作区，与指定 commit 一致 $ git reset –hard [commit] 重置当前 HEAD 为指定 commit，但保持暂存区和工作区不变 $ git reset –keep [commit] 新建一个 commit，用来撤销指定 commit 后者的所有变化都将被前者抵消，并且应用到当前分支 $ git revert [commit]]]></content>
@@ -174,8 +186,8 @@
         <category>macOS</category>
       </categories>
       <tags>
-        <tag>软件</tag>
         <tag>mac</tag>
+        <tag>软件</tag>
       </tags>
   </entry>
   <entry>
@@ -187,9 +199,9 @@
         <category>内网穿透</category>
       </categories>
       <tags>
-        <tag>mac</tag>
         <tag>微信开发</tag>
         <tag>内网穿透</tag>
+        <tag>mac</tag>
       </tags>
   </entry>
   <entry>
