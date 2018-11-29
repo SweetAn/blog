@@ -93,7 +93,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Sweet">
-<meta property="og:url" content="http://blog.sweetm.top/tags/Linux/index.html">
+<meta property="og:url" content="http://blog.sweetm.top/tags/linux/index.html">
 <meta property="og:site_name" content="Sweet">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.sweetm.top/tags/Linux/">
+  <link rel="canonical" href="http://blog.sweetm.top/tags/linux/">
 
 
 
 
 
-  <title>标签: Linux | Sweet</title>
+  <title>标签: linux | Sweet</title>
   
 
 
@@ -284,7 +284,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>Linux<small>标签</small>
+        <h1>linux<small>标签</small>
         </h1>
       </div>
 
@@ -296,17 +296,17 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2018/04/06/私有云Owncloud搭建/" itemprop="url">
+            <a class="post-title-link" href="/2018/06/16/Linux定时任务（crontab）/" itemprop="url">
               
-                <span itemprop="name">私有云Owncloud搭建</span>
+                <span itemprop="name">Linux定时任务（crontab）</span>
               
             </a>
         
       </h2>
 
       <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-04-06T22:16:12+08:00" content="2018-04-06">
-          04-06
+        <time class="post-time" itemprop="dateCreated" datetime="2018-06-16T18:55:53+08:00" content="2018-06-16">
+          06-16
         </time>
       </div>
 
@@ -322,16 +322,68 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2018/04/06/解压命令大全/" itemprop="url">
+            <a class="post-title-link" href="/2018/06/16/du命令查看磁盘文件夹大小/" itemprop="url">
               
-                <span itemprop="name">解压命令大全</span>
+                <span itemprop="name">du命令查看磁盘文件夹大小</span>
               
             </a>
         
       </h2>
 
       <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-04-06T10:26:27+08:00" content="2018-04-06">
+        <time class="post-time" itemprop="dateCreated" datetime="2018-06-16T18:52:32+08:00" content="2018-06-16">
+          06-16
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2018/04/15/frp开机自启/" itemprop="url">
+              
+                <span itemprop="name">frp开机自启</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2018-04-15T14:27:55+08:00" content="2018-04-15">
+          04-15
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2018/04/06/树莓派frp搭建内网穿透/" itemprop="url">
+              
+                <span itemprop="name">树莓派frp搭建内网穿透</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2018-04-06T12:05:27+08:00" content="2018-04-06">
           04-06
         </time>
       </div>
@@ -394,7 +446,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -405,7 +457,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -416,7 +468,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -483,7 +535,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">27.8k</span>
+    <span title="Site words total count">52.6k</span>
   
 </div>
 
@@ -956,71 +1008,6 @@
 
     // handle and trigger popup window;
     $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
-
-
-  
-
-  
-
-</body>
-</html>
-.popup-trigger').click(function(e) {
       e.stopPropagation();
       if (isfetched === false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
