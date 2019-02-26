@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="xbaNxanZlkJ3SYOBjTyK1Gxuiv4PGPk94p_XNghN_ss">
+<meta name="baidu-site-verification" content="fZL2VElq6c">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "93957bb1"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,openJDK,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本来是看 《深入理解Java虚拟机》第二版的，里面的第一章就是编译openJDK7，所以兴致勃勃的在我的mac系统上编译，不过有好多问题😂，所有装了个虚拟机使用了Ubuntu编译了openJDk7 ，原因是资料多。下面就开始一一列出经过和遇到的坑及解决办法吧！ 首先，当然是下载openJdk7源码了使用 Mercurial,因为openJdk7 是使用这个版本控制管理的 1sudo apt-ge">
+<meta name="keywords" content="java,openJDK">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu16.04下编译openJDK7">
+<meta property="og:url" content="http://blog.sweetm.top/2018/04/15/linux-2018-04-15-Ubuntu16-04下编译openJDK7/index.html">
+<meta property="og:site_name" content="Sweet">
+<meta property="og:description" content="本来是看 《深入理解Java虚拟机》第二版的，里面的第一章就是编译openJDK7，所以兴致勃勃的在我的mac系统上编译，不过有好多问题😂，所有装了个虚拟机使用了Ubuntu编译了openJDk7 ，原因是资料多。下面就开始一一列出经过和遇到的坑及解决办法吧！ 首先，当然是下载openJdk7源码了使用 Mercurial,因为openJdk7 是使用这个版本控制管理的 1sudo apt-ge">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-15T04:52:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntu16.04下编译openJDK7">
+<meta name="twitter:description" content="本来是看 《深入理解Java虚拟机》第二版的，里面的第一章就是编译openJDK7，所以兴致勃勃的在我的mac系统上编译，不过有好多问题😂，所有装了个虚拟机使用了Ubuntu编译了openJDk7 ，原因是资料多。下面就开始一一列出经过和遇到的坑及解决办法吧！ 首先，当然是下载openJdk7源码了使用 Mercurial,因为openJdk7 是使用这个版本控制管理的 1sudo apt-ge">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.sweetm.top/2018/04/15/linux-2018-04-15-Ubuntu16-04下编译openJDK7/">
+
+
+
+
+
+  <title>Ubuntu16.04下编译openJDK7 | Sweet</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sweet</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.sweetm.top/2018/04/15/linux-2018-04-15-Ubuntu16-04下编译openJDK7/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KAI">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sweet">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ubuntu16.04下编译openJDK7</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-15T11:46:24+08:00">
+                2018-04-15
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-04-15T12:52:58+08:00">
+                2018-04-15
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程语言/java编译/" itemprop="url" rel="index">
+                    <span itemprop="name">java编译</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">阅读
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计"> 
+                  1,766 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本来是看 《深入理解Java虚拟机》第二版的，里面的第一章就是编译openJDK7，所以兴致勃勃的在我的mac系统上编译，不过有好多问题😂，所有装了个虚拟机使用了Ubuntu编译了openJDk7 ，原因是资料多。<br>下面就开始一一列出经过和遇到的坑及解决办法吧！</p>
+<h2 id="首先，当然是下载openJdk7源码了"><a href="#首先，当然是下载openJdk7源码了" class="headerlink" title="首先，当然是下载openJdk7源码了"></a>首先，当然是下载openJdk7源码了</h2><p>使用 Mercurial,因为openJdk7 是使用这个版本控制管理的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mercurial</span><br></pre></td></tr></table></figure>
+<p>接下来就是下载源码了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hg clone http://hg.openjdk.java.net/jdk7u/jdk7u-dev</span><br><span class="line">cd jdk7u-dev</span><br><span class="line">chmod 755 get_source.sh</span><br><span class="line">./get_source.sh</span><br></pre></td></tr></table></figure>
+<p>给你建议，如果有云服务器，建议在上面下载完，在导入本地，我的本地网络下载不了，原因大家都懂😭</p>
+<h3 id="编译的过程"><a href="#编译的过程" class="headerlink" title="编译的过程"></a>编译的过程</h3><p>大部分是摘抄</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential gawk m4  libasound2-dev libcups2-dev libxrender-dev xorg-dev xutils-dev x11proto-print-dev binutils libmotif3 libmotif-dev ant</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>jdk-6u45-linux-x64.bin,资源自己搜，安装在本机。</p>
+</li>
+<li><p>libmotif3也不能直接安装，<a href="https://launchpad.net/ubuntu/xenial/amd64/libmotif3/2.3.4-8ubuntu1" rel="external nofollow noopener noreferrer" target="_blank">下载地址</a></p>
+</li>
+<li>环境变量设置  enviroment.sh ,make sanity检查<br>使用方法：将这个文件，放到你下载好的源码根目录下，有make文件的那个文件夹，我在这转了好几圈，<br>1、编译前要用 source environment.sh 是这个文件生效<br>2、使用 make sanity<br>如果输出是Sanity check passed，则证明检查通过，可以进行make了</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"># environment.sh</span><br><span class="line">export LANG=C</span><br><span class="line">export ALT_BOOTDIR=/usr/lib/java/jdk1.6.0_45</span><br><span class="line">export ALLOW_DOWNLOADS=true</span><br><span class="line">export HOTSPOT_BUILD_JOBS=4</span><br><span class="line">export ALT_PARALLEL_COMPILE_JOBS=4</span><br><span class="line">export SKIP_COMPARE_IMAGES=true</span><br><span class="line">export USE_PRECOMPILED_HEADER=true</span><br><span class="line"></span><br><span class="line">export BUILD_LANGTOOLS=true</span><br><span class="line">#export BUILD_JAXP=false</span><br><span class="line">#export BUILD_JAXWS=false</span><br><span class="line">#export BUILD_CORBA=false</span><br><span class="line">export BUILD_HOTSPORT=true</span><br><span class="line">export BUILD_JDK=true</span><br><span class="line"></span><br><span class="line"># export SKIP_DEBUG_BUILD=false</span><br><span class="line"># export SKIP_FASTDEBUG_BUILD=true</span><br><span class="line"># export DEBUG_NAME=debug</span><br><span class="line"></span><br><span class="line">BUILD_DEPLOY=false</span><br><span class="line">BUILD_INSTALL=false</span><br><span class="line">export ALT_OUTPUTDIR=/home/mk/jdk7build</span><br><span class="line">unset JAVA_HOME</span><br><span class="line">unset CLASSPATH</span><br><span class="line">unset LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure>
+<h2 id="编译了"><a href="#编译了" class="headerlink" title="编译了"></a>编译了</h2><ul>
+<li>输入make 2&gt;&amp;1 | tee $ALT_OUTPUTDIR/build.log进行编译</li>
+<li>若出现以下信息，则证明编译成功</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">########################################################################</span><br><span class="line">##### Leaving jdk for target(s) sanity all docs images             #####</span><br><span class="line">########################################################################</span><br><span class="line">##### Build time 00:04:29 jdk for target(s) sanity all docs images #####</span><br><span class="line">########################################################################</span><br><span class="line"></span><br><span class="line">-- Build times ----------</span><br><span class="line">Target all_product_build</span><br><span class="line">Start 2018-04-15 11:23:03</span><br><span class="line">End   2018-04-15 11:27:43</span><br><span class="line">00:00:03 corba</span><br><span class="line">00:00:03 hotspot</span><br><span class="line">00:00:02 jaxp</span><br><span class="line">00:00:02 jaxws</span><br><span class="line">00:04:29 jdk</span><br><span class="line">00:00:01 langtools</span><br><span class="line">00:04:40 TOTAL</span><br><span class="line">-------------------------</span><br></pre></td></tr></table></figure>
+<h2 id="错误解决办法"><a href="#错误解决办法" class="headerlink" title="错误解决办法"></a>错误解决办法</h2><h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/usr/include/x86_64-linux-gnu/sys/cdefs.h:42:0: note: this is the location of the previous definition</span><br><span class="line"> #  define __LEAF , __leaf__</span><br><span class="line"> ^</span><br><span class="line">cc1plus: all warnings being treated as errors</span><br><span class="line">/home/mk/jdk7up/jdk7/hotspot/make/linux/makefiles/vm.make:260: recipe for target &apos;precompiled.hpp.gch&apos; failed</span><br><span class="line">make[6]: *** [precompiled.hpp.gch] Error 1</span><br><span class="line">make[6]: Leaving directory &apos;/home/mk/jdk7build/hotspot/outputdir/linux_amd64_compiler2/product&apos;</span><br><span class="line">/home/mk/jdk7up/jdk7/hotspot/make/linux/makefiles/top.make:117: recipe for target &apos;the_vm&apos; failed</span><br><span class="line">make[5]: *** [the_vm] Error 2</span><br><span class="line">make[5]: Leaving directory &apos;/home/mk/jdk7build/hotspot/outputdir/linux_amd64_compiler2/product&apos;</span><br><span class="line">/home/mk/jdk7up/jdk7/hotspot/make/linux/Makefile:289: recipe for target &apos;product&apos; failed</span><br><span class="line">make[4]: *** [product] Error 2</span><br><span class="line">make[4]: Leaving directory &apos;/home/mk/jdk7build/hotspot/outputdir&apos;</span><br><span class="line">Makefile:180: recipe for target &apos;generic_build2&apos; failed</span><br><span class="line">make[3]: *** [generic_build2] Error 2</span><br><span class="line">make[3]: Leaving directory &apos;/home/mk/jdk7up/jdk7/hotspot/make&apos;</span><br><span class="line">Makefile:138: recipe for target &apos;product&apos; failed</span><br><span class="line">make[2]: *** [product] Error 2</span><br><span class="line">make[2]: Leaving directory &apos;/home/mk/jdk7up/jdk7/hotspot/make&apos;</span><br><span class="line">make/hotspot-rules.gmk:97: recipe for target &apos;hotspot-build&apos; failed</span><br><span class="line">make[1]: *** [hotspot-build] Error 2</span><br><span class="line">make[1]: Leaving directory &apos;/home/mk/jdk7up/jdk7&apos;</span><br><span class="line">Makefile:244: recipe for target &apos;build_product_image&apos; failed</span><br><span class="line">make: *** [build_product_image] Error 2</span><br></pre></td></tr></table></figure>
+<p>解决办法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">在interfaceSupport.hpp增加</span><br><span class="line">#ifdef __LEAF</span><br><span class="line">#undef __LEAF</span><br><span class="line"></span><br><span class="line">#define __LEAF(result_type, header)                                  \</span><br><span class="line">  TRACE_CALL(result_type, header)                                    \</span><br><span class="line">  debug_only(NoHandleMark __hm;)                                     \</span><br><span class="line">  /* begin of body */</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+<h3 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/usr/lib/java/jdk1.6.0_45/bin/idlj -J-XX:-PrintVMOptions -J-XX:+UnlockDiagnosticVMOptions -J-XX:-LogVMOutput -J-Xmx512m -J-Xms512m -J-XX:PermSize=32m -J-XX:MaxPermSize=160m -td &quot;/home/mk/jdk7build/corba/gensrc&quot; -i &quot;../../../../src/share/classes/org/omg/PortableServer&quot; -i &quot;../../../../src/share/classes/org/omg/PortableInterceptor&quot; -corba 3.0 -fall -pkgPrefix PortableServer org.omg ../../../../src/share/classes/org/omg/PortableServer/poa.idl</span><br><span class="line">Error occurred during initialization of VM</span><br><span class="line">Could not reserve enough space for object heap</span><br><span class="line">Makefile:96: recipe for target &apos;/home/mk/jdk7build/corba/gensrc/org/omg/PortableServer/CurrentHelper.java&apos; failed</span><br><span class="line">make[5]: *** [/home/mk/jdk7build/corba/gensrc/org/omg/PortableServer/CurrentHelper.java] Error 1</span><br><span class="line">make[5]: Leaving directory &apos;/home/mk/jdk7up/jdk7/corba/make/org/omg/sources&apos;</span><br><span class="line">Makefile:42: recipe for target &apos;build&apos; failed</span><br><span class="line">make[4]: *** [build] Error 1</span><br><span class="line">make[4]: Leaving directory &apos;/home/mk/jdk7up/jdk7/corba/make/org/omg&apos;</span><br><span class="line">Makefile:41: recipe for target &apos;build&apos; failed</span><br><span class="line">make[3]: *** [build] Error 1</span><br><span class="line">make[3]: Leaving directory &apos;/home/mk/jdk7up/jdk7/corba/make/org&apos;</span><br><span class="line">Makefile:166: recipe for target &apos;build&apos; failed</span><br><span class="line">make[2]: *** [build] Error 1</span><br><span class="line">make[2]: Leaving directory &apos;/home/mk/jdk7up/jdk7/corba/make&apos;</span><br><span class="line">make/corba-rules.gmk:42: recipe for target &apos;corba-build&apos; failed</span><br><span class="line">make[1]: *** [corba-build] Error 2</span><br><span class="line">make[1]: Leaving directory &apos;/home/mk/jdk7up/jdk7&apos;</span><br><span class="line">Makefile:244: recipe for target &apos;build_product_image&apos; failed</span><br></pre></td></tr></table></figure>
+<p>解决办法： 文件中有空格</p>
+<h3 id="问题三"><a href="#问题三" class="headerlink" title="问题三"></a>问题三</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(cd  ./langtools/make &amp;&amp; \</span><br><span class="line">  make JDK_TOPDIR=/home/mk/jdk7up/jdk7/jdk JDK_MAKE_SHARED_DIR=/home/mk/jdk7up/jdk7/jdk/make/common/shared EXTERNALSANITYCONTROL=true SOURCE_LANGUAGE_VERSION=7 TARGET_CLASS_VERSION=7 MILESTONE=internal BUILD_NUMBER=b00 JDK_BUILD_NUMBER=b00 FULL_VERSION=1.7.0-internal-mk_2018_04_13_16_15-b00 PREVIOUS_JDK_VERSION=1.6.0 JDK_VERSION=1.7.0 JDK_MKTG_VERSION=7 JDK_MAJOR_VERSION=1 JDK_MINOR_VERSION=7 JDK_MICRO_VERSION=0 PREVIOUS_MAJOR_VERSION=1 PREVIOUS_MINOR_VERSION=6 PREVIOUS_MICRO_VERSION=0 ARCH_DATA_MODEL=64 COOKED_BUILD_NUMBER=0 ALT_OUTPUTDIR=/home/mk/jdk7up/jdk7/build/linux-amd64/langtools ALT_BOOTDIR=/NO_BOOTDIR all)</span><br><span class="line">make[2]: Entering directory &apos;/home/mk/jdk7up/jdk7/langtools/make&apos;</span><br><span class="line">JAVA_HOME=/NO_BOOTDIR ANT_OPTS=-Djava.io.tmpdir=&apos;/home/mk/jdk7up/jdk7/build/linux-amd64/langtools/build/ant-tmp&apos; ant -Djdk.version=1.7.0 -Dfull.version=&apos;1.7.0-internal-mk_2018_04_13_16_15-b00&apos;  -Dmilestone=internal -Dbuild.number=b00 -Djavac.target=7 -Djavac.source=7 -Dboot.java.home=/NO_BOOTDIR -Dimport.jdk=/home/mk/jdk7up/jdk7/jdk -Dbuild.dir=/home/mk/jdk7up/jdk7/build/linux-amd64/langtools/build -Ddist.dir=/home/mk/jdk7up/jdk7/build/linux-amd64/langtools/dist build</span><br><span class="line">Error: JAVA_HOME is not defined correctly.</span><br><span class="line">  We cannot execute /NO_BOOTDIR/bin/java</span><br></pre></td></tr></table></figure>
+<p>解决办法： 环境变量没有设置，也就是，environment.sh  没有执行 source environment.sh </p>
+<h3 id="问题四"><a href="#问题四" class="headerlink" title="问题四"></a>问题四</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -DLINUX -D_GNU_SOURCE -DAMD64 -DPRODUCT -I. -I/home/mk/jdk7up/jdk7/hotspot/src/share/vm/prims -I/home/mk/jdk7up/jdk7/hotspot/src/share/vm -I/home/mk/jdk7up/jdk7/hotspot/src/cpu/x86/vm -I/home/mk/jdk7up/jdk7/hotspot/src/os_cpu/linux_x86/vm -I/home/mk/jdk7up/jdk7/hotspot/src/os/linux/vm -I/home/mk/jdk7up/jdk7/hotspot/src/os/posix/vm -I../generated -DHOTSPOT_RELEASE_VERSION=&quot;\&quot;21.0-b17\&quot;&quot; -DHOTSPOT_BUILD_TARGET=&quot;\&quot;product\&quot;&quot; -DHOTSPOT_BUILD_USER=&quot;\&quot;mk\&quot;&quot; -DHOTSPOT_LIB_ARCH=\&quot;amd64\&quot; -DJRE_RELEASE_VERSION=&quot;\&quot;1.7.0-internal-mk_2018_04_13_16_21-b00\&quot;&quot; -DHOTSPOT_VM_DISTRO=&quot;\&quot;OpenJDK\&quot;&quot; -DTARGET_OS_FAMILY_linux -DTARGET_ARCH_x86 -DTARGET_ARCH_MODEL_x86_64 -DTARGET_OS_ARCH_linux_x86 -DTARGET_OS_ARCH_MODEL_linux_x86_64 -DTARGET_COMPILER_gcc -DCOMPILER2 -DCOMPILER1 -fPIC -fno-rtti -fno-exceptions -D_REENTRANT -fcheck-new -fvisibility=hidden -m64 -pipe -O3 -fno-strict-aliasing -DVM_LITTLE_ENDIAN -D_LP64=1 -fno-omit-frame-pointer -Werror -Wpointer-arith -Wsign-compare    -c -MMD -MP -MF ../generated/dependencies/dump_x86_64.o.d -o dump_x86_64.o /home/mk/jdk7up/jdk7/hotspot/src/cpu/x86/vm/dump_x86_64.cpp</span><br><span class="line">cc1plus: all warnings being treated as errors</span><br></pre></td></tr></table></figure>
+<p>解决办法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在hotspot/make/makefiles/gcc.make 中，把 -Werror 选项去掉。</span><br><span class="line">/home/mk/jdk7up/jdk7/hotspot/make/linux/makefiles/gcc.make</span><br></pre></td></tr></table></figure>
+<h3 id="问题五"><a href="#问题五" class="headerlink" title="问题五"></a>问题五</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-ljvm  -lc</span><br><span class="line">gcc: error: unrecognized command line option &apos;-mimpure-text&apos;</span><br><span class="line">../../common/Library.gmk:221: recipe for target &apos;/home/mk/jdk7build/lib/amd64/libverify.so&apos; failed</span><br></pre></td></tr></table></figure>
+<p>解决办法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/home/mk/jdk7up/jdk7/jdk/make/common/shared/Compiler-gcc.gmk</span><br><span class="line"> 在文件里的第70行</span><br><span class="line">  #SHARED_LIBRARY_FLAG = -shared -mimpure-text</span><br><span class="line">  改为 SHARED_LIBRARY_FLAG = -shared</span><br></pre></td></tr></table></figure>
+<h3 id="问题六"><a href="#问题六" class="headerlink" title="问题六"></a>问题六</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Error: time is more than 10 years from present: 1136059200000</span><br><span class="line">java.lang.RuntimeException: time is more than 10 years from present: 1136059200000</span><br><span class="line">	at build.tools.generatecurrencydata.GenerateCurrencyData.makeSpecialCaseEntry(GenerateCurrencyData.java:285)</span><br><span class="line">	at build.tools.generatecurrencydata.GenerateCurrencyData.buildMainAndSpecialCaseTables(GenerateCurrencyData.java:225)</span><br><span class="line">	at build.tools.generatecurrencydata.GenerateCurrencyData.main(GenerateCurrencyData.java:154)</span><br></pre></td></tr></table></figure>
+<p>解决办法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 修改CurrencyData.properties（路径：jdk/src/share/classes/java/util/CurrencyData.properties）</span><br><span class="line">修改108行</span><br><span class="line">AZ=AZM;2009-12-31-20-00-00;AZN</span><br><span class="line">修改381行</span><br><span class="line">MZ=MZM;2009-06-30-22-00-00;MZN</span><br><span class="line">修改443行</span><br><span class="line">RO=ROL;2009-06-30-21-00-00;RON</span><br><span class="line">修改535行</span><br><span class="line">TR=TRL;2009-12-31-22-00-00;TRY</span><br><span class="line">修改561行</span><br><span class="line">VE=VEB;2009-01-01-04-00-00;VEF</span><br></pre></td></tr></table></figure>
+<h3 id="问题七"><a href="#问题七" class="headerlink" title="问题七"></a>问题七</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make[5]: *** [/home/lichengwu/openjdk7/build/linux-amd64/lib/amd64/libjsoundalsa.so] Error 1</span><br></pre></td></tr></table></figure>
+<p>解决办法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s build/linux-amd64/lib/amd64/libjsound.so build/linux-amd64/lib/amd64/libjsoundalsa.so</span><br><span class="line">ln 命令解决不了，使用 cp命令</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+  <div>
+    
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束 感谢您的阅读-------------</div>
+    
+</div>
+
+    
+  </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/openJDK/" rel="tag"><i class="fa fa-tag"></i> openJDK</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/12/linux-2018-04-12-路由器DMZ原理/" rel="next" title="路由器DMZ原理">
+                <i class="fa fa-chevron-left"></i> 路由器DMZ原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/15/frp开机自启/" rel="prev" title="frp开机自启">
+                frp开机自启 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzIzMy85Nzkw"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F/avatar.jpeg" alt="KAI">
+            
+              <p class="site-author-name" itemprop="name">KAI</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SweetAn" target="_blank" title="GitHub" rel="external nofollow noopener noreferrer">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:mkyxlx@163.com" target="_blank" title="E-Mail" rel="external nofollow noopener noreferrer">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先，当然是下载openJdk7源码了"><span class="nav-number">1.</span> <span class="nav-text">首先，当然是下载openJdk7源码了</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译的过程"><span class="nav-number">1.1.</span> <span class="nav-text">编译的过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译了"><span class="nav-number">2.</span> <span class="nav-text">编译了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误解决办法"><span class="nav-number">3.</span> <span class="nav-text">错误解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题一"><span class="nav-number">3.1.</span> <span class="nav-text">问题一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题二"><span class="nav-number">3.2.</span> <span class="nav-text">问题二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题三"><span class="nav-number">3.3.</span> <span class="nav-text">问题三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题四"><span class="nav-number">3.4.</span> <span class="nav-text">问题四</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题五"><span class="nav-number">3.5.</span> <span class="nav-text">问题五</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题六"><span class="nav-number">3.6.</span> <span class="nav-text">问题六</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题七"><span class="nav-number">3.7.</span> <span class="nav-text">问题七</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KAI</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">71.0k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      你是第
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      访客
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1272831475&web_id=1272831475" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v="></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v="></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v="></script>
+<script type="text/javascript" src="/js/src/post-details.js?v="></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v="></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

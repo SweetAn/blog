@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="xbaNxanZlkJ3SYOBjTyK1Gxuiv4PGPk94p_XNghN_ss">
+<meta name="baidu-site-verification" content="fZL2VElq6c">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "93957bb1"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="注解,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Java 注解处理器 Java中的注解(Annotation)是一个很神奇的东西，特别现在有很多Android库都是使用注解的方式来实现的。一直想详细了解一下其中的原理。很有幸阅读到一篇详细解释编写注解处理器的文章。本文的原文是ANNOTATION PROCESSING 101，作者是Hannes Dorfmann。这是一篇好文，忍不住翻译学习一下。以下是翻译。（注：本文的翻译已经获得了作者 Ha">
+<meta name="keywords" content="注解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java编译时注解">
+<meta property="og:url" content="http://blog.sweetm.top/2018/08/29/java-2018-11-29-Java编译时注解/index.html">
+<meta property="og:site_name" content="Sweet">
+<meta property="og:description" content="Java 注解处理器 Java中的注解(Annotation)是一个很神奇的东西，特别现在有很多Android库都是使用注解的方式来实现的。一直想详细了解一下其中的原理。很有幸阅读到一篇详细解释编写注解处理器的文章。本文的原文是ANNOTATION PROCESSING 101，作者是Hannes Dorfmann。这是一篇好文，忍不住翻译学习一下。以下是翻译。（注：本文的翻译已经获得了作者 Ha">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-29T13:17:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java编译时注解">
+<meta name="twitter:description" content="Java 注解处理器 Java中的注解(Annotation)是一个很神奇的东西，特别现在有很多Android库都是使用注解的方式来实现的。一直想详细了解一下其中的原理。很有幸阅读到一篇详细解释编写注解处理器的文章。本文的原文是ANNOTATION PROCESSING 101，作者是Hannes Dorfmann。这是一篇好文，忍不住翻译学习一下。以下是翻译。（注：本文的翻译已经获得了作者 Ha">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.sweetm.top/2018/08/29/java-2018-11-29-Java编译时注解/">
+
+
+
+
+
+  <title>Java编译时注解 | Sweet</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sweet</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.sweetm.top/2018/08/29/java-2018-11-29-Java编译时注解/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KAI">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sweet">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java编译时注解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T21:04:48+08:00">
+                2018-08-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-29T21:17:23+08:00">
+                2018-11-29
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">阅读
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计"> 
+                  9,287 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  38 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Java-注解处理器"><a href="#Java-注解处理器" class="headerlink" title="Java 注解处理器"></a>Java 注解处理器</h1><blockquote>
+<p>Java中的注解(Annotation)是一个很神奇的东西，特别现在有很多Android库都是使用注解的方式来实现的。一直想详细了解一下其中的原理。很有幸阅读到一篇详细解释编写注解处理器的文章。本文的原文是<a href="http://hannesdorfmann.com/annotation-processing/annotationprocessing101" rel="external nofollow noopener noreferrer" target="_blank">ANNOTATION PROCESSING 101</a>，作者是Hannes Dorfmann。这是一篇好文，忍不住翻译学习一下。以下是翻译。（注：本文的翻译已经获得了作者 Hannes 的授权。）</p>
+</blockquote>
+<hr>
+<p>在这篇文章中，我将阐述怎样写一个注解处理器(Annotation Processor)。在这篇教程中，首先，我将向您解释什么是注解器，你可以利用这个强大的工具做什么以及不能做什么；然后，我将一步一步实现一个简单的注解器。</p>
+<h2 id="一些基本概念"><a href="#一些基本概念" class="headerlink" title="一些基本概念"></a>一些基本概念</h2><p>在开始之前，我们首先申明一个非常重要的问题：我们并不讨论那些在运行时（Runtime）通过反射机制运行处理的注解，而是讨论在编译时（Compile time）处理的注解。</p>
+<p>注解处理器（Annotation Processor）是javac的一个工具，它用来在编译时扫描和处理注解（Annotation）。你可以对自定义注解，并注册相应的注解处理器。到这里，我假设你已经知道什么是注解，并且知道怎么申明的一个注解。如果你不熟悉注解，你可以在这官方文档中得到更多信息。注解处理器在Java 5开始就有了，但是从Java 6（2006年12月发布）开始才有可用的API。过了一些时间，Java世界才意识到注解处理器的强大作用，所以它到最近几年才流行起来。</p>
+<p>一个注解的注解处理器，以Java代码（或者编译过的字节码）作为输入，生成文件（通常是.java文件）作为输出。这具体的含义什么呢？你可以生成Java代码！这些生成的Java代码是在生成的.java文件中，所以你不能修改已经存在的Java类，例如向已有的类中添加方法。这些生成的Java文件，会同其他普通的手动编写的Java源代码一样被javac编译。</p>
+<h2 id="虚处理器AbstractProcessor"><a href="#虚处理器AbstractProcessor" class="headerlink" title="虚处理器AbstractProcessor"></a>虚处理器AbstractProcessor</h2><p>我们首先看一下处理器的API。每一个处理器都是继承于AbstractProcessor，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package com.example;</span><br><span class="line"></span><br><span class="line">public class MyProcessor extends AbstractProcessor &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public synchronized void init(ProcessingEnvironment env)&#123; &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean process(Set&lt;? extends TypeElement&gt; annoations, RoundEnvironment env) &#123; &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Set&lt;String&gt; getSupportedAnnotationTypes() &#123; &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public SourceVersion getSupportedSourceVersion() &#123; &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>init(ProcessingEnvironment env): 每一个注解处理器类都必须有一个空的构造函数。然而，这里有一个特殊的init()方法，它会被注解处理工具调用，并输入ProcessingEnviroment参数。ProcessingEnviroment提供很多有用的工具类Elements, Types和Filer。后面我们将看到详细的内容。</li>
+</ul>
+<ul>
+<li>process(Set &lt;    ?extends TypeElement &gt; annotations, RoundEnvironment env): 这相当于每个处理器的主函数main()。你在这里写你的扫描、评估和处理注解的代码，以及生成Java文件。输入参数RoundEnviroment，可以让你查询出包含特定注解的被注解元素。后面我们将看到详细的内容。</li>
+<li>getSupportedAnnotationTypes():这里你必须指定，这个注解处理器是注册给哪个注解的。注意，它的返回值是一个字符串的集合，包含本处理器想要处理的注解类型的合法全称。换句话说，你在这里定义你的注解处理器注册到哪些注解上。</li>
+<li>getSupportedSourceVersion(): 用来指定你使用的Java版本。通常这里返回SourceVersion.latestSupported()。然而，如果你有足够的理由只支持Java 6的话，你也可以返回SourceVersion.RELEASE_6。我推荐你使用前者。</li>
+</ul>
+<h2 id="组合被注解的类"><a href="#组合被注解的类" class="headerlink" title="组合被注解的类"></a>组合被注解的类</h2><h2 id="一旦我们检查isValidClass-成功，我们将添加FactoryAnnotatedClass到对应的FactoryGroupedClasses中，如下："><a href="#一旦我们检查isValidClass-成功，我们将添加FactoryAnnotatedClass到对应的FactoryGroupedClasses中，如下：" class="headerlink" title="一旦我们检查isValidClass()成功，我们将添加FactoryAnnotatedClass到对应的FactoryGroupedClasses中，如下："></a>一旦我们检查isValidClass()成功，我们将添加FactoryAnnotatedClass到对应的FactoryGroupedClasses中，如下：</h2><p>在Java 7中，你也可以使用注解来代替getSupportedAnnotationTypes()和getSupportedSourceVersion()，像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@SupportedSourceVersion(SourceVersion.latestSupported())</span><br><span class="line">@SupportedAnnotationTypes(&#123;</span><br><span class="line">   // 合法注解全名的集合</span><br><span class="line"> &#125;)</span><br><span class="line">public class MyProcessor extends AbstractProcessor &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public synchronized void init(ProcessingEnvironment env)&#123; &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean process(Set&lt;? extends TypeElement&gt; annoations, RoundEnvironment env) &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为兼容的原因，特别是针对Android平台，我建议使用重载getSupportedAnnotationTypes()和getSupportedSourceVersion()方法代替@SupportedAnnotationTypes和@SupportedSourceVersion。<br><br><br>接下来的你必须知道的事情是，注解处理器是运行它自己的虚拟机JVM中。是的，你没有看错，javac启动一个完整Java虚拟机来运行注解处理器。这对你意味着什么？你可以使用任何你在其他java应用中使用的的东西。使用guava。如果你愿意，你可以使用依赖注入工具，例如dagger或者其他你想要的类库。但是不要忘记，即使是一个很小的处理，你也要像其他Java应用一样，注意算法效率，以及设计模式。</p>
+<h2 id="注册你的处理器"><a href="#注册你的处理器" class="headerlink" title="注册你的处理器"></a>注册你的处理器</h2><p>你可能会问，我怎样将处理器MyProcessor注册到javac中。你必须提供一个.jar文件。就像其他.jar文件一样，你打包你的注解处理器到此文件中。并且，在你的jar中，你需要打包一个特定的文件javax.annotation.processing.Processor到META-INF/services路径下。所以，你的.jar文件看起来就像下面这样：<br><br></p>
+<ul>
+<li><p>MyProgress.jar </p>
+</li>
+<li><ul>
+<li>com</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>example</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>MyProcessor.class</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>META-INF</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>services</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>javax.annotation.processing.Processor</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>打包进MyProcessor.jar中的javax.annotation.processing.Processor的内容是，注解处理器的合法的全名列表，每一个元素换行分割：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">com.example.MyProcessor  </span><br><span class="line">com.foo.OtherProcessor  </span><br><span class="line">net.blabla.SpecialProcessor</span><br></pre></td></tr></table></figure>
+<p>把MyProcessor.jar放到你的builpath中，javac会自动检查和读取javax.annotation.processing.Processor中的内容，并且注册MyProcessor作为注解处理器。</p>
+<h2 id="例子：工厂模式"><a href="#例子：工厂模式" class="headerlink" title="例子：工厂模式"></a>例子：工厂模式</h2><p>开始之前，我必须说，要为这个教程找到一个需要用注解处理器解决的简单问题，实在并不容易。这里我们将实现一个非常简单的工厂模式（不是抽象工厂模式）。这将对注解处理器的API做一个非常简明的介绍。所以，这个问题的程序并不是那么有用，也不是一个真实世界的例子。所以在此申明，你将学习关于注解处理过程的相关内容，而不是设计模式。</p>
+<p>我们将要解决的问题是：我们将实现一个披萨店，这个披萨店给消费者提供两种披萨（“Margherita”和“Calzone”）以及提拉米苏甜点(Tiramisu)。</p>
+<p>看一下如下的代码，不需要做任何更多的解释：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public interface Meal &#123;  </span><br><span class="line">  public float getPrice();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class MargheritaPizza implements Meal &#123;</span><br><span class="line"></span><br><span class="line">  @Override public float getPrice() &#123;</span><br><span class="line">    return 6.0f;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class CalzonePizza implements Meal &#123;</span><br><span class="line"></span><br><span class="line">  @Override public float getPrice() &#123;</span><br><span class="line">    return 8.5f;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Tiramisu implements Meal &#123;</span><br><span class="line"></span><br><span class="line">  @Override public float getPrice() &#123;</span><br><span class="line">    return 4.5f;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了在我们的披萨店PizzsStore下订单，消费者需要输入餐(Meal)的名字。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class PizzaStore &#123;</span><br><span class="line"></span><br><span class="line">  public Meal order(String mealName) &#123;</span><br><span class="line"></span><br><span class="line">    if (mealName == null) &#123;</span><br><span class="line">      throw new IllegalArgumentException(&quot;Name of the meal is null!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (&quot;Margherita&quot;.equals(mealName)) &#123;</span><br><span class="line">      return new MargheritaPizza();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (&quot;Calzone&quot;.equals(mealName)) &#123;</span><br><span class="line">      return new CalzonePizza();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (&quot;Tiramisu&quot;.equals(mealName)) &#123;</span><br><span class="line">      return new Tiramisu();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    throw new IllegalArgumentException(&quot;Unknown meal &apos;&quot; + mealName + &quot;&apos;&quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public static void main(String[] args) throws IOException &#123;</span><br><span class="line">    PizzaStore pizzaStore = new PizzaStore();</span><br><span class="line">    Meal meal = pizzaStore.order(readConsole());</span><br><span class="line">    System.out.println(&quot;Bill: $&quot; + meal.getPrice());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>正如你所见，在order()方法中，我们有很多的if语句，并且如果我们每添加一种新的披萨，我们都要添加一条新的if语句。但是等一下，使用注解处理和工厂模式，我们可以让注解处理器来帮我们自动生成这些if语句。如此以来，我们期望的是如下的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class PizzaStore &#123;</span><br><span class="line"></span><br><span class="line">  private MealFactory factory = new MealFactory();</span><br><span class="line"></span><br><span class="line">  public Meal order(String mealName) &#123;</span><br><span class="line">    return factory.create(mealName);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public static void main(String[] args) throws IOException &#123;</span><br><span class="line">    PizzaStore pizzaStore = new PizzaStore();</span><br><span class="line">    Meal meal = pizzaStore.order(readConsole());</span><br><span class="line">    System.out.println(&quot;Bill: $&quot; + meal.getPrice());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>MealFactory应该是如下的样子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class MealFactory &#123;</span><br><span class="line"></span><br><span class="line">  public Meal create(String id) &#123;</span><br><span class="line">    if (id == null) &#123;</span><br><span class="line">      throw new IllegalArgumentException(&quot;id is null!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    if (&quot;Calzone&quot;.equals(id)) &#123;</span><br><span class="line">      return new CalzonePizza();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (&quot;Tiramisu&quot;.equals(id)) &#123;</span><br><span class="line">      return new Tiramisu();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (&quot;Margherita&quot;.equals(id)) &#123;</span><br><span class="line">      return new MargheritaPizza();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    throw new IllegalArgumentException(&quot;Unknown id = &quot; + id);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Factory注解"><a href="#Factory注解" class="headerlink" title="@Factory注解"></a>@Factory注解</h2><p>你能猜到么：我们想用注解处理器自动生成MealFactory。更一般的说，我们将想要提供一个注解和一个处理器来生成工厂类。<br>我们先来看一下@Factory注解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.TYPE) @Retention(RetentionPolicy.CLASS)</span><br><span class="line">public @interface Factory &#123;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 工厂的名字</span><br><span class="line">   */</span><br><span class="line">  Class type();</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 用来表示生成哪个对象的唯一id</span><br><span class="line">   */</span><br><span class="line">  String id();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>想法是这样的：我们将使用同样的type()注解那些属于同一个工厂的类，并且用注解的id()做一个映射，例如从”Calzone”映射到”ClzonePizza”类。我们应用@Factory注解到我们的类中，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Factory(</span><br><span class="line">    id = &quot;Margherita&quot;,</span><br><span class="line">    type = Meal.class</span><br><span class="line">)</span><br><span class="line">public class MargheritaPizza implements Meal &#123;</span><br><span class="line"></span><br><span class="line">  @Override public float getPrice() &#123;</span><br><span class="line">    return 6f;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Factory(</span><br><span class="line">    id = &quot;Calzone&quot;,</span><br><span class="line">    type = Meal.class</span><br><span class="line">)</span><br><span class="line">public class CalzonePizza implements Meal &#123;</span><br><span class="line"></span><br><span class="line">  @Override public float getPrice() &#123;</span><br><span class="line">    return 8.5f;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Factory(</span><br><span class="line">    id = &quot;Tiramisu&quot;,</span><br><span class="line">    type = Meal.class</span><br><span class="line">)</span><br><span class="line">public class Tiramisu implements Meal &#123;</span><br><span class="line"></span><br><span class="line">  @Override public float getPrice() &#123;</span><br><span class="line">    return 4.5f;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你可能会问你自己，我们是否可以只把@Factory注解应用到我们的Meal接口上？答案是，注解是不能继承的。一个类class X被注解，并不意味着它的子类class Y extends X会自动被注解。在我们开始写处理器的代码之前，我们先规定如下一些规则：</p>
+<p>1、只有类可以被@Factory注解，因为接口或者抽象类并不能用new操作实例化；<br>2、被@Factory注解的类，必须至少提供一个公开的默认构造器（即没有参数的构造函数）。否者我们没法实例化一个对象。<br>3、被@Factory注解的类必须直接或者间接的继承于type()指定的类型；<br>4、具有相同的type的注解类，将被聚合在一起生成一个工厂类。这个生成的类使用Factory后缀，例如type = Meal.class，将生成MealFactory工厂类；<br>5、id只能是String类型，并且在同一个type组中必须唯一。</p>
+<h2 id="处理器"><a href="#处理器" class="headerlink" title="处理器"></a>处理器</h2><p>我将通过添加代码和一段解释的方法，一步一步的引导你来构建我们的处理器。省略号(…)表示省略那些已经讨论过的或者将在后面的步骤中讨论的代码，目的是为了让我们的代码有更好的可读性。正如我们前面说的，我们完整的代码可以在Github上找到。好了，让我们来看一下我们的处理器类FactoryProcessor的骨架：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">@AutoService(Processor.class)</span><br><span class="line">public class FactoryProcessor extends AbstractProcessor &#123;</span><br><span class="line"></span><br><span class="line">  private Types typeUtils;</span><br><span class="line">  private Elements elementUtils;</span><br><span class="line">  private Filer filer;</span><br><span class="line">  private Messager messager;</span><br><span class="line">  private Map&lt;String, FactoryGroupedClasses&gt; factoryClasses = new LinkedHashMap&lt;String, FactoryGroupedClasses&gt;();</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public synchronized void init(ProcessingEnvironment processingEnv) &#123;</span><br><span class="line">    super.init(processingEnv);</span><br><span class="line">    typeUtils = processingEnv.getTypeUtils();</span><br><span class="line">    elementUtils = processingEnv.getElementUtils();</span><br><span class="line">    filer = processingEnv.getFiler();</span><br><span class="line">    messager = processingEnv.getMessager();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public Set&lt;String&gt; getSupportedAnnotationTypes() &#123;</span><br><span class="line">    Set&lt;String&gt; annotataions = new LinkedHashSet&lt;String&gt;();</span><br><span class="line">    annotataions.add(Factory.class.getCanonicalName());</span><br><span class="line">    return annotataions;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public SourceVersion getSupportedSourceVersion() &#123;</span><br><span class="line">    return SourceVersion.latestSupported();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public boolean process(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv) &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你看到在代码的第一行是@AutoService(Processor.class)，这是什么？这是一个其他注解处理器中引入的注解。AutoService注解处理器是Google开发的，用来生成META-INF/services/javax.annotation.processing.Processor文件的。是的，你没有看错，我们可以在注解处理器中使用注解。非常方便，难道不是么？在getSupportedAnnotationTypes()中，我们指定本处理器将处理@Factory注解。</p>
+<h2 id="Elements和TypeMirrors"><a href="#Elements和TypeMirrors" class="headerlink" title="Elements和TypeMirrors"></a>Elements和TypeMirrors</h2><p>在init()中我们获得如下引用：</p>
+<ul>
+<li>Elements：一个用来处理Element的工具类（后面将做详细说明）；</li>
+<li>Types：一个用来处理TypeMirror的工具类（后面将做详细说明）；</li>
+<li>Filer：正如这个名字所示，使用Filer你可以创建文件。</li>
+</ul>
+<p>在注解处理过程中，我们扫描所有的Java源文件。源代码的每一个部分都是一个特定类型的Element。换句话说：Element代表程序的元素，例如包、类或者方法。每个Element代表一个静态的、语言级别的构件。在下面的例子中，我们通过注释来说明这个：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package com.example;    // PackageElement</span><br><span class="line"></span><br><span class="line">public class Foo &#123;        // TypeElement</span><br><span class="line"></span><br><span class="line">    private int a;      // VariableElement</span><br><span class="line">    private Foo other;  // VariableElement</span><br><span class="line"></span><br><span class="line">    public Foo () &#123;&#125;    // ExecuteableElement</span><br><span class="line"></span><br><span class="line">    public void setA (  // ExecuteableElement</span><br><span class="line">                     int newA   // VariableElement</span><br><span class="line">                     ) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你必须换个角度来看源代码，它只是结构化的文本，他不是可运行的。你可以想象它就像你将要去解析的XML文件一样（或者是编译器中抽象的语法树）。就像XML解释器一样，有一些类似DOM的元素。你可以从一个元素导航到它的父或者子元素上。<br><br><br>举例来说，假如你有一个代表public class Foo类的TypeElement元素，你可以遍历它的孩子，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TypeElement fooClass = ... ;  </span><br><span class="line">for (Element e : fooClass.getEnclosedElements())&#123; // iterate over children  </span><br><span class="line">    Element parent = e.getEnclosingElement();  // parent == fooClass</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>正如你所见，Element代表的是源代码。TypeElement代表的是源代码中的类型元素，例如类。然而，TypeElement并不包含类本身的信息。你可以从TypeElement中获取类的名字，但是你获取不到类的信息，例如它的父类。这种信息需要通过TypeMirror获取。你可以通过调用elements.asType()获取元素的TypeMirror。</p>
+<h2 id="搜索-Factory注解"><a href="#搜索-Factory注解" class="headerlink" title="搜索@Factory注解"></a>搜索@Factory注解</h2><p>我们来一步一步实现process()方法。首先，我们从搜索被注解了@Factory的类开始：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@AutoService(Processor.class)</span><br><span class="line">public class FactoryProcessor extends AbstractProcessor &#123;</span><br><span class="line"></span><br><span class="line">  private Types typeUtils;</span><br><span class="line">  private Elements elementUtils;</span><br><span class="line">  private Filer filer;</span><br><span class="line">  private Messager messager;</span><br><span class="line">  private Map&lt;String, FactoryGroupedClasses&gt; factoryClasses = new LinkedHashMap&lt;String, FactoryGroupedClasses&gt;();</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public boolean process(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv) &#123;</span><br><span class="line"></span><br><span class="line">    // 遍历所有被注解了@Factory的元素</span><br><span class="line">    for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(Factory.class)) &#123;</span><br><span class="line">          ...</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里并没有什么高深的技术。roundEnv.getElementsAnnotatedWith(Factory.class))返回所有被注解了@Factory的元素的列表。你可能已经注意到，我们并没有说“所有被注解了@Factory的类的列表”，因为它真的是返回Element的列表。请记住：Element可以是类、方法、变量等。所以，接下来，我们必须检查这些Element是否是一个类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">  public boolean process(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv) &#123;</span><br><span class="line"></span><br><span class="line">    for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(Factory.class)) &#123;</span><br><span class="line"></span><br><span class="line">      // 检查被注解为@Factory的元素是否是一个类</span><br><span class="line">      if (annotatedElement.getKind() != ElementKind.CLASS) &#123;</span><br><span class="line">            ...</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为什么要这么做？我们要确保只有class元素被我们的处理器处理。前面我们已经学习到类是用TypeElement表示。我们为什么不这样判断呢if (! (annotatedElement instanceof TypeElement) )？这是错误的，因为接口（interface）类型也是TypeElement。所以在注解处理器中，我们要避免使用instanceof，而是配合TypeMirror使用EmentKind或者TypeKind。</p>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><p>在init()中，我们也获得了一个Messager对象的引用。Messager提供给注解处理器一个报告错误、警告以及提示信息的途径。它不是注解处理器开发者的日志工具，而是用来写一些信息给使用此注解器的第三方开发者的。在官方文档中描述了消息的不同级别。非常重要的是Kind.ERROR，因为这种类型的信息用来表示我们的注解处理器处理失败了。很有可能是第三方开发者错误的使用了@Factory注解（例如，给接口使用了@Factory注解）。这个概念和传统的Java应用有点不一样，在传统Java应用中我们可能就抛出一个异常Exception。如果你在process()中抛出一个异常，那么运行注解处理器的JVM将会崩溃（就像其他Java应用一样），使用我们注解处理器FactoryProcessor第三方开发者将会从javac中得到非常难懂的出错信息，因为它包含FactoryProcessor的堆栈跟踪（Stacktace）信息。因此，注解处理器就有一个Messager类，它能够打印非常优美的错误信息。除此之外，你还可以连接到出错的元素。在像IntelliJ这种现代的IDE（集成开发环境）中，第三方开发者可以直接点击错误信息，IDE将会直接跳转到第三方开发者项目的出错的源文件的相应的行。</p>
+<p>我们重新回到process()方法的实现。如果遇到一个非类类型被注解@Factory，我们发出一个出错信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public boolean process(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv) &#123;</span><br><span class="line"></span><br><span class="line">    for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(Factory.class)) &#123;</span><br><span class="line"></span><br><span class="line">      // 检查被注解为@Factory的元素是否是一个类</span><br><span class="line">      if (annotatedElement.getKind() != ElementKind.CLASS) &#123;</span><br><span class="line">        error(annotatedElement, &quot;Only classes can be annotated with @%s&quot;,</span><br><span class="line">            Factory.class.getSimpleName());</span><br><span class="line">        return true; // 退出处理</span><br><span class="line">      &#125;</span><br><span class="line">      ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">private void error(Element e, String msg, Object... args) &#123;  </span><br><span class="line">    messager.printMessage(</span><br><span class="line">        Diagnostic.Kind.ERROR,</span><br><span class="line">        String.format(msg, args),</span><br><span class="line">        e);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>让Messager显示相关出错信息，更重要的是注解处理器程序必须完成运行而不崩溃，这就是为什么在调用error()后直接return。如果我们不直接返回，process()将继续运行，因为messager.printMessage( Diagnostic.Kind.ERROR)不会停止此进程。因此，如果我们在打印错误信息以后不返回的话，我们很可能就会运行到一个NullPointerException等。就像我们前面说的，如果我们继续运行process()，问题是如果在process()中抛出一个未处理的异常，javac将会打印出内部的NullPointerException，而不是Messager中的错误信息。</p>
+<h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2><p>在继续检查被注解@Fractory的类是否满足我们上面说的5条规则之前，我们将介绍一个让我们更方便继续处理的数据结构。有时候，一个问题或者解释器看起来如此简单，以至于程序员倾向于用一个面向过程方式来写整个处理器。但是你知道吗？一个注解处理器任然是一个Java程序，所以我们需要使用面向对象编程、接口、设计模式，以及任何你将在其他普通Java程序中使用的技巧。<br><br><br>我们的FactoryProcessor非常简单，但是我们仍然想要把一些信息存为对象。在FactoryAnnotatedClass中，我们保存被注解类的数据，比如合法的类的名字，以及@Factory注解本身的一些信息。所以，我们保存TypeElement和处理过的@Factory注解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">public class FactoryAnnotatedClass &#123;</span><br><span class="line"></span><br><span class="line">  private TypeElement annotatedClassElement;</span><br><span class="line">  private String qualifiedSuperClassName;</span><br><span class="line">  private String simpleTypeName;</span><br><span class="line">  private String id;</span><br><span class="line"></span><br><span class="line">  public FactoryAnnotatedClass(TypeElement classElement) throws IllegalArgumentException &#123;</span><br><span class="line">    this.annotatedClassElement = classElement;</span><br><span class="line">    Factory annotation = classElement.getAnnotation(Factory.class);</span><br><span class="line">    id = annotation.id();</span><br><span class="line"></span><br><span class="line">    if (StringUtils.isEmpty(id)) &#123;</span><br><span class="line">      throw new IllegalArgumentException(</span><br><span class="line">          String.format(&quot;id() in @%s for class %s is null or empty! that&apos;s not allowed&quot;,</span><br><span class="line">              Factory.class.getSimpleName(), classElement.getQualifiedName().toString()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Get the full QualifiedTypeName</span><br><span class="line">    try &#123;</span><br><span class="line">      Class&lt;?&gt; clazz = annotation.type();</span><br><span class="line">      qualifiedSuperClassName = clazz.getCanonicalName();</span><br><span class="line">      simpleTypeName = clazz.getSimpleName();</span><br><span class="line">    &#125; catch (MirroredTypeException mte) &#123;</span><br><span class="line">      DeclaredType classTypeMirror = (DeclaredType) mte.getTypeMirror();</span><br><span class="line">      TypeElement classTypeElement = (TypeElement) classTypeMirror.asElement();</span><br><span class="line">      qualifiedSuperClassName = classTypeElement.getQualifiedName().toString();</span><br><span class="line">      simpleTypeName = classTypeElement.getSimpleName().toString();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 获取在&#123;@link Factory#id()&#125;中指定的id</span><br><span class="line">   * return the id</span><br><span class="line">   */</span><br><span class="line">  public String getId() &#123;</span><br><span class="line">    return id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 获取在&#123;@link Factory#type()&#125;指定的类型合法全名</span><br><span class="line">   *</span><br><span class="line">   * @return qualified name</span><br><span class="line">   */</span><br><span class="line">  public String getQualifiedFactoryGroupName() &#123;</span><br><span class="line">    return qualifiedSuperClassName;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 获取在 &#123;@link Factory#type()&#125; 中指定的类型的简单名字</span><br><span class="line">   *</span><br><span class="line">   * @return qualified name</span><br><span class="line">   */</span><br><span class="line">  public String getSimpleFactoryGroupName() &#123;</span><br><span class="line">    return simpleTypeName;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 获取被@Factory注解的原始元素</span><br><span class="line">   */</span><br><span class="line">  public TypeElement getTypeElement() &#123;</span><br><span class="line">    return annotatedClassElement;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码很多，但是最重要的部分是在构造函数中。其中你能找到如下的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Factory annotation = classElement.getAnnotation(Factory.class);  </span><br><span class="line">id = annotation.id(); // Read the id value (like &quot;Calzone&quot; or &quot;Tiramisu&quot;)</span><br><span class="line"></span><br><span class="line">if (StringUtils.isEmpty(id)) &#123;  </span><br><span class="line">    throw new IllegalArgumentException(</span><br><span class="line">          String.format(&quot;id() in @%s for class %s is null or empty! that&apos;s not allowed&quot;,</span><br><span class="line">              Factory.class.getSimpleName(), classElement.getQualifiedName().toString()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我们获取@Factory注解，并且检查id是否为空？如果为空，我们将抛出IllegalArgumentException异常。你可能感到疑惑的是，前面我们说了不要抛出异常，而是使用Messager。这里仍然不矛盾。我们抛出内部的异常，你在将在后面看到会在process()中捕获这个异常。我这样做出于一下两个原因：</p>
+<p>1、我想示意我们应该像普通的Java程序一样编码。抛出和捕获异常是非常好的Java编程实践；<br>2、如果我们想要在FactoryAnnotatedClass中打印信息，我需要也传入Messager对象，并且我们在错误处理一节中已经提到，为了打印Messager信息，我们必须成功停止处理器运行。如果我们使用Messager打印了错误信息，我们怎样告知process()出现了错误呢？最容易，并且我认为最直观的方式就是抛出一个异常，然后让process()捕获之。<br><br><br>接下来，我们将获取@Fractory注解中的type成员。我们比较关心的是合法的全名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">try &#123;  </span><br><span class="line">      Class&lt;?&gt; clazz = annotation.type();</span><br><span class="line">      qualifiedGroupClassName = clazz.getCanonicalName();</span><br><span class="line">      simpleFactoryGroupName = clazz.getSimpleName();</span><br><span class="line">&#125; catch (MirroredTypeException mte) &#123;</span><br><span class="line">      DeclaredType classTypeMirror = (DeclaredType) mte.getTypeMirror();</span><br><span class="line">      TypeElement classTypeElement = (TypeElement) classTypeMirror.asElement();</span><br><span class="line">      qualifiedGroupClassName = classTypeElement.getQualifiedName().toString();</span><br><span class="line">      simpleFactoryGroupName = classTypeElement.getSimpleName().toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里有一点小麻烦，因为这里的类型是一个java.lang.Class。这就意味着，他是一个真正的Class对象。因为注解处理是在编译Java源代码之前。我们需要考虑如下两种情况：</p>
+<p>1、这个类已经被编译：这种情况是：如果第三方.jar包含已编译的被@Factory注解.class文件。在这种情况下，我们可以想try中那块代码中所示直接获取Class。<br>2、这个还没有被编译：这种情况是我们尝试编译被@Fractory注解的源代码。这种情况下，直接获取Class会抛出MirroredTypeException异常。幸运的是，MirroredTypeException包含一个TypeMirror，它表示我们未编译类。因为我们已经知道它必定是一个类类型（我们已经在前面检查过），我们可以直接强制转换为DeclaredType，然后读取TypeElement来获取合法的名字。<br><br><br>好了，我们现在还需要一个数据结构FactoryGroupedClasses，它将简单的组合所有的FactoryAnnotatedClasses到一起。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class FactoryGroupedClasses &#123;</span><br><span class="line"></span><br><span class="line">  private String qualifiedClassName;</span><br><span class="line"></span><br><span class="line">  private Map&lt;String, FactoryAnnotatedClass&gt; itemsMap =</span><br><span class="line">      new LinkedHashMap&lt;String, FactoryAnnotatedClass&gt;();</span><br><span class="line"></span><br><span class="line">  public FactoryGroupedClasses(String qualifiedClassName) &#123;</span><br><span class="line">    this.qualifiedClassName = qualifiedClassName;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void add(FactoryAnnotatedClass toInsert) throws IdAlreadyUsedException &#123;</span><br><span class="line"></span><br><span class="line">    FactoryAnnotatedClass existing = itemsMap.get(toInsert.getId());</span><br><span class="line">    if (existing != null) &#123;</span><br><span class="line">      throw new IdAlreadyUsedException(existing);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    itemsMap.put(toInsert.getId(), toInsert);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void generateCode(Elements elementUtils, Filer filer) throws IOException &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>正如你所见，这是一个基本的Map<string, factoryannotatedclass="">，这个映射表用来映射@Factory.id()到FactoryAnnotatedClass。我们选择Map这个数据类型，是因为我们要确保每个id是唯一的，我们可以很容易通过map查找实现。generateCode()方法将被用来生成工厂类代码（将在后面讨论）。</string,></p>
+<h2 id="匹配标准"><a href="#匹配标准" class="headerlink" title="匹配标准"></a>匹配标准</h2><p>我们继续实现process()方法。接下来我们想要检查被注解的类必须有只要一个公开的构造函数，不是抽象类，继承于特定的类型，以及是一个公开类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">public class FactoryProcessor extends AbstractProcessor &#123;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public boolean process(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv) &#123;</span><br><span class="line"></span><br><span class="line">    for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(Factory.class)) &#123;</span><br><span class="line"></span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line">      // 因为我们已经知道它是ElementKind.CLASS类型，所以可以直接强制转换</span><br><span class="line">      TypeElement typeElement = (TypeElement) annotatedElement;</span><br><span class="line"></span><br><span class="line">      try &#123;</span><br><span class="line">        FactoryAnnotatedClass annotatedClass =</span><br><span class="line">            new FactoryAnnotatedClass(typeElement); // throws IllegalArgumentException</span><br><span class="line"></span><br><span class="line">        if (!isValidClass(annotatedClass)) &#123;</span><br><span class="line">          return true; // 已经打印了错误信息，退出处理过程</span><br><span class="line">         &#125;</span><br><span class="line">       &#125; catch (IllegalArgumentException e) &#123;</span><br><span class="line">        // @Factory.id()为空</span><br><span class="line">        error(typeElement, e.getMessage());</span><br><span class="line">        return true;</span><br><span class="line">       &#125;</span><br><span class="line">          ...</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"> private boolean isValidClass(FactoryAnnotatedClass item) &#123;</span><br><span class="line"></span><br><span class="line">    // 转换为TypeElement, 含有更多特定的方法</span><br><span class="line">    TypeElement classElement = item.getTypeElement();</span><br><span class="line"></span><br><span class="line">    if (!classElement.getModifiers().contains(Modifier.PUBLIC)) &#123;</span><br><span class="line">      error(classElement, &quot;The class %s is not public.&quot;,</span><br><span class="line">          classElement.getQualifiedName().toString());</span><br><span class="line">      return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 检查是否是一个抽象类</span><br><span class="line">    if (classElement.getModifiers().contains(Modifier.ABSTRACT)) &#123;</span><br><span class="line">      error(classElement, &quot;The class %s is abstract. You can&apos;t annotate abstract classes with @%&quot;,</span><br><span class="line">          classElement.getQualifiedName().toString(), Factory.class.getSimpleName());</span><br><span class="line">      return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 检查继承关系: 必须是@Factory.type()指定的类型子类</span><br><span class="line">    TypeElement superClassElement =</span><br><span class="line">        elementUtils.getTypeElement(item.getQualifiedFactoryGroupName());</span><br><span class="line">    if (superClassElement.getKind() == ElementKind.INTERFACE) &#123;</span><br><span class="line">      // 检查接口是否实现了                                       if(!classElement.getInterfaces().contains(superClassElement.asType())) &#123;</span><br><span class="line">        error(classElement, &quot;The class %s annotated with @%s must implement the interface %s&quot;,</span><br><span class="line">            classElement.getQualifiedName().toString(), Factory.class.getSimpleName(),</span><br><span class="line">            item.getQualifiedFactoryGroupName());</span><br><span class="line">        return false;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      // 检查子类</span><br><span class="line">      TypeElement currentClass = classElement;</span><br><span class="line">      while (true) &#123;</span><br><span class="line">        TypeMirror superClassType = currentClass.getSuperclass();</span><br><span class="line"></span><br><span class="line">        if (superClassType.getKind() == TypeKind.NONE) &#123;</span><br><span class="line">          // 到达了基本类型(java.lang.Object), 所以退出</span><br><span class="line">          error(classElement, &quot;The class %s annotated with @%s must inherit from %s&quot;,</span><br><span class="line">              classElement.getQualifiedName().toString(), Factory.class.getSimpleName(),</span><br><span class="line">              item.getQualifiedFactoryGroupName());</span><br><span class="line">          return false;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (superClassType.toString().equals(item.getQualifiedFactoryGroupName())) &#123;</span><br><span class="line">          // 找到了要求的父类</span><br><span class="line">          break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 在继承树上继续向上搜寻</span><br><span class="line">        currentClass = (TypeElement) typeUtils.asElement(superClassType);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 检查是否提供了默认公开构造函数</span><br><span class="line">    for (Element enclosed : classElement.getEnclosedElements()) &#123;</span><br><span class="line">      if (enclosed.getKind() == ElementKind.CONSTRUCTOR) &#123;</span><br><span class="line">        ExecutableElement constructorElement = (ExecutableElement) enclosed;</span><br><span class="line">        if (constructorElement.getParameters().size() == 0 &amp;&amp; constructorElement.getModifiers()</span><br><span class="line">            .contains(Modifier.PUBLIC)) &#123;</span><br><span class="line">          // 找到了默认构造函数</span><br><span class="line">          return true;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 没有找到默认构造函数</span><br><span class="line">    error(classElement, &quot;The class %s must provide an public empty default constructor&quot;,</span><br><span class="line">        classElement.getQualifiedName().toString());</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们这里添加了isValidClass()方法，来检查是否我们所有的规则都被满足了：</p>
+<ul>
+<li>必须是公开类：classElement.getModifiers().contains(Modifier.PUBLIC)</li>
+<li>必须是非抽象类：classElement.getModifiers().contains(Modifier.ABSTRACT)</li>
+<li>必须是@Factoy.type()指定的类型的子类或者接口的实现：首先我们使用elementUtils.getTypeElement(item.getQualifiedFactoryGroupName())创建一个传入的Class(@Factoy.type())的元素。是的，你可以仅仅通过已知的合法类名来直接创建TypeElement（使用TypeMirror）。接下来我们检查它是一个接口还是一个类：superClassElement.getKind() == ElementKind.INTERFACE。所以我们这里有两种情况：如果是接口，就判断classElement.getInterfaces().contains(superClassElement.asType())；如果是类，我们就必须使用currentClass.getSuperclass()扫描继承层级。注意，整个检查也可以使用typeUtils.isSubtype()来实现。</li>
+<li>类必须有一个公开的默认构造函数：我们遍历所有的闭元素classElement.getEnclosedElements()，然后检查ElementKind.CONSTRUCTOR、Modifier.PUBLIC以及constructorElement.getParameters().size() == 0。</li>
+</ul>
+<p>如果所有这些条件都满足，isValidClass()返回true，否者就打印错误信息，并且返回false。</p>
+<h2 id="组合被注解的类-1"><a href="#组合被注解的类-1" class="headerlink" title="组合被注解的类"></a>组合被注解的类</h2><p>一旦我们检查isValidClass()成功，我们将添加FactoryAnnotatedClass到对应的FactoryGroupedClasses中，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">public class FactoryProcessor extends AbstractProcessor &#123;</span><br><span class="line"></span><br><span class="line">   private Map&lt;String, FactoryGroupedClasses&gt; factoryClasses =</span><br><span class="line">      new LinkedHashMap&lt;String, FactoryGroupedClasses&gt;();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> @Override</span><br><span class="line">  public boolean process(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv) &#123;</span><br><span class="line">      ...</span><br><span class="line">      try &#123;</span><br><span class="line">        FactoryAnnotatedClass annotatedClass =</span><br><span class="line">            new FactoryAnnotatedClass(typeElement); // throws IllegalArgumentException</span><br><span class="line"></span><br><span class="line">          if (!isValidClass(annotatedClass)) &#123;</span><br><span class="line">          return true; // 错误信息被打印，退出处理流程</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 所有检查都没有问题，所以可以添加了</span><br><span class="line">        FactoryGroupedClasses factoryClass =</span><br><span class="line">        factoryClasses.get(annotatedClass.getQualifiedFactoryGroupName());</span><br><span class="line">        if (factoryClass == null) &#123;</span><br><span class="line">          String qualifiedGroupName = annotatedClass.getQualifiedFactoryGroupName();</span><br><span class="line">          factoryClass = new FactoryGroupedClasses(qualifiedGroupName);</span><br><span class="line">          factoryClasses.put(qualifiedGroupName, factoryClass);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 如果和其他的@Factory标注的类的id相同冲突，</span><br><span class="line">        // 抛出IdAlreadyUsedException异常</span><br><span class="line">        factoryClass.add(annotatedClass);</span><br><span class="line">      &#125; catch (IllegalArgumentException e) &#123;</span><br><span class="line">        // @Factory.id()为空 --&gt; 打印错误信息</span><br><span class="line">        error(typeElement, e.getMessage());</span><br><span class="line">        return true;</span><br><span class="line">      &#125; catch (IdAlreadyUsedException e) &#123;</span><br><span class="line">        FactoryAnnotatedClass existing = e.getExisting();</span><br><span class="line">        // 已经存在</span><br><span class="line">        error(annotatedElement,</span><br><span class="line">            &quot;Conflict: The class %s is annotated with @%s with id =&apos;%s&apos; but %s already uses the same id&quot;,</span><br><span class="line">            typeElement.getQualifiedName().toString(), Factory.class.getSimpleName(),</span><br><span class="line">            existing.getTypeElement().getQualifiedName().toString());</span><br><span class="line">        return true;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h2><p>我们已经收集了所有的被@Factory注解的类保存到为FactoryAnnotatedClass，并且组合到了FactoryGroupedClasses。现在我们将为每个工厂生成Java文件了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public boolean process(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv) &#123;  </span><br><span class="line">    ...</span><br><span class="line">  try &#123;</span><br><span class="line">        for (FactoryGroupedClasses factoryClass : factoryClasses.values()) &#123;</span><br><span class="line">          factoryClass.generateCode(elementUtils, filer);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        error(null, e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>写Java文件，和写其他普通文件没有什么两样。使用Filer提供的Writer对象，我们可以连接字符串来写我们生成的Java代码。幸运的是，Square公司（因为提供了许多非常优秀的开源项目二非常有名）给我们提供了JavaWriter，这是一个高级的生成Java代码的库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">public class FactoryGroupedClasses &#123;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 将被添加到生成的工厂类的名字中</span><br><span class="line">   */</span><br><span class="line">  private static final String SUFFIX = &quot;Factory&quot;;</span><br><span class="line"></span><br><span class="line">  private String qualifiedClassName;</span><br><span class="line"></span><br><span class="line">  private Map&lt;String, FactoryAnnotatedClass&gt; itemsMap =</span><br><span class="line">      new LinkedHashMap&lt;String, FactoryAnnotatedClass&gt;();</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">  public void generateCode(Elements elementUtils, Filer filer) throws IOException &#123;</span><br><span class="line"></span><br><span class="line">    TypeElement superClassName = elementUtils.getTypeElement(qualifiedClassName);</span><br><span class="line">    String factoryClassName = superClassName.getSimpleName() + SUFFIX;</span><br><span class="line"></span><br><span class="line">    JavaFileObject jfo = filer.createSourceFile(qualifiedClassName + SUFFIX);</span><br><span class="line">    Writer writer = jfo.openWriter();</span><br><span class="line">    JavaWriter jw = new JavaWriter(writer);</span><br><span class="line"></span><br><span class="line">    // 写包名</span><br><span class="line">    PackageElement pkg = elementUtils.getPackageOf(superClassName);</span><br><span class="line">    if (!pkg.isUnnamed()) &#123;</span><br><span class="line">      jw.emitPackage(pkg.getQualifiedName().toString());</span><br><span class="line">      jw.emitEmptyLine();</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      jw.emitPackage(&quot;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    jw.beginType(factoryClassName, &quot;class&quot;, EnumSet.of(Modifier.PUBLIC));</span><br><span class="line">    jw.emitEmptyLine();</span><br><span class="line">    jw.beginMethod(qualifiedClassName, &quot;create&quot;, EnumSet.of(Modifier.PUBLIC), &quot;String&quot;, &quot;id&quot;);</span><br><span class="line"></span><br><span class="line">    jw.beginControlFlow(&quot;if (id == null)&quot;);</span><br><span class="line">    jw.emitStatement(&quot;throw new IllegalArgumentException(\&quot;id is null!\&quot;)&quot;);</span><br><span class="line">    jw.endControlFlow();</span><br><span class="line"></span><br><span class="line">    for (FactoryAnnotatedClass item : itemsMap.values()) &#123;</span><br><span class="line">      jw.beginControlFlow(&quot;if (\&quot;%s\&quot;.equals(id))&quot;, item.getId());</span><br><span class="line">      jw.emitStatement(&quot;return new %s()&quot;, item.getTypeElement().getQualifiedName().toString());</span><br><span class="line">      jw.endControlFlow();</span><br><span class="line">      jw.emitEmptyLine();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    jw.emitStatement(&quot;throw new IllegalArgumentException(\&quot;Unknown id = \&quot; + id)&quot;);</span><br><span class="line">    jw.endMethod();</span><br><span class="line">    jw.endType();</span><br><span class="line">    jw.close();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：因为JavaWriter非常非常的流行，所以很多处理器、库、工具都依赖于JavaWriter。如果你使用依赖管理工具，例如maven或者gradle，假如一个库依赖的JavaWriter的版本比其他的库新，这将会导致一些问题。所以我建议你直接拷贝重新打包JavaWiter到你的注解处理器代码中（实际它只是一个Java文件）。</p>
+</blockquote>
+<p>更新：JavaWrite现在已经被JavaPoet取代了。</p>
+<p><a href="https://race604.com/annotation-processing/" rel="external nofollow noopener noreferrer" target="_blank">https://race604.com/annotation-processing/</a></p>
+<h2 id="处理循环"><a href="#处理循环" class="headerlink" title="处理循环"></a>处理循环</h2><p>注解处理过程可能会多于一次。官方javadoc定义处理过程如下：</p>
+<blockquote>
+<p>注解处理过程是一个有序的循环过程。在每次循环中，一个处理器可能被要求去处理那些在上一次循环中产生的源文件和类文件中的注解。第一次循环的输入是运行此工具的初始输入。这些初始输入，可以看成是虚拟的第0此的循环的输出。</p>
+</blockquote>
+<p>一个简单的定义：一个处理循环是调用一个注解处理器的process()方法。对应到我们的工厂模式的例子中：FactoryProcessor被初始化一次（不是每次循环都会新建处理器对象），然而，如果生成了新的源文件process()能够被调用多次。听起来有点奇怪不是么？原因是这样的，这些生成的文件中也可能包含@Factory注解，它们还将会被FactoryProcessor处理。<br><br><br>例如我们的PizzaStore的例子中将会经过3次循环处理：</p>
+<table>
+<thead>
+<tr>
+<th>Round</th>
+<th>Input</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>CalzonePizza.java <br> Tiramisu.java <br> MargheritaPizza.java <br> Meal.java <br> PizzaStore.java</td>
+<td>MealFactory.java</td>
+</tr>
+<tr>
+<td>2</td>
+<td>MealFactory.java</td>
+<td>— none —</td>
+</tr>
+<tr>
+<td>3</td>
+<td>— none —</td>
+<td>— none —</td>
+</tr>
+</tbody>
+</table>
+<p>我解释处理循环还有另外一个原因。如果你看一下我们的FactoryProcessor代码你就能注意到，我们收集数据和保存它们在一个私有的域中Map<string, factorygroupedclasses=""> factoryClasses。在第一轮中，我们检测到了MagheritaPizza, CalzonePizza和Tiramisu，然后生成了MealFactory.java。在第二轮中把MealFactory作为输入。因为在MealFactory中没有检测到@Factory注解，我们预期并没有错误，然而我们得到如下的信息：</string,></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Attempt to recreate a file for type com.hannesdorfmann.annotationprocessing101.factory.MealFactory</span><br></pre></td></tr></table></figure>
+<p>这个问题是因为我们没有清除factoryClasses，这意味着，在第二轮的process()中，任然保存着第一轮的数据，并且会尝试生成在第一轮中已经生成的文件，从而导致这个错误的出现。在我们的这个场景中，我们知道只有在第一轮中检查@Factory注解的类，所以我们可以简单的修复这个问题，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public boolean process(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv) &#123;  </span><br><span class="line">    try &#123;</span><br><span class="line">      for (FactoryGroupedClasses factoryClass : factoryClasses.values()) &#123;</span><br><span class="line">        factoryClass.generateCode(elementUtils, filer);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      // 清除factoryClasses</span><br><span class="line">      factoryClasses.clear();</span><br><span class="line"></span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">      error(null, e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我知道这有其他的方法来处理这个问题，例如我们也可以设置一个布尔值标签等。关键的点是：我们要记住注解处理过程是需要经过多轮处理的，并且你不能重载或者重新创建已经生成的源代码。</p>
+<h2 id="分离处理器和注解"><a href="#分离处理器和注解" class="headerlink" title="分离处理器和注解"></a>分离处理器和注解</h2><p>如果你已经看了我们的代码库，你将发现我们组织我们的代码到两个maven模块中了。我们这么做是因为，我们想让我们的工厂模式的例子的使用者，在他们的工程中只编译注解，而包含处理器模块只是为了编译。有点晕？我们举个例子，如果我们只有一个包。如果另一个开发者想要把我们的工厂模式处理器用于他的项目中，他就必须包含@Factory注解和整个FactoryProcessor的代码（包括FactoryAnnotatedClass和FactoryGroupedClasses）到他们项目中。我非常确定的是，他并不需要在他已经编译好的项目中包含处理器相关的代码。如果你是一个Android的开发者，你肯定听说过65k个方法的限制（即在一个.dex文件中，只能寻址65000个方法）。如果你在FactoryProcessor中使用guava，并且把注解和处理器打包在一个包中，这样的话，Android APK安装包中不只是包含FactoryProcessor的代码，而也包含了整个guava的代码。Guava有大约20000个方法。所以分开注解和处理器是非常有意义的。</p>
+<h2 id="生成的类的实例化"><a href="#生成的类的实例化" class="headerlink" title="生成的类的实例化"></a>生成的类的实例化</h2><p>你已经看到了，在这个PizzaStore的例子中，生成了MealFactory类，它和其他手写的Java类没有任何区别。进而，你需要就想其他Java对象，手动实例化 它：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class PizzaStore &#123;</span><br><span class="line"></span><br><span class="line">  private MealFactory factory = new MealFactory();</span><br><span class="line"></span><br><span class="line">  public Meal order(String mealName) &#123;</span><br><span class="line">    return factory.create(mealName);</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你是一个Android的开发者，你应该也非常熟悉一个叫做ButterKnife的注解处理器。在ButterKnife中，你使用@InjectView注解Android的View。ButterKnifeProcessor生成一个MyActivity$$ViewInjector，但是在ButterKnife你不需要手动调用new MyActivity$$ViewInjector()实例化一个ButterKnife注入的对象，而是使用Butterknife.inject(activity)。ButterKnife内部使用反射机制来实例化MyActivity$$ViewInjector()对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">try &#123;  </span><br><span class="line">    Class&lt;?&gt; injector = Class.forName(clsName + &quot;$$ViewInjector&quot;);</span><br><span class="line">&#125; catch (ClassNotFoundException e) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>但是反射机制不是很慢么，我们使用注解处理来生成本地代码，会不会导致很多的反射性能的问题？的确，反射机制的性能确实是一个问题。然而，它不需要手动去创建对象，确实提高了开发者的开发速度。ButterKnife中有一个哈希表HashMap来缓存实例化过的对象。所以<br><code>MyActivity$$ViewInjector只是使用反射机制实例化一次，第二次需要MyActivity$$ViewInjector</code>的时候，就直接冲哈希表中获得。</p>
+<p>FragmentArgs非常类似于ButterKnife。它使用反射机制来创建对象，而不需要开发者手动来做这些。FragmentArgs在处理注解的时候生成一个特别的查找表类，它其实就是一种哈希表，所以整个FragmentArgs库只是在第一次使用的时候，执行一次反射调用，一旦整个Class.forName()的Fragemnt的参数对象被创建，后面的都是本地代码运行了。</p>
+<p>作为一个注解注解处理器的开发者，这些都由你来决定，为其他的注解器使用者，在反射和可用性上找到一个好的平衡。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到此，我希望你对注解处理过程有一个非常深刻的理解。我必须再次说明一下：注解处理器是一个非常强大的工具，减少了很多无聊的代码的编写。我也想提醒的是，注解处理器可以做到比我上面提到的工厂模式的例子复杂很多的事情。例如，泛型的类型擦除，因为注解处理器是发生在类型擦除（type erasure）之前的（译者注：类型擦除可以参考这里）。就像你所看到的，你在写注解处理的时候，有两个普遍的问题你需要处理：第一问题， 如果你想在其他类中使用ElementUtils, TypeUtils和Messager，你就必须把他们作为参数传进去。在我为Android开发的注解器AnnotatedAdapter中，我尝试使用Dagger（一个依赖注入库）来解决这个问题。在这个简单的处理中使用它听起来有点过头了，但是它确实很好用；第二个问题，你必须做查询Elements的操作。就想我之前提到的，处理Element就解析XML或者HTML一样。对于HTML你可以是用jQuery，如果在注解处理器中，有类似于jQuery的库那那绝对是酷毙了。如果你知道有类似的库，请在下面的评论告诉我。</p>
+<p>请注意的是，在FactoryProcessor代码中有一些缺陷和陷阱。这些“错误”是我故意放进去的，是为了演示一些在开发过程中的常见错误（例如“Attempt to recreate a file”）。如果你想基于FactoryProcessor写你自己注解处理器，请不要直接拷贝粘贴这些陷阱过去，你应该从最开始就避免它们。</p>
+<p>我在后续的博客中将会写注解处理器的单元测试，敬请关注。</p>
+<p>µ</p>
+
+      
+    </div>
+    
+    
+    
+
+  <div>
+    
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束 感谢您的阅读-------------</div>
+    
+</div>
+
+    
+  </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/注解/" rel="tag"><i class="fa fa-tag"></i> 注解</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/29/java-2018-11-29-Java注解详解/" rel="next" title="Java注解详解">
+                <i class="fa fa-chevron-left"></i> Java注解详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/15/android-2019-02-26-ListView和RecycleView影藏滑动边界效果/" rel="prev" title="ListView和RecycleView影藏滑动边界效果">
+                ListView和RecycleView影藏滑动边界效果 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzIzMy85Nzkw"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F/avatar.jpeg" alt="KAI">
+            
+              <p class="site-author-name" itemprop="name">KAI</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SweetAn" target="_blank" title="GitHub" rel="external nofollow noopener noreferrer">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:mkyxlx@163.com" target="_blank" title="E-Mail" rel="external nofollow noopener noreferrer">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-注解处理器"><span class="nav-number">1.</span> <span class="nav-text">Java 注解处理器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">一些基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚处理器AbstractProcessor"><span class="nav-number">1.2.</span> <span class="nav-text">虚处理器AbstractProcessor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合被注解的类"><span class="nav-number">1.3.</span> <span class="nav-text">组合被注解的类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一旦我们检查isValidClass-成功，我们将添加FactoryAnnotatedClass到对应的FactoryGroupedClasses中，如下："><span class="nav-number">1.4.</span> <span class="nav-text">一旦我们检查isValidClass()成功，我们将添加FactoryAnnotatedClass到对应的FactoryGroupedClasses中，如下：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注册你的处理器"><span class="nav-number">1.5.</span> <span class="nav-text">注册你的处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子：工厂模式"><span class="nav-number">1.6.</span> <span class="nav-text">例子：工厂模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Factory注解"><span class="nav-number">1.7.</span> <span class="nav-text">@Factory注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理器"><span class="nav-number">1.8.</span> <span class="nav-text">处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Elements和TypeMirrors"><span class="nav-number">1.9.</span> <span class="nav-text">Elements和TypeMirrors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索-Factory注解"><span class="nav-number">1.10.</span> <span class="nav-text">搜索@Factory注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误处理"><span class="nav-number">1.11.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据模型"><span class="nav-number">1.12.</span> <span class="nav-text">数据模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匹配标准"><span class="nav-number">1.13.</span> <span class="nav-text">匹配标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合被注解的类-1"><span class="nav-number">1.14.</span> <span class="nav-text">组合被注解的类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码生成"><span class="nav-number">1.15.</span> <span class="nav-text">代码生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理循环"><span class="nav-number">1.16.</span> <span class="nav-text">处理循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分离处理器和注解"><span class="nav-number">1.17.</span> <span class="nav-text">分离处理器和注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成的类的实例化"><span class="nav-number">1.18.</span> <span class="nav-text">生成的类的实例化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.19.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KAI</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">71.0k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      你是第
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      访客
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1272831475&web_id=1272831475" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v="></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v="></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v="></script>
+<script type="text/javascript" src="/js/src/post-details.js?v="></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v="></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
