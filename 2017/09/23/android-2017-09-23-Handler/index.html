@@ -99,12 +99,12 @@
 <meta property="og:site_name" content="Sweet">
 <meta property="og:description" content="Handler 这个分析的思路是 创建Handler-&amp;gt;发送消息-&amp;gt;接受消息 为主线来分析源码的 1、创建Handler 的方法在这个方法里面，获取了当前线程的Looper，获取了Looper的消息队列 123456789101112131415161718192021  public Handler(Callback callback, boolean async) &amp;#123;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://blog.sweetm.top/2017/09/23/android-2017-09-23-Handler/assets/1549858915924.png">
-<meta property="og:updated_time" content="2019-02-26T03:53:23.379Z">
+<meta property="og:image" content="http://blog.sweetm.top/2017/09/23/assets/1549858915924.png">
+<meta property="og:updated_time" content="2019-03-02T06:33:34.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Handler基础复习">
 <meta name="twitter:description" content="Handler 这个分析的思路是 创建Handler-&amp;gt;发送消息-&amp;gt;接受消息 为主线来分析源码的 1、创建Handler 的方法在这个方法里面，获取了当前线程的Looper，获取了Looper的消息队列 123456789101112131415161718192021  public Handler(Callback callback, boolean async) &amp;#123;">
-<meta name="twitter:image" content="http://blog.sweetm.top/2017/09/23/android-2017-09-23-Handler/assets/1549858915924.png">
+<meta name="twitter:image" content="http://blog.sweetm.top/2017/09/23/assets/1549858915924.png">
 
 
 
@@ -343,8 +343,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T11:53:23+08:00">
-                2019-02-26
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-02T14:33:34+08:00">
+                2019-03-02
               </time>
             
           </span>
@@ -446,7 +446,7 @@
       
 
       
-        <h2 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h2><p><img src="assets/1549858915924.png" alt="1549858915924"></p>
+        <h2 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h2><p><img src="../assets/1549858915924.png" alt="1549858915924"></p>
 <p>这个分析的思路是 创建Handler-&gt;发送消息-&gt;接受消息 为主线来分析源码的</p>
 <h3 id="1、创建Handler-的方法"><a href="#1、创建Handler-的方法" class="headerlink" title="1、创建Handler 的方法"></a>1、创建Handler 的方法</h3><p>在这个方法里面，获取了当前线程的Looper，获取了Looper的消息队列</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Handler</span><span class="params">(Callback callback, <span class="keyword">boolean</span> async)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (FIND_POTENTIAL_LEAKS) &#123;</span><br><span class="line">          <span class="keyword">final</span> Class&lt;? extends Handler&gt; klass = getClass();</span><br><span class="line">          <span class="keyword">if</span> ((klass.isAnonymousClass() || klass.isMemberClass() || klass.isLocalClass()) &amp;&amp;</span><br><span class="line">                  (klass.getModifiers() &amp; Modifier.STATIC) == <span class="number">0</span>) &#123;</span><br><span class="line">              Log.w(TAG, <span class="string">"The following Handler class should be static or leaks might occur: "</span> +</span><br><span class="line">                  klass.getCanonicalName());</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line"><span class="comment">//获取当前线程的Looper</span></span><br><span class="line">      mLooper = Looper.myLooper();</span><br><span class="line">      <span class="keyword">if</span> (mLooper == <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(</span><br><span class="line">              <span class="string">"Can't create handler inside thread that has not called Looper.prepare()"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//消息队列</span></span><br><span class="line">      mQueue = mLooper.mQueue;</span><br><span class="line">      <span class="comment">//消息callback</span></span><br><span class="line">      mCallback = callback;</span><br><span class="line">      mAsynchronous = async;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
@@ -501,8 +501,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/06/java-容器-05-HashMap/" rel="next" title="HashMap 源码分析">
-                <i class="fa fa-chevron-left"></i> HashMap 源码分析
+              <a href="/2017/09/23/android-2017-08-01-Toast在有的机型上不显示通知的问题/" rel="next" title="Toast 在有的机型上不能显示通知的问题">
+                <i class="fa fa-chevron-left"></i> Toast 在有的机型上不能显示通知的问题
               </a>
             
           </div>
@@ -511,8 +511,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/23/android-2017-09-23-AsyncTask-知识/" rel="prev" title="AsyncTask基础复习">
-                AsyncTask基础复习 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/09/23/android-2017-09-23-AIDL复习/" rel="prev" title="AIDL基础复习">
+                AIDL基础复习 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -614,7 +614,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

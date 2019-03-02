@@ -100,9 +100,9 @@
 <meta property="og:description" content="谷歌网址https://developer.android.com/topic/libraries/architecture/viewmodel#java ViewModelThe ViewModel class is designed to store and manage UI-related data in a lifecycle conscious way. The ViewModel c">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://blog.sweetm.top/2018/02/26/android-2018-02-26-MVVM之ViewModel介绍/assets/viewmodel-lifecycle.png">
-<meta property="og:image" content="http://blog.sweetm.top/2018/02/26/android-2018-02-26-MVVM之ViewModel介绍/assets/viewmodel-loader.png">
-<meta property="og:image" content="http://blog.sweetm.top/2018/02/26/android-2018-02-26-MVVM之ViewModel介绍/assets/viewmodel-replace-loader.png">
-<meta property="og:updated_time" content="2019-02-26T03:02:08.097Z">
+<meta property="og:image" content="http://blog.sweetm.top/2018/02/26/assets/viewmodel-loader.png">
+<meta property="og:image" content="http://blog.sweetm.top/2018/02/26/assets/viewmodel-replace-loader.png">
+<meta property="og:updated_time" content="2019-03-02T06:34:27.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MVVM之ViewModel">
 <meta name="twitter:description" content="谷歌网址https://developer.android.com/topic/libraries/architecture/viewmodel#java ViewModelThe ViewModel class is designed to store and manage UI-related data in a lifecycle conscious way. The ViewModel c">
@@ -345,8 +345,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T11:02:08+08:00">
-                2019-02-26
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-02T14:34:27+08:00">
+                2019-03-02
               </time>
             
           </span>
@@ -474,9 +474,9 @@
 </ul>
 <h2 id="Replacing-Loaders-with-ViewModel-替换加载器"><a href="#Replacing-Loaders-with-ViewModel-替换加载器" class="headerlink" title="Replacing Loaders with ViewModel  替换加载器"></a>Replacing Loaders with ViewModel  替换加载器</h2><p>Loader classes like CursorLoader are frequently used to keep the data in an app’s UI in sync with a database. You can use ViewModel, with a few other classes, to replace the loader. Using a ViewModel separates your UI controller from the data-loading operation, which means you have fewer strong references between classes.</p>
 <p>In one common approach to using loaders, an app might use a CursorLoader to observe the contents of a database. When a value in the database changes, the loader automatically triggers a reload of the data and updates the UI:</p>
-<p><img src="assets/viewmodel-loader.png" alt="viewmodel-loader"></p>
+<p><img src="../assets/viewmodel-loader.png" alt="viewmodel-loader"></p>
 <p>Figure 2. Loading data with loaders<br>ViewModel works with Room and LiveData to replace the loader. The ViewModel ensures that the data survives a device configuration change. Room informs your LiveData when the database changes, and the LiveData, in turn, updates your UI with the revised data.</p>
-<p><img src="assets/viewmodel-replace-loader.png" alt="viewmodel-replace-loader"></p>
+<p><img src="../assets/viewmodel-replace-loader.png" alt="viewmodel-replace-loader"></p>
 <p>Figure 3. Loading data with ViewModel</p>
 
       
@@ -632,7 +632,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -99,13 +99,13 @@
 <meta property="og:site_name" content="Sweet">
 <meta property="og:description" content="LinkList源码分析 特点LinkedList：底层数据结构是链表，查询慢，增删快。线程不安全，效率高  添加了的功能 添加，删除，获取开头或者结尾     开始分析源码1、先看继承关系123public class LinkedList&amp;lt;E&amp;gt;    extends AbstractSequentialList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://blog.sweetm.top/2016/09/01/java-容器-03-LinkList源码解析/media/15450534811131.jpg">
+<meta property="og:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/blog/15450534811131.jpg">
 <meta property="og:image" content="http://blog.sweetm.top/2016/09/01/java-容器-03-LinkList源码解析/media/15450564848647.jpg">
-<meta property="og:updated_time" content="2019-02-26T07:25:48.383Z">
+<meta property="og:updated_time" content="2019-03-02T06:40:56.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LinkList源码分析">
 <meta name="twitter:description" content="LinkList源码分析 特点LinkedList：底层数据结构是链表，查询慢，增删快。线程不安全，效率高  添加了的功能 添加，删除，获取开头或者结尾     开始分析源码1、先看继承关系123public class LinkedList&amp;lt;E&amp;gt;    extends AbstractSequentialList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt">
-<meta name="twitter:image" content="http://blog.sweetm.top/2016/09/01/java-容器-03-LinkList源码解析/media/15450534811131.jpg">
+<meta name="twitter:image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/blog/15450534811131.jpg">
 
 
 
@@ -344,8 +344,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T15:25:48+08:00">
-                2019-02-26
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-02T14:40:56+08:00">
+                2019-03-02
               </time>
             
           </span>
@@ -447,7 +447,7 @@
       
 
       
-        <h1 id="LinkList源码分析"><a href="#LinkList源码分析" class="headerlink" title="LinkList源码分析"></a>LinkList源码分析</h1><p><img src="media/15450534811131.jpg" alt=""></p>
+        <h1 id="LinkList源码分析"><a href="#LinkList源码分析" class="headerlink" title="LinkList源码分析"></a>LinkList源码分析</h1><p><img src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/blog/15450534811131.jpg" alt=""></p>
 <h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>LinkedList：底层数据结构是链表，查询慢，增删快。线程不安全，效率高  添加了的功能 添加，删除，获取开头或者结尾    </p>
 <h2 id="开始分析源码"><a href="#开始分析源码" class="headerlink" title="开始分析源码"></a>开始分析源码</h2><h3 id="1、先看继承关系"><a href="#1、先看继承关系" class="headerlink" title="1、先看继承关系"></a>1、先看继承关系</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkedList</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="keyword">extends</span> <span class="title">AbstractSequentialList</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt;, <span class="title">Deque</span>&lt;<span class="title">E</span>&gt;, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span></span><br></pre></td></tr></table></figure>
 <h3 id="2、先看成员变量"><a href="#2、先看成员变量" class="headerlink" title="2、先看成员变量"></a>2、先看成员变量</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 记录集合的长度</span></span><br><span class="line"><span class="keyword">transient</span> <span class="keyword">int</span> size = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 链表头节点</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Pointer to first node.</span></span><br><span class="line"><span class="comment"> * Invariant: (first == null &amp;&amp; last == null) ||</span></span><br><span class="line"><span class="comment"> *            (first.prev == null &amp;&amp; first.item != null)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">transient</span> Node&lt;E&gt; first;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 链表尾节点</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Pointer to last node.</span></span><br><span class="line"><span class="comment"> * Invariant: (first == null &amp;&amp; last == null) ||</span></span><br><span class="line"><span class="comment"> *            (last.next == null &amp;&amp; last.item != null)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">transient</span> Node&lt;E&gt; last;</span><br></pre></td></tr></table></figure>
@@ -611,7 +611,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
