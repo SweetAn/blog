@@ -292,7 +292,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.sweetm.top/2017/09/23/android-2017-09-23-Service基础复习/">
+    <link itemprop="mainEntityOfPage" href="http://blog.sweetm.top/2017/09/23/android-2017-09-23-AIDL复习/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="KAI">
@@ -311,7 +311,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/23/android-2017-09-23-Service基础复习/" itemprop="url">Service基础复习</a></h1>
+                <a class="post-title-link" href="/2017/09/23/android-2017-09-23-AIDL复习/" itemprop="url">AIDL基础复习</a></h1>
         
 
         <div class="post-meta">
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T11:33:13+08:00">
-                2019-02-26
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-02T21:45:43+08:00">
+                2019-03-02
               </time>
             
           </span>
@@ -400,7 +400,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计"> 
-                  842 字
+                  830 字
                 </span>
               
 
@@ -416,7 +416,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -439,17 +439,12 @@
       
         
           
-          Service1、service和线程(Thread)的区别和场景(1) Thread:程序执行的最小单元，它是分配CPU的基本单位
-
-生命周期1.新建2.就绪3.运行4.死亡5.阻塞
-
-(2) Service是Android的一种机制，服务是运行在主线程上的使用的是进程间的通信机制
-
-生命周期1.
+          AIDL1、创建AIDL:实体对象、新建AIDL文件、make工程
+2、服务端：新建Binder对象、定义方法123456789// 包名需要和原始类的一样parcelable Person;interface IMyAidl &#123;    void addPerson(in Person p
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/23/android-2017-09-23-Service基础复习/#more" rel="contents">
+            <a class="btn" href="/2017/09/23/android-2017-09-23-AIDL复习/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -504,7 +499,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.sweetm.top/2017/09/23/android-2017-09-23-AsyncTask-知识/">
+    <link itemprop="mainEntityOfPage" href="http://blog.sweetm.top/2017/09/23/android-2017-08-01-Toast在有的机型上不显示通知的问题/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="KAI">
@@ -523,7 +518,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/23/android-2017-09-23-AsyncTask-知识/" itemprop="url">AsyncTask基础复习</a></h1>
+                <a class="post-title-link" href="/2017/09/23/android-2017-08-01-Toast在有的机型上不显示通知的问题/" itemprop="url">Toast 在有的机型上不能显示通知的问题</a></h1>
         
 
         <div class="post-meta">
@@ -551,7 +546,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T11:53:13+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T13:29:00+08:00">
                 2019-02-26
               </time>
             
@@ -581,8 +576,8 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/基础知识/" itemprop="url" rel="index">
-                    <span itemprop="name">基础知识</span>
+                  <a href="/categories/Android/遇到的坑/" itemprop="url" rel="index">
+                    <span itemprop="name">遇到的坑</span>
                   </a>
                 </span>
 
@@ -612,7 +607,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计"> 
-                  266 字
+                  661 字
                 </span>
               
 
@@ -628,7 +623,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -651,15 +646,14 @@
       
         
           
-          AsyncTask1、使用注意事项
-AsyncTask的实例必须在主线程中创建
-AsyncTask的execute方法必须在主线程中调用
-回调方法，Android会自动调用 
-一个AsyncTask的实例，只能执行一次execute方法12345678910111213141516171819202
+          Toast 在有的机型上不能显示通知
+我开发的软件是无人机自动化APP,在DJI平板上运行的时候发现Toast显示不能正常的显示出来，所以只能翻源码查看原因了
+
+12345678910111213141516171819/** * Show the view for the specified du
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/23/android-2017-09-23-AsyncTask-知识/#more" rel="contents">
+            <a class="btn" href="/2017/09/23/android-2017-08-01-Toast在有的机型上不显示通知的问题/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
