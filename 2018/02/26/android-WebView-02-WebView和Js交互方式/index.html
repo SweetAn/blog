@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="xbaNxanZlkJ3SYOBjTyK1Gxuiv4PGPk94p_XNghN_ss">
+<meta name="baidu-site-verification" content="fZL2VElq6c">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "93957bb1"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android控件,WebView,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.WebView和Js交互方式1.1 Android去调用JS的代码方式 对于android调用JS代码的方法有2种： 第一种方式已经不推荐使用了，第二种方式不仅更方便，也提供了结果的回调，但仅支持API 19以后的系统。12WebView.loadUrl(&quot;javascript:&quot; + javascript);WebView.evaluateJavascript(javascript, cal">
+<meta name="keywords" content="Android控件,WebView">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebView和Js交互方式">
+<meta property="og:url" content="http://blog.sweetm.top/2018/02/26/android-WebView-02-WebView和Js交互方式/index.html">
+<meta property="og:site_name" content="Sweet">
+<meta property="og:description" content="1.WebView和Js交互方式1.1 Android去调用JS的代码方式 对于android调用JS代码的方法有2种： 第一种方式已经不推荐使用了，第二种方式不仅更方便，也提供了结果的回调，但仅支持API 19以后的系统。12WebView.loadUrl(&quot;javascript:&quot; + javascript);WebView.evaluateJavascript(javascript, cal">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-07T03:16:09.966Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WebView和Js交互方式">
+<meta name="twitter:description" content="1.WebView和Js交互方式1.1 Android去调用JS的代码方式 对于android调用JS代码的方法有2种： 第一种方式已经不推荐使用了，第二种方式不仅更方便，也提供了结果的回调，但仅支持API 19以后的系统。12WebView.loadUrl(&quot;javascript:&quot; + javascript);WebView.evaluateJavascript(javascript, cal">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.sweetm.top/2018/02/26/android-WebView-02-WebView和Js交互方式/">
+
+
+
+
+
+  <title>WebView和Js交互方式 | Sweet</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sweet</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.sweetm.top/2018/02/26/android-WebView-02-WebView和Js交互方式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KAI">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sweet">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">WebView和Js交互方式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-26T11:16:17+08:00">
+                2018-02-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-07T11:16:09+08:00">
+                2019-03-07
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/WebView/" itemprop="url" rel="index">
+                    <span itemprop="name">WebView</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">阅读
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计"> 
+                  2,235 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-WebView和Js交互方式"><a href="#1-WebView和Js交互方式" class="headerlink" title="1.WebView和Js交互方式"></a>1.WebView和Js交互方式</h3><h4 id="1-1-Android去调用JS的代码方式"><a href="#1-1-Android去调用JS的代码方式" class="headerlink" title="1.1 Android去调用JS的代码方式"></a>1.1 Android去调用JS的代码方式</h4><ul>
+<li>对于android调用JS代码的方法有2种：<ul>
+<li>第一种方式已经不推荐使用了，第二种方式不仅更方便，也提供了结果的回调，但仅支持API 19以后的系统。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">WebView.loadUrl(<span class="string">"javascript:"</span> + javascript);</span><br><span class="line">WebView.evaluateJavascript(javascript, callbacck);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-2-JS去调用Android的代码方式"><a href="#1-2-JS去调用Android的代码方式" class="headerlink" title="1.2 JS去调用Android的代码方式"></a>1.2 JS去调用Android的代码方式</h4><ul>
+<li><p>对于JS调用Android代码的方法有3种：</p>
+<ul>
+<li><p>第一种：通过WebView的addJavascriptInterface（）进行对象映射</p>
+</li>
+<li><p>第二种：通过 WebViewClient 的shouldOverrideUrlLoading ()方法回调拦截 url</p>
+</li>
+<li><p>第三种：通过 WebChromeClient 的onJsAlert()、onJsConfirm()、onJsPrompt（）方法回调拦截JS对话框alert()、confirm()、prompt()消息</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="第一种-addJavascriptInterface"><a href="#第一种-addJavascriptInterface" class="headerlink" title="第一种 addJavascriptInterface"></a>第一种 addJavascriptInterface</h5><pre><code>根据安卓官方的api说明，addJavaScriptInterface方法存在安全漏洞。因为JS可以通过反射访问注入对象。官方在4.2及以后的系统中修复了该问题，要求注入的远程方法必须使用注解@JavascriptInterface
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">//允许运行js代码</span></span><br><span class="line">mWebView.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>); </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">JsObject</span> </span>&#123;  </span><br><span class="line">   <span class="meta">@JavascriptInterface</span>  </span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="string">"injectedObject"</span>; &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">webView.addJavascriptInterface(<span class="keyword">new</span> JsObject(), <span class="string">"injectedObject"</span>);  </span><br><span class="line"></span><br><span class="line"><span class="comment">//JS调用注入对象示例【java代码】</span></span><br><span class="line">webView.loadUrl(<span class="string">"javascript:alert(injectedObject.toString())"</span>);</span><br></pre></td></tr></table></figure>
+<p>​    </p>
+<h5 id="第二种-shouldOverrideUrlLoading回调拦截"><a href="#第二种-shouldOverrideUrlLoading回调拦截" class="headerlink" title="第二种  shouldOverrideUrlLoading回调拦截"></a>第二种  shouldOverrideUrlLoading回调拦截</h5><pre><code>WebViewClient.shouldOverrideUrlLoading()
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">shouldOverrideUrlLoading</span><span class="params">(WebView view, String url)</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">if</span> ( TextUtils.isEmpty(url) ) &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">// 通用url跳转规则</span></span><br><span class="line">                    <span class="keyword">if</span> ( TbUrlBridge.overrideUrl(TbWebViewActivity.<span class="keyword">this</span>, url) ) &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">// 非通用url规则，则用当前webview直接打开</span></span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            <span class="keyword">if</span>(url.startsWith(<span class="string">"weixin://"</span>) <span class="comment">//微信</span></span><br><span class="line">                                    || url.startsWith(<span class="string">"alipays://"</span>) <span class="comment">//支付宝</span></span><br><span class="line">                                    || url.startsWith(<span class="string">"mailto://"</span>) <span class="comment">//邮件</span></span><br><span class="line">                                    || url.startsWith(<span class="string">"tel://"</span>)<span class="comment">//电话</span></span><br><span class="line">                                    || url.startsWith(<span class="string">"baidumap://"</span>)<span class="comment">//大众点评</span></span><br><span class="line">                                <span class="comment">//其他自定义的scheme</span></span><br><span class="line">                                    ) &#123;</span><br><span class="line"><span class="comment">//                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));</span></span><br><span class="line"><span class="comment">//                                startActivity(intent);</span></span><br><span class="line">                                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (Exception e) &#123; <span class="comment">//防止crash (如果手机上没有安装处理某个scheme开头的url的APP, 会导致crash)</span></span><br><span class="line">                            <span class="keyword">return</span> <span class="keyword">true</span>;<span class="comment">//没有安装该app时，返回true，表示拦截自定义链接，但不跳转，避免弹出上面的错误页面</span></span><br><span class="line">                        &#125;</span><br><span class="line">                        mUrl = url;</span><br><span class="line">                        refresh();</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">super</span>.shouldOverrideUrlLoading(view, url);</span><br><span class="line">                &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="第三种-onJsAlert，onJsConfirm，onJsPrompt"><a href="#第三种-onJsAlert，onJsConfirm，onJsPrompt" class="headerlink" title="第三种  onJsAlert，onJsConfirm，onJsPrompt"></a>第三种  onJsAlert，onJsConfirm，onJsPrompt</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Tell the client to display a javascript alert dialog.  If the client</span></span><br><span class="line"><span class="comment">     * returns true, WebView will assume that the client will handle the</span></span><br><span class="line"><span class="comment">     * dialog.  If the client returns false, it will continue execution.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> view The WebView that initiated the callback.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> url The url of the page requesting the dialog.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message Message to be displayed in the window.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> result A JsResult to confirm that the user hit enter.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> boolean Whether the client will handle the alert dialog.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onJsAlert</span><span class="params">(WebView view, String url, String message,</span></span></span><br><span class="line"><span class="function"><span class="params">            JsResult result)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Tell the client to display a confirm dialog to the user. If the client</span></span><br><span class="line"><span class="comment">     * returns true, WebView will assume that the client will handle the</span></span><br><span class="line"><span class="comment">     * confirm dialog and call the appropriate JsResult method. If the</span></span><br><span class="line"><span class="comment">     * client returns false, a default value of false will be returned to</span></span><br><span class="line"><span class="comment">     * javascript. The default behavior is to return false.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> view The WebView that initiated the callback.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> url The url of the page requesting the dialog.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message Message to be displayed in the window.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> result A JsResult used to send the user's response to</span></span><br><span class="line"><span class="comment">     *               javascript.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> boolean Whether the client will handle the confirm dialog.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onJsConfirm</span><span class="params">(WebView view, String url, String message,</span></span></span><br><span class="line"><span class="function"><span class="params">            JsResult result)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Tell the client to display a prompt dialog to the user. If the client</span></span><br><span class="line"><span class="comment">     * returns true, WebView will assume that the client will handle the</span></span><br><span class="line"><span class="comment">     * prompt dialog and call the appropriate JsPromptResult method. If the</span></span><br><span class="line"><span class="comment">     * client returns false, a default value of false will be returned to to</span></span><br><span class="line"><span class="comment">     * javascript. The default behavior is to return false.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> view The WebView that initiated the callback.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> url The url of the page requesting the dialog.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message Message to be displayed in the window.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> defaultValue The default value displayed in the prompt dialog.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> result A JsPromptResult used to send the user's reponse to</span></span><br><span class="line"><span class="comment">     *               javascript.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> boolean Whether the client will handle the prompt dialog.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onJsPrompt</span><span class="params">(WebView view, String url, String message,</span></span></span><br><span class="line"><span class="function"><span class="params">            String defaultValue, JsPromptResult result)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//控制台log</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Report a JavaScript console message to the host application. The ChromeClient</span></span><br><span class="line"><span class="comment">     * should override this to process the log message as they see fit.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> consoleMessage Object containing details of the console message.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> true if the message is handled by the client.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">WebChromeClient.onConsoleMessage()</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.jianshu.com/p/7d820c00642a" rel="external nofollow noopener noreferrer" target="_blank">https://www.jianshu.com/p/7d820c00642a</a></p>
+<h3 id="2-Android调用JS脚本"><a href="#2-Android调用JS脚本" class="headerlink" title="2.Android调用JS脚本"></a>2.Android调用JS脚本</h3><ul>
+<li>对于Android调用JS代码的方法有2种：<ul>
+<li>通过WebView的loadUrl（）</li>
+<li>通过WebView的evaluateJavascript（）</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-1-通过WebView的evaluateJavascript"><a href="#2-1-通过WebView的evaluateJavascript" class="headerlink" title="2.1 通过WebView的evaluateJavascript()"></a>2.1 通过WebView的evaluateJavascript()</h4><ul>
+<li>优点：该方法比第一种方法效率更高、使用更简洁。</li>
+<li><ol>
+<li>因为该方法的执行不会使页面刷新，而第一种方法（loadUrl ）的执行则会。</li>
+</ol>
+</li>
+<li><ol>
+<li>Android 4.4 后才可使用<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//只需要将第一种方法的loadUrl()换成下面该方法即可</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Asynchronously evaluates JavaScript in the context of the currently displayed page.</span></span><br><span class="line"><span class="comment">     * If non-null, |resultCallback| will be invoked with any result returned from that</span></span><br><span class="line"><span class="comment">     * execution. This method must be called on the UI thread and the callback will</span></span><br><span class="line"><span class="comment">     * be made on the UI thread.</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * Compatibility note. Applications targeting &#123;<span class="doctag">@link</span> android.os.Build.VERSION_CODES#N&#125; or</span></span><br><span class="line"><span class="comment">     * later, JavaScript state from an empty WebView is no longer persisted across navigations like</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@link</span> #loadUrl(String)&#125;. For example, global variables and functions defined before calling</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@link</span> #loadUrl(String)&#125; will not exist in the loaded page. Applications should use</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@link</span> #addJavascriptInterface&#125; instead to persist JavaScript objects across navigations.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> script the JavaScript to execute.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> resultCallback A callback to be invoked when the script execution</span></span><br><span class="line"><span class="comment">     *                       completes with the result of the execution (if any).</span></span><br><span class="line"><span class="comment">     *                       May be null if no notification of the result is required.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">mWebView.evaluateJavascript（<span class="string">"javascript:callJS()"</span>, <span class="keyword">new</span> ValueCallback&lt;String&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceiveValue</span><span class="params">(String value)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//此处为 js 返回的结果</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="2-2-通过WebView的loadUrl"><a href="#2-2-通过WebView的loadUrl" class="headerlink" title="2.2 通过WebView的loadUrl()"></a>2.2 通过WebView的loadUrl()</h4><ul>
+<li>直接Webview调用loadUrl方法，里面是JS的方法名，并可以传入参数，javascript：xxx()方法名需要和JS方法名相同</li>
+<li>contentWebView.loadUrl(“javascript:javacalljs()”);</li>
+<li>HTML代码</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  function alertFun()</span><br><span class="line">  &#123;</span><br><span class="line"> alert("Alert警告对话框!");</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webView.loadUrl(<span class="string">"javascript:alertFun()"</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-使用建议"><a href="#2-3-使用建议" class="headerlink" title="2.3 使用建议"></a>2.3 使用建议</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">两种方法混合使用，即Android <span class="number">4.4</span>以下使用方法<span class="number">1</span>，Android <span class="number">4.4</span>以上方法<span class="number">2</span></span><br><span class="line"><span class="comment">//Android版本变量</span></span><br><span class="line"><span class="keyword">final</span> <span class="keyword">int</span> version = Build.VERSION.SDK_INT;</span><br><span class="line"><span class="comment">//因为该方法在 Android 4.4 版本才可使用，所以使用时需进行版本判断</span></span><br><span class="line"><span class="keyword">if</span> (version &lt; <span class="number">18</span>) &#123;</span><br><span class="line">    mWebView.loadUrl(<span class="string">"javascript:callJS()"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    mWebView.evaluateJavascript（<span class="string">"javascript:callJS()"</span>, <span class="keyword">new</span> ValueCallback&lt;String&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceiveValue</span><span class="params">(String value)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//此处为 js 返回的结果</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-什么时候注入js探索"><a href="#3-什么时候注入js探索" class="headerlink" title="3.什么时候注入js探索"></a>3.什么时候注入js探索</h3><ul>
+<li><strong>3.1 onPageFinished()或者onPageStarted()方法中注入js代码</strong></li>
+<li>做过WebView开发，并且需要和js交互，大部分都会认为js在WebViewClient.onPageFinished()方法中注入最合适，此时dom树已经构建完成，页面已经完全展现出来。但如果做过页面加载速度的测试，会发现WebViewClient.onPageFinished()方法通常需要等待很久才会回调（首次加载通常超过3s），这是因为WebView需要加载完一个网页里主文档和所有的资源才会回调这个方法。</li>
+<li>能不能在WebViewClient.onPageStarted()中注入呢？答案是不确定。经过测试，有些机型可以，有些机型不行。在WebViewClient.onPageStarted()中注入还有一个致命的问题——这个方法可能会回调多次，会造成js代码的多次注入。</li>
+<li>从7.0开始，WebView加载js方式发生了一些小改变，<strong>官方建议把js注入的时机放在页面开始加载之后</strong>。</li>
+</ul>
+<ul>
+<li>3.2 WebViewClient.onProgressChanged()方法中注入js代码**</li>
+<li>WebViewClient.onProgressChanged()这个方法在dom树渲染的过程中会回调多次，每次都会告诉我们当前加载的进度。<ul>
+<li>在这个方法中，可以给WebView自定义进度条，类似微信加载网页时的那种进度条</li>
+<li>如果在此方法中注入js代码，则需要避免重复注入，需要增强逻辑。可以定义一个boolean值变量控制注入时机</li>
+</ul>
+</li>
+<li>那么有人会问，加载到多少才需要处理js注入逻辑呢？<ul>
+<li>正是因为这个原因，页面的进度加载到80%的时候，实际上dom树已经渲染得差不多了，表明WebView已经解析了<html>标签，这时候注入一定是成功的。在WebViewClient.onProgressChanged()实现js注入有几个需要注意的地方：</html></li>
+<li>6.2.1 上文提到的多次注入控制，使用了boolean值变量控制</li>
+<li>6.2.2 重新加载一个URL之前，需要重置boolean值变量，让重新加载后的页面再次注入js</li>
+<li>6.2.3 如果做过本地js，css等缓存，则先判断本地是否存在，若存在则加载本地，否则加载网络js</li>
+<li>6.2.4 注入的进度阈值可以自由定制，理论上10%-100%都是合理的，不过建议使用了75%到90%之间可以。</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-H5页面点击图片监听图片链接地址"><a href="#7-H5页面点击图片监听图片链接地址" class="headerlink" title="7.H5页面点击图片监听图片链接地址"></a>7.H5页面点击图片监听图片链接地址</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">settings.setJavaScriptEnabled(<span class="keyword">true</span>);</span><br><span class="line">wv_view.addJavascriptInterface(<span class="keyword">new</span> ImageJs(<span class="keyword">this</span>),<span class="string">"imageListener"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**打开图片js通信接口*/</span></span><br><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageJs</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Activity activity;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ImageJs</span><span class="params">(Activity activity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.activity = activity;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 下面的@SuppressLint("JavascriptInterface")最好加上。防止在某些版本中js和java的交互不支持。</span></span><br><span class="line">    <span class="comment">//@SuppressLint("JavascriptInterface")</span></span><br><span class="line">    <span class="meta">@android</span>.webkit.JavascriptInterface</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">openImage</span><span class="params">(String img)</span> </span>&#123;</span><br><span class="line">        Log.i(<span class="string">"url地址"</span>,<span class="string">"图片"</span>+ img);</span><br><span class="line">        <span class="comment">//跳转页面</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**添加图片点击事件的js代码，网上找到，就是这样写，不需要明白*/</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">addImageClickListner</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    String jsCode=<span class="string">"javascript:(function()&#123;"</span> +</span><br><span class="line">            <span class="string">"var imgs=document.getElementsByTagName(\"img\");"</span> +</span><br><span class="line">            <span class="string">"for(var i=0;i&lt;imgs.length;i++)&#123;"</span> +</span><br><span class="line">            <span class="string">"imgs[i].onclick=function()&#123;"</span> +</span><br><span class="line">            <span class="string">"window.imageListener.openImage(this.src);"</span> +    <span class="comment">//imageListener自定义，openImage要与js通信接口相同</span></span><br><span class="line">            <span class="string">"&#125;&#125;&#125;)()"</span>;</span><br><span class="line">    wv_view.loadUrl(jsCode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+  <div>
+    
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束 感谢您的阅读-------------</div>
+    
+</div>
+
+    
+  </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android控件/" rel="tag"><i class="fa fa-tag"></i> Android控件</a>
+          
+            <a href="/tags/WebView/" rel="tag"><i class="fa fa-tag"></i> WebView</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/25/android-WebView-01-WebView基础/" rel="next" title="WebView基础">
+                <i class="fa fa-chevron-left"></i> WebView基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/26/android-WebView-03-WebView的坑/" rel="prev" title="WebView的坑">
+                WebView的坑 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzIzMy85Nzkw"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F/avatar.jpeg" alt="KAI">
+            
+              <p class="site-author-name" itemprop="name">KAI</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SweetAn" target="_blank" title="GitHub" rel="external nofollow noopener noreferrer">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:mkyxlx@163.com" target="_blank" title="E-Mail" rel="external nofollow noopener noreferrer">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-WebView和Js交互方式"><span class="nav-number">1.</span> <span class="nav-text">1.WebView和Js交互方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-Android去调用JS的代码方式"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 Android去调用JS的代码方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-JS去调用Android的代码方式"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 JS去调用Android的代码方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一种-addJavascriptInterface"><span class="nav-number">1.2.1.</span> <span class="nav-text">第一种 addJavascriptInterface</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二种-shouldOverrideUrlLoading回调拦截"><span class="nav-number">1.2.2.</span> <span class="nav-text">第二种  shouldOverrideUrlLoading回调拦截</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第三种-onJsAlert，onJsConfirm，onJsPrompt"><span class="nav-number">1.2.3.</span> <span class="nav-text">第三种  onJsAlert，onJsConfirm，onJsPrompt</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Android调用JS脚本"><span class="nav-number">2.</span> <span class="nav-text">2.Android调用JS脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-通过WebView的evaluateJavascript"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 通过WebView的evaluateJavascript()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-通过WebView的loadUrl"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 通过WebView的loadUrl()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-使用建议"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 使用建议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-什么时候注入js探索"><span class="nav-number">3.</span> <span class="nav-text">3.什么时候注入js探索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-H5页面点击图片监听图片链接地址"><span class="nav-number">4.</span> <span class="nav-text">7.H5页面点击图片监听图片链接地址</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KAI</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">84.0k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      你是第
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      访客
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1272831475&web_id=1272831475" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v="></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v="></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v="></script>
+<script type="text/javascript" src="/js/src/post-details.js?v="></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v="></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
