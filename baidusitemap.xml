@@ -4,6 +4,129 @@
 
     
   <url>
+    <loc>http://blog.sweetm.top/2019/03/22/android-IPC-%E6%9C%BA%E5%88%B6/</loc>
+    <lastmod>2019-03-28T07:45:06.964Z</lastmod>
+    <data>
+        <display>
+        <title>Android IPC 机制</title>
+        <pubTime>2019-03-22T13:16:17.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>Android 进程间通信</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://blog.sweetm.top/categories/Android/"/>
+          
+             
+              <breadCrumb title="高级" url="http://blog.sweetm.top/categories/Android/%E9%AB%98%E7%BA%A7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.sweetm.top/2019/02/21/android-Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2019-03-28T07:42:30.702Z</lastmod>
+    <data>
+        <display>
+        <title>Android 性能优化</title>
+        <pubTime>2019-02-21T13:16:17.000Z</pubTime>
+        
+        <tag>Android优化</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://blog.sweetm.top/categories/Android/"/>
+          
+             
+              <breadCrumb title="高级" url="http://blog.sweetm.top/categories/Android/%E9%AB%98%E7%BA%A7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.sweetm.top/2018/02/27/%E7%BD%91%E7%BB%9C-2017-01-18-TCP%E5%92%8CUDP-%E4%BC%A0%E8%BE%93%E5%B1%82-%E3%80%81Socket/</loc>
+    <lastmod>2019-03-28T07:41:03.048Z</lastmod>
+    <data>
+        <display>
+        <title>TCP和UDP(传输层) Socket</title>
+        <pubTime>2018-02-27T14:33:33.000Z</pubTime>
+        
+        <tag>UDP</tag>
+         
+        <tag>TCP</tag>
+         
+         
+           
+             
+              <breadCrumb title="网络" url="http://blog.sweetm.top/categories/%E7%BD%91%E7%BB%9C/"/>
+          
+             
+              <breadCrumb title="网络基础" url="http://blog.sweetm.top/categories/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.sweetm.top/2019/02/24/%E7%BD%91%E7%BB%9C-03-IPV4/</loc>
+    <lastmod>2019-03-28T07:37:41.184Z</lastmod>
+    <data>
+        <display>
+        <title>IPV4 协议介绍</title>
+        <pubTime>2019-02-24T14:33:33.000Z</pubTime>
+        
+        <tag>UDP</tag>
+         
+        <tag>TCP</tag>
+         
+         
+           
+             
+              <breadCrumb title="网络" url="http://blog.sweetm.top/categories/%E7%BD%91%E7%BB%9C/"/>
+          
+             
+              <breadCrumb title="网络基础" url="http://blog.sweetm.top/categories/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.sweetm.top/2019/02/24/%E7%BD%91%E7%BB%9C-01%E5%8D%8F%E8%AE%AE%E6%A6%82%E8%BF%B0/</loc>
+    <lastmod>2019-03-28T07:36:48.143Z</lastmod>
+    <data>
+        <display>
+        <title>协议概述</title>
+        <pubTime>2019-02-24T14:33:33.000Z</pubTime>
+        
+        <tag>UDP</tag>
+         
+        <tag>TCP</tag>
+         
+         
+           
+             
+              <breadCrumb title="网络" url="http://blog.sweetm.top/categories/%E7%BD%91%E7%BB%9C/"/>
+          
+             
+              <breadCrumb title="网络基础" url="http://blog.sweetm.top/categories/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.sweetm.top/2016/06/25/%E7%AE%97%E6%B3%95-%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2019-03-07T03:20:07.029Z</lastmod>
     <data>
@@ -415,31 +538,6 @@
         <display>
         <title>网络编程基础知识</title>
         <pubTime>2018-02-24T13:30:00.000Z</pubTime>
-        
-        <tag>UDP</tag>
-         
-        <tag>TCP</tag>
-         
-         
-           
-             
-              <breadCrumb title="网络" url="http://blog.sweetm.top/categories/%E7%BD%91%E7%BB%9C/"/>
-          
-             
-              <breadCrumb title="网络基础" url="http://blog.sweetm.top/categories/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.sweetm.top/2018/02/24/%E7%BD%91%E7%BB%9C-2017-01-18-TCP%E5%92%8CUDP-%E4%BC%A0%E8%BE%93%E5%B1%82-%E3%80%81Socket/</loc>
-    <lastmod>2019-02-26T05:33:25.457Z</lastmod>
-    <data>
-        <display>
-        <title>TCP和UDP(传输层) Socket</title>
-        <pubTime>2018-02-24T14:33:33.000Z</pubTime>
         
         <tag>UDP</tag>
          
@@ -1045,9 +1143,9 @@
         <title>地图投影和坐标系概念</title>
         <pubTime>2018-02-10T03:15:19.000Z</pubTime>
         
-        <tag>地图</tag>
-         
         <tag>GIS</tag>
+         
+        <tag>地图</tag>
          
          
            
@@ -1070,9 +1168,9 @@
         <title>mac下常用软件、插件和驱动</title>
         <pubTime>2018-02-25T02:15:13.000Z</pubTime>
         
-        <tag>mac</tag>
-         
         <tag>软件</tag>
+         
+        <tag>mac</tag>
          
          
            
@@ -1095,11 +1193,11 @@
         <title>Mac下内网穿透工具</title>
         <pubTime>2018-02-24T14:33:33.000Z</pubTime>
         
-        <tag>内网穿透</tag>
+        <tag>mac</tag>
          
         <tag>微信开发</tag>
          
-        <tag>mac</tag>
+        <tag>内网穿透</tag>
          
          
            
