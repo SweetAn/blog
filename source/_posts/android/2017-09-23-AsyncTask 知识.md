@@ -1,11 +1,12 @@
 ---
 title: AsyncTask基础复习
+tags:
+  - AsyncTask
+categories:
+  - Android
+  - 基础知识
+abbrlink: 7096
 date: 2017-09-23 15:36:17
-tags: 
-- AsyncTask
-categories: 
-- Android
-- 基础知识
 ---
 
 ## AsyncTask

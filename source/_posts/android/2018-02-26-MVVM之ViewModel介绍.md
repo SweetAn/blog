@@ -1,11 +1,12 @@
 ---
 title: MVVM之ViewModel
+tags:
+  - MVVM
+categories:
+  - Android
+  - 框架
+abbrlink: 14992
 date: 2018-02-26 20:27:57
-tags: 
-- MVVM
-categories: 
-- Android
-- 框架
 ---
 
 谷歌网址
@@ -34,8 +35,7 @@ ViewModel的生命周期在activity中时当onDestory之后结束，在fragment�
 
 Figure 1 illustrates （插图）the various lifecycle states of an activity as it undergoes（经历） a rotation and then is finished. The illustration also shows the lifetime of the ViewModel next to the associated activity lifecycle. This particular diagram illustrates the states of an activity. The same basic states apply to the lifecycle of a fragment.
 
-![viewmodel-lifecycle](assets/viewmodel-lifecycle.png)
-
+![](https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/blog/viewmodel-lifecycle.png)
 
 ## Share data between fragments  分享数据在fragment之间
 
@@ -93,11 +93,9 @@ Loader classes like CursorLoader are frequently used to keep the data in an app'
 
 In one common approach to using loaders, an app might use a CursorLoader to observe the contents of a database. When a value in the database changes, the loader automatically triggers a reload of the data and updates the UI:
 
-![viewmodel-loader](assets/viewmodel-loader.png)
-
+![](https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/blog/viewmodel-loader.png)
 Figure 2. Loading data with loaders
 ViewModel works with Room and LiveData to replace the loader. The ViewModel ensures that the data survives a device configuration change. Room informs your LiveData when the database changes, and the LiveData, in turn, updates your UI with the revised data.
 
-![viewmodel-replace-loader](assets/viewmodel-replace-loader.png)
-
+![](https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/blog/viewmodel-replace-loader.png)
 Figure 3. Loading data with ViewModel

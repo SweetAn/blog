@@ -1,12 +1,13 @@
 ---
 title: TCP和UDP(传输层) Socket
-date: 2018-02-24 22:33:33
-tags: 
-- UDP
-- TCP
-categories: 
-- 网络
-- 网络基础
+tags:
+  - UDP
+  - TCP
+categories:
+  - 网络
+  - 网络基础
+abbrlink: 38108
+date: 2018-02-27 22:33:33
 ---
 
 ### 1.TCP和UDP的区别

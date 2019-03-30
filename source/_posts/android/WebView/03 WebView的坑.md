@@ -1,0 +1,31 @@
+---
+title: WebView的坑
+tags:
+  - Android控件
+  - WebView
+categories:
+  - Android
+  - WebView
+abbrlink: 52877
+date: 2018-02-26 11:16:17
+---
+
+
+## WebView 
+
+### 一、Webview常见的坑
+
+1.Android API level 16 以及之前的版本存在远程代码执行安全漏洞，该漏洞的源于程序没有正确限制使用WebView.addJavascriptInterface方法，远程攻击者可通过使用Java Relflection API 利用该漏洞执行任意Java对象的方法。
+2.webview 在布局文件中使用的时候，在界面销毁的时候先调用webView destroy() 方法,不然会造成内存泄漏。
+3.jsbridge  实际上，JSBridge 就像其名称中的『Bridge』的意义一样，是 Native 和非 Native 之间的桥梁，它的核心是 构建 Native 和非 Native 间消息通信的通道，而且是 双向通信的通道。
+
+4.webviewClient.onPageFinished(不准确)->WebChromeClient.onProgressChanged
+
+5、后台耗电的问题
+
+6、硬件加速渲染界面，界面闪烁、白块等问题。
+
+### 二、关于webview的内存泄漏的问题
+1、独立进程，简单暴力，不过涉及进程间通信
+2、动态添加WebView,对传入WebView中使用Context使用弱引用，动态添加WebView意思在布局中创建个ViewGroup用来放置WebView,Activity创建时add进来，在Activity remove调，然后再destory掉。
+

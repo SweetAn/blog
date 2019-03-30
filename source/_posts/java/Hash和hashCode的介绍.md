@@ -1,11 +1,12 @@
 ---
 title: Hash和HashCode的介绍
+tags:
+  - Hash
+  - HashCode
+categories:
+  - Java
+abbrlink: 5020
 date: 2016-08-29 21:01:45
-tags: 
-- Hash
-- HashCode
-categories: 
-- Java
 ---
 
 ### 1.Hash的作用介绍

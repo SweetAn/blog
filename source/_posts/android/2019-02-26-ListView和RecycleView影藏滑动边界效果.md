@@ -1,11 +1,12 @@
 ---
 title: ListView和RecycleView影藏滑动边界效果
-date: 2018-9-15 22:13:11
-tags: 
-- Android控件
-categories: 
-- Android
-- 控件
+tags:
+  - Android控件
+categories:
+  - Android
+  - 控件
+abbrlink: 17668
+date: 2018-09-15 22:13:11
 ---
 
 ### 一、首先是Listview的属性设置

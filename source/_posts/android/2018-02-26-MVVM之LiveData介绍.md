@@ -1,6 +1,7 @@
 ---
 title: MVVM之LiveData介绍
-date:  2018-02-26 21:27:57
+abbrlink: 51782
+date: 2018-02-26 21:27:57
 tags:
 ---
 

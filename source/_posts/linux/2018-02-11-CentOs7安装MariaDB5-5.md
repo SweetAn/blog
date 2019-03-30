@@ -1,13 +1,14 @@
 ---
 title: CentOs7安装MariaDB5.5
+tags:
+  - MySql
+  - CentOS7
+  - Maria DB
+categories:
+  - 服务器
+  - 数据库
+abbrlink: 32699
 date: 2018-02-11 09:43:17
-tags: 
-- MySql
-- CentOS7
-- Maria DB
-categories: 
-- 服务器
-- 数据库
 ---
 ### 安装基于 CentOS 7 的默认版本数据库 Maria DB
 #### [1]安装 MariaDB 5.5

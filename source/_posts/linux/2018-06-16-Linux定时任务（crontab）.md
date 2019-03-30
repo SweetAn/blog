@@ -1,11 +1,12 @@
 ---
 title: Linux定时任务（crontab）
-date: 2018-06-16 18:55:53
 tags:
-- linux
-categories: 
-- 服务器
-- linux指令
+  - linux
+categories:
+  - 服务器
+  - linux指令
+abbrlink: 34177
+date: 2018-06-16 18:55:53
 ---
 
 ## 1、什么是例行性工作调度

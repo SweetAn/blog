@@ -1,16 +1,19 @@
 ---
-title:  LinkList源码分析
+title: LinkList源码分析
+tags:
+  - 容器
+categories:
+  - Java
+  - 容器
+abbrlink: 7931
 date: 2016-09-01 21:33:25
-tags: 
-- 容器
-categories: 
-- Java
-- 容器
 ---
 
 
 # LinkList源码分析
-![](media/15450534811131.jpg)
+
+![](https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/blog/15450534811131.jpg)
+
 
 
 ## 特点

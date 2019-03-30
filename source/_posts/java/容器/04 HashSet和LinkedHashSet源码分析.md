@@ -1,17 +1,18 @@
 ---
-title:  HashSet源码分析
+title: HashSet源码分析
+tags:
+  - 容器
+categories:
+  - Java
+  - 容器
+abbrlink: 59740
 date: 2016-09-03 23:45:11
-tags: 
-- 容器
-categories: 
-- Java
-- 容器
 ---
 
 
 # 一、HashSet源码分析
 
-![](media/15452905651185.jpg)
+![](https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/blog/15452905651185.jpg)
 
 ```
 public class HashSet<E>
@@ -201,8 +202,7 @@ public class HashSet<E>
 
 # 二、LinkedHashSet
 
-![](media/15452923339877.jpg)
-
+![](https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/blog/15452923339877.jpg)
 ## 1、构造函数
 
 由 继承关系可以看出 LinkedHashSet 是 HashSet的子类，可以看出HashSet留私有的构造函数，是留给LinkedHashSet留下的

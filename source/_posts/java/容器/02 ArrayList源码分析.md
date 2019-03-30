@@ -1,11 +1,12 @@
 ---
-title:  ArrayList源码分析
+title: ArrayList源码分析
+tags:
+  - 容器
+categories:
+  - Java
+  - 容器
+abbrlink: 33908
 date: 2016-08-30 20:30:25
-tags: 
-- 容器
-categories: 
-- Java
-- 容器
 ---
 
 

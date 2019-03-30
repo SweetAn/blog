@@ -1,11 +1,12 @@
 ---
-title:  HashMap 源码分析 
+title: HashMap 源码分析
+tags:
+  - 容器
+categories:
+  - Java
+  - 容器
+abbrlink: 8330
 date: 2016-09-06 22:00:11
-tags: 
-- 容器
-categories: 
-- Java
-- 容器
 ---
 
 # HashMap 源码分析 
@@ -16,9 +17,7 @@ categories:
 
 > 基于 Java 1.8
 
-![](media/15455737440182.jpg)
-
-
+![](https://sweetm-1256061026.cos.ap-beijing.myqcloud.com/blog/15456551000468.jpg)
 
 ``` java
 public class HashMap<K,V> extends AbstractMap<K,V>
